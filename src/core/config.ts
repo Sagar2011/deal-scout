@@ -8,7 +8,7 @@ export type AppConfig = {
 export function loadConfig(env: NodeJS.ProcessEnv): AppConfig {
   const config: AppConfig = {
     runsDir: env.DEAL_SCOUT_RUNS_DIR || "runs",
-    concurrency: parseConcurrency(env.DEAL_SCOUT_CONCURRENCY || 2),
+    concurrency: parseConcurrency(env.DEAL_SCOUT_CONCURRENCY || "2"),
   };
 
   if (env.OPENROUTER_API_KEY) {
