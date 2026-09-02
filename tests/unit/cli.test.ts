@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { parseCommand } from "../src/cli.js";
+import { parseCommand } from "../../src/cli/command.js";
 
 test("parses a run topic", () => {
   assert.deepEqual(parseCommand(["run", "--topic", "AI agents for SMBs"]), {

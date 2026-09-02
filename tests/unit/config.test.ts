@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { loadConfig } from "../src/config.js";
+import { loadConfig } from "../../src/core/config.js";
 
 test("uses the standard runs directory when none is configured", () => {
   assert.deepEqual(loadConfig({}), { runsDir: "runs" });

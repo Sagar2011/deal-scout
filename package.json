@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsx src/index.ts",
-    "test": "tsx --test tests/*.test.ts",
+    "test": "tsx --test tests/unit/*.test.ts tests/integration/*.test.ts",
     "typecheck": "tsc --noEmit"
   },
   "engines": {
@@ -21,8 +21,11 @@
     "npm": "10.2.3"
   },
   "devDependencies": {
-    "@types/node": "^20.17.30",
-    "tsx": "^4.19.3",
-    "typescript": "^5.8.3"
+    "@types/node": "20.17.30",
+    "tsx": "4.19.3",
+    "typescript": "5.8.3"
+  },
+  "dependencies": {
+    "axios": "1.20.0"
   }
 }
