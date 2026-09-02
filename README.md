@@ -11,7 +11,7 @@ npm install
 npm run dev -- run --topic "AI agents for SMBs"
 ```
 
-The command prints the run path. Inspect `runs/<run-id>/memos/` for partner-readable memos. Run `npm test`, `npm run typecheck`, and `npm audit` before submission.
+The command prints each pipeline stage, including whether OpenRouter or the deterministic fallback produced analysis and a memo, followed by the run path. Inspect `runs/<run-id>/memos/` for partner-readable memos. Run `npm test`, `npm run typecheck`, and `npm audit` before submission.
 
 ## Run Artifacts
 

@@ -6,6 +6,7 @@ import test from "node:test";
 
 import { renderMemo } from "../../src/reports/memo.js";
 import { runPipeline } from "../../src/pipeline/run.js";
+import { analyseCandidate } from "../../src/analysis/analysis.js";
 import { OpenRouterAnalyzer, OpenRouterMemoWriter } from "../../src/analysis/llm.js";
 import { recommend } from "../../src/analysis/recommendation.js";
 import { scoreAnalysis } from "../../src/analysis/scoring.js";
@@ -51,6 +52,20 @@ test("scores and recommends a sufficiently evidenced thesis match", () => {
     ]).decision,
     "Watch"
   );
+});
+
+test("passes a vague fallback candidate with no explicit SMB fit", async () => {
+  const fallback = await analyseCandidate(
+    {
+      ...candidate,
+      name: "Vague Agent",
+      description: "Agentic AI for society builders.",
+      signal: "YC Fall 2025 company listing",
+    },
+    []
+  );
+  assert.equal(scoreAnalysis(fallback).total, 46);
+  assert.equal(recommend(scoreAnalysis(fallback), []).decision, "Pass");
 });
 
 test("accepts a structured LLM analysis", async () => {
@@ -130,13 +145,18 @@ test("renders cited Markdown with a clear call", () => {
 
 test("writes evidence, analysis, and a memo for one candidate", async () => {
   const rootDir = await mkdtemp(join(tmpdir(), "deal-scout-"));
+  const info: string[] = [];
   try {
     const summary = await runPipeline({
       topic: "AI agents for SMBs",
       rootDir,
       candidates: [candidate],
+      logger: { info: (message) => info.push(message), error: () => undefined },
     });
     assert.equal(summary.completed, 1);
+    assert.ok(info.some((message) => message.includes("Starting run")));
+    assert.ok(info.some((message) => message.includes("deterministic analysis")));
+    assert.ok(info.some((message) => message.includes("deterministic memo")));
     const memo = await readFile(
       join(summary.runPath, "memos", "acme-agent.md"),
       "utf8"
