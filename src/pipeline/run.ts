@@ -116,6 +116,7 @@ export async function runPipeline(input: {
         analysis,
         score,
         recommendation,
+        profile,
       };
       logger.info(`${progress}: rendering HTML memo.`);
       await dependencies.store.writeText(

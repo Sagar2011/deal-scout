@@ -4,13 +4,17 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 
-import { renderMemo } from "../../src/reports/memo.js";
+import { renderMemo, renderRunReport } from "../../src/reports/memo.js";
 import { runPipeline } from "../../src/pipeline/run.js";
 import { analyseCandidate } from "../../src/analysis/analysis.js";
 import { OpenRouterAnalyzer } from "../../src/analysis/llm.js";
 import { recommend } from "../../src/analysis/recommendation.js";
 import { scoreAnalysis } from "../../src/analysis/scoring.js";
-import type { Candidate, StartupAnalysis } from "../../src/core/models.js";
+import type {
+  Candidate,
+  CandidateProfile,
+  StartupAnalysis,
+} from "../../src/core/models.js";
 
 const candidate: Candidate = {
   name: "Acme Agent",
@@ -37,10 +41,28 @@ const analysis: StartupAnalysis = {
   },
 };
 
+const profile: CandidateProfile = {
+  profileUrl: candidate.sourceUrl,
+  description: candidate.description,
+  logoUrl: "https://images.example/acme-logo.png",
+  founders: [
+    {
+      name: "Ada Lovelace",
+      title: "Founder/CEO",
+      bio: "Former engineering lead.",
+      linkedinUrl: "https://www.linkedin.com/in/ada-lovelace",
+    },
+  ],
+};
+
 test("scores and recommends a sufficiently evidenced thesis match", () => {
   const score = scoreAnalysis(analysis);
   assert.equal(score.total, 73);
-  assert.deepEqual(score.breakdown[0], { label: "Workflow clarity", score: 23, maximum: 25 });
+  assert.deepEqual(score.breakdown[0], {
+    label: "Workflow clarity",
+    score: 23,
+    maximum: 25,
+  });
   assert.equal(
     recommend(score, [
       {
@@ -90,13 +112,19 @@ test("normalizes nested LLM fields before HTML rendering", async () => {
     async post() {
       return {
         data: {
-          choices: [{ message: { content: JSON.stringify({
-            ...analysis,
-            team: { founders: ["Ada Lovelace", "Grace Hopper"], size: 2 },
-            product: { description: "Automates finance work." },
-            market: { segment: "SMB finance" },
-            traction: { customers: "unknown", team: 2 },
-          }) } }],
+          choices: [
+            {
+              message: {
+                content: JSON.stringify({
+                  ...analysis,
+                  team: { founders: ["Ada Lovelace", "Grace Hopper"], size: 2 },
+                  product: { description: "Automates finance work." },
+                  market: { segment: "SMB finance" },
+                  traction: { customers: "unknown", team: 2 },
+                }),
+              },
+            },
+          ],
         },
       };
     },
@@ -121,6 +149,7 @@ test("renders cited HTML with a clear call", () => {
     ],
     analysis,
     score: scoreAnalysis(analysis),
+    profile,
     recommendation: {
       decision: "Watch",
       rationale: "Promising workflow fit.",
@@ -137,7 +166,28 @@ test("renders cited HTML with a clear call", () => {
   assert.match(memo, /class="meter mixed"/);
   assert.match(memo, /class="meter weak"/);
   assert.match(memo, /Thesis drivers/);
+  assert.match(memo, /src="https:\/\/images\.example\/acme-logo\.png"/);
+  assert.match(memo, /Ada Lovelace on LinkedIn/);
   assert.match(memo, /href="https:\/\/www\.ycombinator\.com/);
+});
+
+test("renders optional logos and founder links in run cards", () => {
+  const report = renderRunReport("AI agents", [
+    {
+      candidate,
+      evidence: [],
+      analysis,
+      score: scoreAnalysis(analysis),
+      recommendation: {
+        decision: "Watch",
+        rationale: "Promising workflow fit.",
+        mindChanges: [],
+      },
+      profile,
+    },
+  ]);
+  assert.match(report, /src="https:\/\/images\.example\/acme-logo\.png"/);
+  assert.match(report, /Ada Lovelace on LinkedIn/);
 });
 
 test("writes evidence, analysis, and a memo for one candidate", async () => {

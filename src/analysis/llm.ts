@@ -69,7 +69,10 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 function toText(value: unknown): string {
   if (typeof value === "string") return value;
   if (Array.isArray(value)) return value.map(toText).filter(Boolean).join("; ");
-  if (isRecord(value)) return Object.entries(value).map(([key, item]) => `${key}: ${toText(item)}`).join("; ");
+  if (isRecord(value))
+    return Object.entries(value)
+      .map(([key, item]) => `${key}: ${toText(item)}`)
+      .join("; ");
   return value == null ? "" : String(value);
 }
 

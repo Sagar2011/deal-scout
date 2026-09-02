@@ -14,12 +14,18 @@ export type Evidence = {
   capturedAt: string;
 };
 
-export type Founder = { name: string; title: string; bio: string };
+export type Founder = {
+  name: string;
+  title: string;
+  bio: string;
+  linkedinUrl?: string;
+};
 
 export type CandidateProfile = {
   profileUrl: string;
   description: string;
   teamSize?: number;
+  logoUrl?: string;
   founders: Founder[];
 };
 
