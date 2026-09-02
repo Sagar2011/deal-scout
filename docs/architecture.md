@@ -11,4 +11,4 @@
 7. `core/storage.ts` persists every artifact under one run directory.
 8. `pipeline/` coordinates source discovery and the complete run.
 
-The boundaries are plain TypeScript modules. A failure for one candidate does not discard completed artifacts for others. This is deliberately not a service architecture.
+The pipeline depends on small contracts for sources, enrichers, analysis providers, report renderers, and run storage. `pipeline/defaults.ts` registers today's YC, Hacker News, YC-profile, OpenRouter, HTML, and file-store adapters. Add a future source, provider, or database-backed store by implementing its contract and registering it there; the orchestration stays unchanged.

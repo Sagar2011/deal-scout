@@ -4,6 +4,7 @@ import { buildAnalysisPrompt } from "../prompts/investment-analysis.js";
 import type { HttpClient } from "../sources/types.js";
 
 export class OpenRouterAnalyzer {
+  readonly name = "OpenRouter";
   constructor(
     private readonly apiKey: string,
     private readonly model: string,

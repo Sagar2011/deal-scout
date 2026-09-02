@@ -43,3 +43,5 @@ export async function writeText(
   await mkdir(join(path, ".."), { recursive: true });
   await writeFile(path, value, "utf8");
 }
+
+export const fileRunStore = { createRun, writeJson, writeText };

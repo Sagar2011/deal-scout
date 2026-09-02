@@ -116,7 +116,9 @@ test("writes evidence, analysis, and a memo for one candidate", async () => {
     });
     assert.equal(summary.completed, 1);
     assert.ok(info.some((message) => message.includes("Starting run")));
-    assert.ok(info.some((message) => message.includes("deterministic analysis")));
+    assert.ok(
+      info.some((message) => message.includes("deterministic analysis"))
+    );
     assert.ok(info.some((message) => message.includes("rendering HTML memo")));
     const memo = await readFile(
       join(summary.runPath, "memos", "acme-agent.html"),

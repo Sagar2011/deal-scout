@@ -2,6 +2,9 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { discoverCandidates } from "../../src/pipeline/discover.js";
+import { HackerNewsSource } from "../../src/sources/hacker-news.js";
+import type { CandidateSource } from "../../src/sources/types.js";
+import { YcSource } from "../../src/sources/yc.js";
 
 test("returns one candidate from YC and Hacker News", async () => {
   const requests: string[] = [];
@@ -61,7 +64,11 @@ test("returns one candidate from YC and Hacker News", async () => {
     },
   };
 
-  const candidates = await discoverCandidates("AI agents", http, 1);
+  const candidates = await discoverCandidates(
+    "AI agents",
+    [new YcSource(http), new HackerNewsSource(http)],
+    1
+  );
 
   assert.deepEqual(candidates, [
     {
@@ -82,4 +89,25 @@ test("returns one candidate from YC and Hacker News", async () => {
     },
   ]);
   assert.equal(requests.length, 3);
+});
+
+test("discovers from a supplied source registry", async () => {
+  const source: CandidateSource = {
+    async findCandidates() {
+      return [
+        {
+          name: "Extensible Source",
+          website: "https://example.com",
+          description: "A registered source candidate.",
+          source: "Hacker News",
+          sourceUrl: "https://news.ycombinator.com/item?id=1",
+          signal: "1 HN point",
+        },
+      ];
+    },
+  };
+  assert.equal(
+    (await discoverCandidates("anything", [source], 5))[0].name,
+    "Extensible Source"
+  );
 });

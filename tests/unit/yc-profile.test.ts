@@ -28,7 +28,8 @@ test("extracts YC founder biographies and team context", async () => {
 
   assert.deepEqual(profile, {
     profileUrl: candidate.sourceUrl,
-    description: "Acme automates finance. Founded in 2025 by Ada Lovelace and Grace Hopper, Acme has 3 employees.",
+    description:
+      "Acme automates finance. Founded in 2025 by Ada Lovelace and Grace Hopper, Acme has 3 employees.",
     teamSize: 3,
     founders: [
       {
