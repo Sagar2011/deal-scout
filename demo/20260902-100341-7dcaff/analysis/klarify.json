@@ -1,0 +1,79 @@
+{
+  "analysis": {
+    "team": "Founders Moody Abdul (CEO) and Alexander Bergholm (CTO). Moody previously founded Circleback.ai; Alexander has a competitive CS background (top 50 in Canada). Total team size of 4 employees based in San Francisco. No additional team information is available in the evidence.",
+    "product": "AI Agent for Therapists – a software solution intended to assist therapists in their practice using AI to support therapeutic processes. No further product details or workflow are provided in the evidence.",
+    "market": "Based on the product description, the solution appears to target the mental‑health/therapy sector. No market size, segmentation, or competitive landscape data is supplied.",
+    "traction": "No traction metrics (e.g., revenue, active users, pilot customers, retention) are presented in the evidence.",
+    "risks": [
+      "Regulatory and compliance risk: AI in mental‑health may be subject to healthcare regulations (e.g., HIPAA, FDA guidance) – current compliance status is unknown.",
+      "Team size risk: Only 4 employees may limit product development, go‑to‑market execution, and scaling capabilities.",
+      "Product‑market fit risk: No evidence of customer validation, adoption, or demand for the solution.",
+      "Competitive risk: No information on existing competitors or differentiation is available."
+    ],
+    "openQuestions": [
+      "What is the specific workflow and feature set of the AI Agent for Therapists?",
+      "Is there any demonstrated traction (e.g., pilot clients, revenue, user metrics)?",
+      "What is the target market size and segmentation?",
+      "What is the business model (subscription, per‑session, B2B, B2C)?",
+      "What regulatory clearances or compliance measures are in place?",
+      "Who are the key competitors, and how does Klarify differentiate?",
+      "What experience does the team have in mental‑health or healthcare AI?",
+      "What is the current funding status and runway?",
+      "What are the key product roadmap milestones and timeline?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.25,
+      "smbFit": 0,
+      "technicalDepth": 0.25,
+      "signalStrength": 0.5,
+      "whyNow": 0
+    }
+  },
+  "score": {
+    "total": 50,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "SMB fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 19,
+        "maximum": 25
+      },
+      {
+        "label": "SMB fit",
+        "score": 5,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 5,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 10,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 11,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Watch",
+    "rationale": "50/100 against the current SMB AI-agent thesis with 7 captured evidence records.",
+    "mindChanges": [
+      "Verify founder background and technical depth.",
+      "Verify customer retention and willingness to pay.",
+      "Validate that the workflow produces measurable ROI."
+    ]
+  }
+}

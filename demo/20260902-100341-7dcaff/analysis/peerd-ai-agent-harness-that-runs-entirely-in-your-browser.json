@@ -1,0 +1,81 @@
+{
+  "analysis": {
+    "team": "Unknown – no evidence on founders or team composition; open question: Who are the founders and what is their background?",
+    "product": "AI agent harness that runs entirely in the browser; open‑source project hosted on GitHub (https://github.com/NotASithLord/peerd). Provides a framework for executing AI agents within a browser environment.",
+    "market": "Unknown – no evidence regarding target market, customer segments, or market size; open question: What market is the product intended for?",
+    "traction": "Limited – the product was posted on Hacker News and received 75 points; no additional adoption metrics are available; open question: Are there any other measures of user interest or usage?",
+    "risks": [
+      "No disclosed team information raises execution risk.",
+      "Unclear business model and revenue path.",
+      "Technical feasibility of running AI agents fully in‑browser may be limited by browser performance and sandbox constraints.",
+      "Low traction (75 HN points) suggests limited market validation.",
+      "Open‑source nature may hinder proprietary monetization.",
+      "Uncertain market fit and customer discovery."
+    ],
+    "openQuestions": [
+      "Who are the founders and what is their relevant experience?",
+      "What is the team composition and size?",
+      "What is the target market and customer segment?",
+      "What is the proposed business model or monetization strategy?",
+      "Are there any additional traction metrics (e.g., sign‑ups, active users, revenue)?",
+      "What technical stack enables AI agent execution in the browser?",
+      "What are the key use cases and value propositions for end‑users?",
+      "What is the competitive landscape and differentiation?",
+      "Is there any existing funding or runway?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.25,
+      "smbFit": 0,
+      "technicalDepth": 0.25,
+      "signalStrength": 0.25,
+      "whyNow": 0.25
+    }
+  },
+  "score": {
+    "total": 50,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "SMB fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 19,
+        "maximum": 25
+      },
+      {
+        "label": "SMB fit",
+        "score": 5,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 5,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 10,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 11,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Watch",
+    "rationale": "50/100 against the current SMB AI-agent thesis with 3 captured evidence records.",
+    "mindChanges": [
+      "Verify founder background and technical depth.",
+      "Verify customer retention and willingness to pay.",
+      "Validate that the workflow produces measurable ROI."
+    ]
+  }
+}

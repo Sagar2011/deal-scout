@@ -1,0 +1,82 @@
+{
+  "analysis": {
+    "team": "summary: No information about founders, team size, or background is present in the supplied evidence. The only identifiable person is the author of a Substack post (alexeyondata) hosting a write-up, which is not equivalent to a company team.; evidence: ",
+    "product": "summary: The candidate appears to be a write-up/Substack post describing the author's experiment building an 'AI Agent Team for Software Development' and testing it on 5 real projects. There is no evidence of a packaged, sellable product, no pricing, no integration story, and no defined user workflow beyond the author's own testing.; evidence: https://alexeyondata.substack.com/p/i-built-an-ai-agent-team-for-software",
+    "market": "summary: The addressable market is not characterized in the supplied evidence. The post title suggests a developer-tooling / AI software-development agent category, but no TAM, SAM, segmentation, target customer profile, or buyer persona is provided.; evidence: ",
+    "traction": "summary: The only traction signal is '3 HN points' on a Hacker News submission. No users, revenue, pilots, waitlist, or growth metrics are provided.; evidence: 3 HN points (https://news.ycombinator.com/item?id=47643241)",
+    "risks": [
+      "No evidence of a company, incorporated entity, or team behind the artifact; appears to be a personal blog post rather than a venture-backable business.",
+      "No evidence of customers, pilots, or any commercial validation beyond a low-engagement HN submission.",
+      "The 'AI agent team for software development' category is highly crowded; the evidence provides no differentiation, defensibility, or moat.",
+      "No pricing, GTM, or distribution plan is documented in the evidence.",
+      "Reliance on a single HN point total (3) as the sole external signal is a very weak proxy for product-market fit.",
+      "No technical architecture, security, IP, or data details are disclosed in the supplied evidence."
+    ],
+    "openQuestions": [
+      "Is there an actual company behind this post, and if so, who are the founders and what is their relevant background?",
+      "What is the product: a framework, an agent orchestration layer, a hosted service, or just a write-up of an experiment?",
+      "What are the 5 real projects used for testing, and were the users/owners aware and willing to pay?",
+      "Who is the target customer (indie devs, SMB dev teams, enterprises), and what is the pricing model?",
+      "What traction exists beyond '3 HN points' — users, revenue, letters of intent, waitlist size?",
+      "How does this compare to existing agent-based software development tools (e.g., Devin, Cursor, Copilot Workspace, AutoGen, LangGraph-based stacks)?",
+      "What funding has been raised, if any, and what is the cap table?",
+      "What is the underlying technical stack, and what is the defensible IP or data advantage?",
+      "Why now — is there a specific shift in model capability, cost, or enterprise adoption that makes this timely?",
+      "Is the Substack author the founder, and is there a separate company domain or entity?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.25,
+      "smbFit": 0.25,
+      "technicalDepth": 0.25,
+      "signalStrength": 0.25,
+      "whyNow": 0.25
+    }
+  },
+  "score": {
+    "total": 45,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "SMB fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 19,
+        "maximum": 25
+      },
+      {
+        "label": "SMB fit",
+        "score": 5,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 5,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 5,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 11,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Pass",
+    "rationale": "45/100 against the current SMB AI-agent thesis with 3 captured evidence records.",
+    "mindChanges": [
+      "Verify founder background and technical depth.",
+      "Verify customer retention and willingness to pay.",
+      "Validate that the workflow produces measurable ROI."
+    ]
+  }
+}

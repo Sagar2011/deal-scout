@@ -1,0 +1,77 @@
+{
+  "analysis": {
+    "team": "Unknown – no information provided about founders or team.",
+    "product": "AMA2 is described as a messenger built for AI agents; minimal product details are available.",
+    "market": "Unknown – no market size, segmentation, or demand data provided.",
+    "traction": "Limited traction: 5 HN points and a Show HN post; no user metrics, revenue, or growth data.",
+    "risks": [
+      "High risk due to lack of information: unknown team, unverified product‑market fit, no evidence of technical depth, minimal traction, and uncertain business model/go‑to‑market strategy."
+    ],
+    "openQuestions": [
+      "Who are the founders and what is their background?",
+      "What is the technical architecture of AMA2?",
+      "Is there a clear value proposition for AI agents versus existing messaging solutions?",
+      "What is the target market (SMB, enterprise, developers)?",
+      "What are the monetization or revenue plans?",
+      "Are there any existing users or pilots?",
+      "What is the competitive landscape and differentiation?",
+      "What resources or funding have been secured?",
+      "What is the roadmap for product development?",
+      "Is there any IP or patents?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.25,
+      "smbFit": 0,
+      "technicalDepth": 0,
+      "signalStrength": 0.25,
+      "whyNow": 0.25
+    }
+  },
+  "score": {
+    "total": 45,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "SMB fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 19,
+        "maximum": 25
+      },
+      {
+        "label": "SMB fit",
+        "score": 5,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 5,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 5,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 11,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Pass",
+    "rationale": "45/100 against the current SMB AI-agent thesis with 3 captured evidence records.",
+    "mindChanges": [
+      "Verify founder background and technical depth.",
+      "Verify customer retention and willingness to pay.",
+      "Validate that the workflow produces measurable ROI."
+    ]
+  }
+}

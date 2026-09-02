@@ -1,0 +1,20 @@
+{
+  "profileUrl": "https://www.ycombinator.com/companies/klarify",
+  "description": "AI Agent for Therapists. Founded in 2024 by Moody Abdul and Alexander Bergholm, Klarify has 4 employees based in San Francisco.",
+  "teamSize": 4,
+  "logoUrl": "https://bookface-images.s3.amazonaws.com/small_logos/b1e276eff7f94fc1f97bb94df15769f7ec1b4fef.png",
+  "founders": [
+    {
+      "name": "Moody Abdul",
+      "title": "Founder/CEO",
+      "bio": "Founder of Klarify, an AI agent for therapists.  Previously founder @ Circleback.ai.   Contact: moody@klarify.ca",
+      "linkedinUrl": "https://www.linkedin.com/in/moodyabdul"
+    },
+    {
+      "name": "Alexander Bergholm",
+      "title": "Founder/CTO",
+      "bio": "CTO @ Klarify (Batch P26)  Here to graduate clients from therapy by enhancing their therapeutic journey.  Former Div 1 collegiate CS player, top 50 in Canada — still clutch under pressure.",
+      "linkedinUrl": "https://www.linkedin.com/in/bergholmalexander/"
+    }
+  ]
+}
