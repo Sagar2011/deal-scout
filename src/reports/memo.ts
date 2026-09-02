@@ -6,6 +6,7 @@ import type {
   Score,
   StartupAnalysis,
 } from "../core/models.js";
+import type { RunThesis } from "../core/thesis.js";
 
 export type MemoInput = {
   candidate: Candidate;
@@ -14,10 +15,11 @@ export type MemoInput = {
   score: Score;
   recommendation: Recommendation;
   profile?: CandidateProfile;
+  thesis?: RunThesis;
 };
 
 export function renderMemo(input: MemoInput): string {
-  const { candidate, evidence, analysis, score, recommendation, profile } =
+  const { candidate, evidence, analysis, score, recommendation, profile, thesis } =
     input;
   const decisionClass = decisionSlug(recommendation.decision);
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${escape(
@@ -43,7 +45,9 @@ export function renderMemo(input: MemoInput): string {
     recommendation.decision
   )}</h2><p>${escape(
     recommendation.rationale
-  )}</p></section><section><div class="section-heading"><div><p class="section-kicker">THESIS FIT</p><h2>Score breakdown</h2></div><p class="section-note">Each factor is scored independently against the current thesis.</p></div>${scoreBreakdown(
+  )}</p></section><section><div class="section-heading"><div><p class="section-kicker">THESIS FIT</p><h2>Score breakdown</h2></div><p class="section-note">${escape(
+    thesis?.statement ?? "Each factor is scored independently against the selected thesis."
+  )}</p></div>${scoreBreakdown(
     score
   )}</section><section><div class="section-heading"><div><p class="section-kicker">AT A GLANCE</p><h2>Thesis drivers</h2></div></div>${thesisDrivers(
     score

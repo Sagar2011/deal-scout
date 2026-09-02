@@ -2,6 +2,8 @@ import axios from "axios";
 import type { Candidate, Evidence, StartupAnalysis } from "../core/models.js";
 import { buildAnalysisPrompt } from "../prompts/investment-analysis.js";
 import type { HttpClient } from "../sources/types.js";
+import { retryOpenRouter } from "./openrouter-retry.js";
+import type { RunThesis } from "../core/thesis.js";
 
 export class OpenRouterAnalyzer {
   readonly name = "OpenRouter";
@@ -13,19 +15,22 @@ export class OpenRouterAnalyzer {
 
   async analyse(
     candidate: Candidate,
-    evidence: Evidence[]
+    evidence: Evidence[],
+    thesis: RunThesis
   ): Promise<StartupAnalysis> {
-    const prompt = buildAnalysisPrompt(candidate, evidence);
-    const response = await this.http.post<{
-      choices: Array<{ message: { content: string } }>;
-    }>(
-      "https://openrouter.ai/api/v1/chat/completions",
-      {
-        model: this.model,
-        temperature: 0,
-        messages: [{ role: "user", content: prompt }],
-      },
-      { headers: { Authorization: `Bearer ${this.apiKey}` } }
+    const prompt = buildAnalysisPrompt(candidate, evidence, thesis);
+    const response = await retryOpenRouter(() =>
+      this.http.post<{
+        choices: Array<{ message: { content: string } }>;
+      }>(
+        "https://openrouter.ai/api/v1/chat/completions",
+        {
+          model: this.model,
+          temperature: 0,
+          messages: [{ role: "user", content: prompt }],
+        },
+        { headers: { Authorization: `Bearer ${this.apiKey}` } }
+      )
     );
     const result = normalizeAnalysis(
       JSON.parse(extractJson(response.data.choices[0]?.message.content ?? ""))
@@ -55,7 +60,7 @@ function normalizeAnalysis(value: unknown): StartupAnalysis {
     openQuestions: toTextList(value.openQuestions),
     criteria: {
       workflowClarity: Number(criteria.workflowClarity),
-      smbFit: Number(criteria.smbFit),
+      topicFit: Number(criteria.topicFit),
       technicalDepth: Number(criteria.technicalDepth),
       signalStrength: Number(criteria.signalStrength),
       whyNow: Number(criteria.whyNow),

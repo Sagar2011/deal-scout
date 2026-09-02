@@ -39,7 +39,7 @@ export type StartupAnalysis = {
   openQuestions: string[];
   criteria: {
     workflowClarity: number;
-    smbFit: number;
+    topicFit: number;
     technicalDepth: number;
     signalStrength: number;
     whyNow: number;

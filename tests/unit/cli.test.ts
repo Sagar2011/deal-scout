@@ -9,6 +9,20 @@ test("parses a run topic", () => {
   });
 });
 
+test("parses an optional candidate limit", () => {
+  assert.deepEqual(parseCommand(["run", "--topic", "health startup", "--limit", "3"]), {
+    topic: "health startup",
+    limit: 3,
+  });
+});
+
+test("rejects an invalid candidate limit", () => {
+  assert.throws(
+    () => parseCommand(["run", "--topic", "health startup", "--limit", "0"]),
+    /--limit must be a positive integer/
+  );
+});
+
 test("rejects a run without a topic", () => {
   assert.throws(() => parseCommand(["run"]), /--topic is required/);
 });

@@ -32,6 +32,7 @@ export class HackerNewsSource implements CandidateSource {
           story.url &&
           story.created_at_i &&
           story.created_at_i >= newestAllowedAge &&
+          /^show hn:/i.test(title) &&
           matchesTopic(title, topic)
         );
       })

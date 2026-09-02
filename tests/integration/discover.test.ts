@@ -24,7 +24,7 @@ test("returns one candidate from YC and Hacker News", async () => {
             hits: [
               {
                 objectID: "42",
-                title: "Show HN: HN Agent",
+                title: "Show HN: AI Agent",
                 url: "https://hn-agent.example",
                 points: 120,
                 created_at_i: Math.floor(Date.now() / 1000),
@@ -71,7 +71,7 @@ test("returns one candidate from YC and Hacker News", async () => {
   );
 
   assert.equal(candidates.length, 1);
-  assert.equal(candidates[0].name, "HN Agent");
+  assert.equal(candidates[0].name, "AI Agent");
   assert.equal(requests.length, 3);
 });
 
@@ -139,7 +139,7 @@ test("filters loose YC matches using meaningful topic terms", async () => {
   );
 });
 
-test("returns the freshest relevant candidates up to the final requested limit", async () => {
+test("returns only candidates that satisfy every original-topic constraint", async () => {
   const source: CandidateSource = {
     async findCandidates() {
       return [
@@ -175,7 +175,7 @@ test("returns the freshest relevant candidates up to the final requested limit",
 
   assert.deepEqual(
     candidates.map((candidate) => candidate.name),
-    ["Game agent", "Newer game studio"]
+    ["Game agent"]
   );
 });
 
@@ -217,5 +217,125 @@ test("does not admit a candidate that matches only a broadened query", async () 
   assert.deepEqual(
     candidates.map((candidate) => candidate.name),
     ["Game creation toolkit"]
+  );
+});
+
+test("requires a contextual match from an expanded query", async () => {
+  const source: CandidateSource = {
+    async findCandidates() {
+      return [
+        {
+          name: "Coding Agent",
+          website: "https://coding.example",
+          description: "AI agents for software development.",
+          source: "Hacker News",
+          sourceUrl: "https://news.ycombinator.com/item?id=coding",
+          signal: "100 HN points",
+        },
+        {
+          name: "Business Messaging Agent",
+          website: "https://messaging.example",
+          description: "AI agents for business messaging.",
+          source: "Hacker News",
+          sourceUrl: "https://news.ycombinator.com/item?id=messaging",
+          signal: "20 HN points",
+        },
+        {
+          name: "Invoice Agent",
+          website: "https://invoices.example",
+          description:
+            "AI agents automate invoice follow-up for small businesses.",
+          source: "Y Combinator",
+          sourceUrl: "https://www.ycombinator.com/companies/invoice-agent",
+          signal: "YC Winter 2025 company listing",
+        },
+      ];
+    },
+  };
+
+  const candidates = await discoverCandidates(
+    ["AI agents for SMBs", "small business AI agents"],
+    [source],
+    11,
+    "AI agents for SMBs"
+  );
+
+  assert.deepEqual(candidates.map((candidate) => candidate.name), [
+    "Invoice Agent",
+  ]);
+});
+
+test("requires the complete thesis match instead of a generic AI-agent term", async () => {
+  const source: CandidateSource = {
+    async findCandidates() {
+      return [
+        {
+          name: "Coding Agent",
+          website: "https://coding.example",
+          description: "AI agents for software development.",
+          source: "Hacker News",
+          sourceUrl: "https://news.ycombinator.com/item?id=coding",
+          signal: "100 HN points",
+        },
+        {
+          name: "Invoice Agent",
+          website: "https://invoices.example",
+          description:
+            "AI agents automate invoice follow-up for small businesses.",
+          source: "Y Combinator",
+          sourceUrl: "https://www.ycombinator.com/companies/invoice-agent",
+          signal: "YC Winter 2025 company listing",
+        },
+      ];
+    },
+  };
+
+  const candidates = await discoverCandidates(
+    ["AI agents for SMBs", "small business AI agents"],
+    [source],
+    11,
+    "AI agents for SMBs"
+  );
+
+  assert.deepEqual(
+    candidates.map((candidate) => candidate.name),
+    ["Invoice Agent"]
+  );
+});
+
+test("keeps only Show HN product launches", async () => {
+  const source = new HackerNewsSource({
+    async get() {
+      return {
+        data: {
+          hits: [
+            {
+              objectID: "launch",
+              title: "Show HN: AI agents for small businesses",
+              url: "https://launch.example",
+              points: 20,
+              created_at_i: Math.floor(Date.now() / 1000),
+            },
+            {
+              objectID: "article",
+              title: "How AI agents affect small businesses",
+              url: "https://article.example",
+              points: 20,
+              created_at_i: Math.floor(Date.now() / 1000),
+            },
+          ],
+        },
+      };
+    },
+    async post() {
+      throw new Error("not used");
+    },
+  });
+
+  assert.deepEqual(
+    (await source.findCandidates("AI agents for SMBs", 5)).map(
+      (candidate) => candidate.name
+    ),
+    ["AI agents for small businesses"]
   );
 });

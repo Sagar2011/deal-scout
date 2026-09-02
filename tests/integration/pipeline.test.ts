@@ -11,6 +11,8 @@ import { OpenRouterAnalyzer } from "../../src/analysis/llm.js";
 import { OpenRouterQueryExpander } from "../../src/analysis/query-expander.js";
 import { recommend } from "../../src/analysis/recommendation.js";
 import { scoreAnalysis } from "../../src/analysis/scoring.js";
+import { collectCompanyWebsiteEvidence } from "../../src/research/company-website.js";
+import { createRunThesis } from "../../src/core/thesis.js";
 import { fileRunStore } from "../../src/core/storage.js";
 import type { PipelineDependencies } from "../../src/core/contracts.js";
 import type {
@@ -38,7 +40,7 @@ const analysis: StartupAnalysis = {
   openQuestions: ["What is the customer retention profile?"],
   criteria: {
     workflowClarity: 0.9,
-    smbFit: 0.9,
+    topicFit: 0.9,
     technicalDepth: 0.4,
     signalStrength: 0.6,
     whyNow: 0.8,
@@ -75,6 +77,24 @@ test("scores and recommends a sufficiently evidenced thesis match", () => {
         source: "Y Combinator",
         capturedAt: "2026-09-02T00:00:00.000Z",
       },
+      {
+        claim: "Founder profile",
+        url: candidate.sourceUrl,
+        source: "Y Combinator",
+        capturedAt: "2026-09-02T00:00:00.000Z",
+      },
+      {
+        claim: "Customer workflow evidence",
+        url: candidate.website,
+        source: "Company website",
+        capturedAt: "2026-09-02T00:00:00.000Z",
+      },
+      {
+        claim: "Product evidence",
+        url: candidate.website,
+        source: "Company website",
+        capturedAt: "2026-09-02T00:00:00.000Z",
+      },
     ]).decision,
     "Watch"
   );
@@ -100,7 +120,7 @@ test("calibrates materially different LLM criteria to the same evidence-backed s
       ...analysis,
       criteria: {
         workflowClarity: 0.1,
-        smbFit: 0.1,
+        topicFit: 0.1,
         technicalDepth: 0.1,
         signalStrength: 0.1,
         whyNow: 0.1,
@@ -113,7 +133,7 @@ test("calibrates materially different LLM criteria to the same evidence-backed s
       ...analysis,
       criteria: {
         workflowClarity: 1,
-        smbFit: 1,
+        topicFit: 1,
         technicalDepth: 1,
         signalStrength: 1,
         whyNow: 1,
@@ -124,7 +144,89 @@ test("calibrates materially different LLM criteria to the same evidence-backed s
   assert.deepEqual(lowLlmScore, highLlmScore);
 });
 
-test("passes a vague fallback candidate with no explicit SMB fit", async () => {
+test("gives zero points to dimensions without supporting evidence", () => {
+  const score = scoreAnalysis(analysis, {
+    candidate: {
+      ...candidate,
+      name: "Unknown Product",
+      description: "A new product.",
+      signal: "YC Winter 2025 company listing",
+    },
+    evidence: [],
+  });
+
+  assert.equal(score.total, 0);
+  assert.deepEqual(
+    score.breakdown.map((item) => item.score),
+    [0, 0, 0, 0, 0]
+  );
+});
+
+test("does not score why-now without a dedicated market-timing source", () => {
+  const score = scoreAnalysis(analysis, {
+    candidate,
+    evidence: [
+      {
+        claim: candidate.description,
+        url: candidate.sourceUrl,
+        source: "Y Combinator",
+        capturedAt: "2026-09-02T00:00:00.000Z",
+      },
+      {
+        claim: "Newly released AI capability for small businesses.",
+        url: candidate.website,
+        source: "Company website",
+        capturedAt: "2026-09-02T00:00:00.000Z",
+      },
+    ],
+  });
+
+  assert.equal(score.breakdown.find((item) => item.label === "Why now")?.score, 0);
+});
+
+test("scores a candidate against the supplied topic instead of SMB fit", () => {
+  const healthcareCandidate: Candidate = {
+    ...candidate,
+    name: "Health Acme",
+    description: "Healthcare credentialing software for provider operations.",
+  };
+  const score = scoreAnalysis(analysis, {
+    candidate: healthcareCandidate,
+    evidence: [
+      {
+        claim: healthcareCandidate.description,
+        url: healthcareCandidate.sourceUrl,
+        source: "Y Combinator",
+        capturedAt: "2026-09-02T00:00:00.000Z",
+      },
+    ],
+    thesis: createRunThesis("healthcare startup"),
+  });
+
+  assert.deepEqual(score.breakdown[1], {
+    label: "Healthcare Startup fit",
+    score: 15,
+    maximum: 20,
+  });
+});
+
+test("captures a public company website description as evidence", async () => {
+  const evidence = await collectCompanyWebsiteEvidence(candidate, {
+    async post() {
+      throw new Error("not used");
+    },
+    async get() {
+      return {
+        data: '<meta property="og:description" content="Automates invoice follow-up for small businesses.">',
+      };
+    },
+  });
+
+  assert.equal(evidence[0]?.source, "Company website");
+  assert.match(evidence[0]?.claim ?? "", /Automates invoice follow-up/);
+});
+
+test("passes a vague deterministic fallback candidate", async () => {
   const fallback = await analyseCandidate(
     {
       ...candidate,
@@ -134,7 +236,6 @@ test("passes a vague fallback candidate with no explicit SMB fit", async () => {
     },
     []
   );
-  assert.equal(scoreAnalysis(fallback).total, 46);
   assert.equal(recommend(scoreAnalysis(fallback), []).decision, "Pass");
 });
 

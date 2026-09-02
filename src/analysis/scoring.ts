@@ -5,18 +5,20 @@ import type {
   Score,
   StartupAnalysis,
 } from "../core/models.js";
+import type { RunThesis } from "../core/thesis.js";
 
 type ScoreContext = {
   candidate: Candidate;
   evidence: Evidence[];
   profile?: CandidateProfile;
+  thesis?: RunThesis;
 };
 
 export function scoreAnalysis(
   analysis: StartupAnalysis,
   context?: ScoreContext
 ): Score {
-  const { workflowClarity, smbFit, technicalDepth, signalStrength, whyNow } =
+  const { workflowClarity, topicFit, technicalDepth, signalStrength, whyNow } =
     context ? evidenceCriteria(context) : analysis.criteria;
   const breakdown = [
     {
@@ -24,7 +26,11 @@ export function scoreAnalysis(
       score: Math.round(workflowClarity * 25),
       maximum: 25,
     },
-    { label: "SMB fit", score: Math.round(smbFit * 20), maximum: 20 },
+    {
+      label: context?.thesis?.fitLabel ?? "Topic fit",
+      score: Math.round(topicFit * 20),
+      maximum: 20,
+    },
     {
       label: "Technical depth",
       score: Math.round(technicalDepth * 20),
@@ -66,19 +72,31 @@ function evidenceCriteria(context: ScoreContext): StartupAnalysis["criteria"] {
     context.candidate.signal.match(/(\d+) HN points/)?.[1] ?? 0
   );
   return {
-    workflowClarity: /automat|workflow|agent/.test(text) ? 0.75 : 0.25,
-    smbFit: /small business|small businesses|smb/.test(text) ? 0.75 : 0.25,
-    technicalDepth: hasFounderSignal && hasTechnicalSignal ? 0.5 : 0.25,
+    workflowClarity: /automat|workflow|agent/.test(text) ? 0.75 : 0,
+    topicFit: context.thesis ? topicFit(text, context.thesis.topic) : 0,
+    technicalDepth: hasFounderSignal && hasTechnicalSignal ? 0.5 : 0,
     signalStrength:
       context.candidate.source === "Hacker News"
         ? hnPoints >= 100
           ? 0.75
           : hnPoints >= 20
           ? 0.5
-          : 0.25
+          : 0
         : /hiring|employees|funding|raised|launch|customer|revenue/.test(text)
         ? 0.5
-        : 0.25,
-    whyNow: /ai|agent/.test(text) ? 0.75 : 0.5,
+        : 0,
+    // This version has no dedicated market-timing source, so it cannot defend a
+    // numeric why-now claim from product copy or a company listing alone.
+    whyNow: 0,
   };
+}
+
+function topicFit(text: string, topic: string): number {
+  const terms = topic
+    .toLowerCase()
+    .split(/[^a-z0-9]+/)
+    .filter((term) => term.length > 2 && term !== "startup");
+  return terms.length > 0 && terms.every((term) => text.includes(term.slice(0, 5)))
+    ? 0.75
+    : 0;
 }

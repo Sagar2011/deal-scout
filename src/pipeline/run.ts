@@ -12,6 +12,7 @@ import { collectEvidence } from "../research/evidence.js";
 import type { HttpClient } from "../sources/types.js";
 import { discoverCandidates } from "./discover.js";
 import { createDefaultDependencies } from "./defaults.js";
+import { createRunThesis } from "../core/thesis.js";
 
 type PipelineLogger = Pick<Console, "info" | "error">;
 
@@ -29,8 +30,10 @@ export async function runPipeline(input: {
 }): Promise<RunSummary> {
   const logger = input.logger ?? console;
   const dependencies = input.dependencies ?? createDefaultDependencies(input);
+  const thesis = createRunThesis(input.topic);
   logger.info(`[DealScout] Starting run for "${input.topic}".`);
   const run = await dependencies.store.createRun(input.rootDir, input.topic);
+  await dependencies.store.writeJson(run, "thesis.json", thesis);
   const requestedCount = input.limit ?? 11;
   let queries = await buildQueryPlan(
     input.topic,
@@ -118,6 +121,16 @@ export async function runPipeline(input: {
         }
         logger.info(`${progress}: collecting evidence.`);
         const evidence = collectEvidence(candidate, profile);
+        for (const collector of dependencies.evidenceCollectors ?? []) {
+          try {
+            logger.info(`${progress}: collecting ${collector.name}.`);
+            evidence.push(...(await collector.collect(candidate)));
+          } catch (error) {
+            logger.error(
+              `${progress}: ${collector.name} failed (${error instanceof Error ? error.message : String(error)}). Continuing with captured source evidence.`
+            );
+          }
+        }
         logger.info(
           dependencies.analyzer
             ? `${progress}: requesting ${dependencies.analyzer.name} analysis.`
@@ -126,6 +139,7 @@ export async function runPipeline(input: {
         const analysis = await analyseCandidate(
           candidate,
           evidence,
+          thesis,
           dependencies.analyzer,
           (error) =>
             logger.error(
@@ -135,8 +149,13 @@ export async function runPipeline(input: {
             ),
           profile
         );
-        const score = scoreAnalysis(analysis, { candidate, evidence, profile });
-        const recommendation = recommend(score, evidence);
+        const score = scoreAnalysis(analysis, {
+          candidate,
+          evidence,
+          profile,
+          thesis,
+        });
+        const recommendation = recommend(score, evidence, thesis);
         logger.info(
           `${progress}: scored ${score.total}/100, ${recommendation.decision}.`
         );
@@ -167,6 +186,7 @@ export async function runPipeline(input: {
           score,
           recommendation,
           profile,
+          thesis,
         };
         logger.info(`${progress}: rendering HTML memo.`);
         await dependencies.store.writeText(

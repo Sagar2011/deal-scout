@@ -5,6 +5,7 @@ import { OpenRouterAnalyzer } from "../analysis/llm.js";
 import { OpenRouterQueryExpander } from "../analysis/query-expander.js";
 import { renderMemo, renderRunReport } from "../reports/memo.js";
 import { enrichYcProfile } from "../research/yc-profile.js";
+import { collectCompanyWebsiteEvidence } from "../research/company-website.js";
 import { HackerNewsSource } from "../sources/hacker-news.js";
 import type { HttpClient } from "../sources/types.js";
 import { YcSource } from "../sources/yc.js";
@@ -22,6 +23,12 @@ export function createDefaultDependencies(input: {
         name: "YC company profile",
         supports: (candidate) => candidate.source === "Y Combinator",
         enrich: (candidate) => enrichYcProfile(candidate, http),
+      },
+    ],
+    evidenceCollectors: [
+      {
+        name: "company website metadata",
+        collect: (candidate) => collectCompanyWebsiteEvidence(candidate, http),
       },
     ],
     queryExpander: input.llmApiKey

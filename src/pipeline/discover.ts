@@ -2,6 +2,7 @@ import type { Candidate } from "../core/models.js";
 import type { CandidateSource } from "../sources/types.js";
 import {
   matchesAllTopicTerms,
+  matchesStrongExpandedTopic,
   topicRelevance,
 } from "../sources/topic-match.js";
 
@@ -31,8 +32,8 @@ export async function discoverCandidates(
         .filter(({ candidate, topic }) => {
           const text = `${candidate.name} ${candidate.description}`;
           return (
-            topicRelevance(text, originalTopic) > 0 ||
-            matchesAllTopicTerms(text, topic)
+            matchesAllTopicTerms(text, originalTopic) ||
+            matchesStrongExpandedTopic(text, topic)
           );
         })
         .sort(
