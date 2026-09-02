@@ -1,7 +1,7 @@
 import type { Candidate, RunSummary } from "../core/models.js";
 import { createRun, writeJson, writeText } from "../core/storage.js";
 import { analyseCandidate } from "../analysis/analysis.js";
-import { OpenAiAnalyzer, OpenAiMemoWriter } from "../analysis/llm.js";
+import { OpenRouterAnalyzer, OpenRouterMemoWriter } from "../analysis/llm.js";
 import { recommend } from "../analysis/recommendation.js";
 import { scoreAnalysis } from "../analysis/scoring.js";
 import { renderMemo } from "../reports/memo.js";
@@ -16,6 +16,7 @@ export async function runPipeline(input: {
   http?: HttpClient;
   limit?: number;
   llmApiKey?: string;
+  llmModel?: string;
 }): Promise<RunSummary> {
   const run = await createRun(input.rootDir, input.topic);
   const candidates =
@@ -30,7 +31,12 @@ export async function runPipeline(input: {
       const analysis = await analyseCandidate(
         candidate,
         evidence,
-        input.llmApiKey ? new OpenAiAnalyzer(input.llmApiKey) : undefined
+        input.llmApiKey
+          ? new OpenRouterAnalyzer(
+              input.llmApiKey,
+              input.llmModel ?? "openrouter/free"
+            )
+          : undefined
       );
       const score = scoreAnalysis(analysis);
       const recommendation = recommend(score, evidence);
@@ -54,7 +60,10 @@ export async function runPipeline(input: {
       let memo = renderMemo(memoInput);
       if (input.llmApiKey) {
         try {
-          memo = await new OpenAiMemoWriter(input.llmApiKey).write(memoInput);
+          memo = await new OpenRouterMemoWriter(
+            input.llmApiKey,
+            input.llmModel ?? "openrouter/free"
+          ).write(memoInput);
         } catch {
           // Preserve a reviewable memo when a model request fails.
         }

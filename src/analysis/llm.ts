@@ -7,9 +7,10 @@ import {
 } from "../prompts/investment-memo.js";
 import type { HttpClient } from "../sources/types.js";
 
-export class OpenAiAnalyzer {
+export class OpenRouterAnalyzer {
   constructor(
     private readonly apiKey: string,
+    private readonly model: string,
     private readonly http: HttpClient = axios
   ) {}
 
@@ -21,16 +22,15 @@ export class OpenAiAnalyzer {
     const response = await this.http.post<{
       choices: Array<{ message: { content: string } }>;
     }>(
-      "https://api.openai.com/v1/chat/completions",
+      "https://openrouter.ai/api/v1/chat/completions",
       {
-        model: "gpt-4.1-mini",
+        model: this.model,
         messages: [{ role: "user", content: prompt }],
-        response_format: { type: "json_object" },
       },
       { headers: { Authorization: `Bearer ${this.apiKey}` } }
     );
     const result = JSON.parse(
-      response.data.choices[0]?.message.content ?? ""
+      extractJson(response.data.choices[0]?.message.content ?? "")
     ) as StartupAnalysis;
     if (
       !result.team ||
@@ -44,9 +44,10 @@ export class OpenAiAnalyzer {
   }
 }
 
-export class OpenAiMemoWriter {
+export class OpenRouterMemoWriter {
   constructor(
     private readonly apiKey: string,
+    private readonly model: string,
     private readonly http: HttpClient = axios
   ) {}
 
@@ -54,9 +55,9 @@ export class OpenAiMemoWriter {
     const response = await this.http.post<{
       choices: Array<{ message: { content: string } }>;
     }>(
-      "https://api.openai.com/v1/chat/completions",
+      "https://openrouter.ai/api/v1/chat/completions",
       {
-        model: "gpt-4.1-mini",
+        model: this.model,
         messages: [{ role: "user", content: buildMemoPrompt(input) }],
       },
       { headers: { Authorization: `Bearer ${this.apiKey}` } }
@@ -65,4 +66,11 @@ export class OpenAiMemoWriter {
     if (!memo) throw new Error("LLM returned an empty memo");
     return memo;
   }
+}
+
+function extractJson(content: string): string {
+  return content
+    .replace(/^```(?:json)?\s*/i, "")
+    .replace(/\s*```$/, "")
+    .trim();
 }

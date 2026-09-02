@@ -9,7 +9,14 @@ test("uses the standard runs directory when none is configured", () => {
 
 test("reads configured run and LLM settings", () => {
   assert.deepEqual(
-    loadConfig({ DEAL_SCOUT_RUNS_DIR: "tmp/runs", OPENAI_API_KEY: "test-key" }),
-    { runsDir: "tmp/runs", llmApiKey: "test-key" }
+    loadConfig({ DEAL_SCOUT_RUNS_DIR: "tmp/runs", OPENROUTER_API_KEY: "test-key" }),
+    { runsDir: "tmp/runs", llmApiKey: "test-key", llmModel: "openrouter/free" }
+  );
+});
+
+test("accepts an optional OpenRouter model override", () => {
+  assert.deepEqual(
+    loadConfig({ OPENROUTER_API_KEY: "test-key", OPENROUTER_MODEL: "meta-llama/llama-3.3-70b-instruct:free" }),
+    { runsDir: "runs", llmApiKey: "test-key", llmModel: "meta-llama/llama-3.3-70b-instruct:free" }
   );
 });

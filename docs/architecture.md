@@ -6,8 +6,9 @@
 2. `research/evidence.ts` turns source-backed candidate facts into evidence records.
 3. `analysis/` contains fallback/LLM analysis, scoring, and recommendations.
 4. `prompts/` keeps the analysis and memo prompts independently reviewable and refinable.
-5. `reports/memo.ts` renders a short Markdown brief with citations; the LLM memo writer is optional and falls back to this renderer on failure.
-5. `core/storage.ts` persists every artifact under one run directory.
-6. `pipeline/` coordinates source discovery and the complete run.
+5. `analysis/llm.ts` optionally calls OpenRouter with `openrouter/free` by default and falls back on invalid or unavailable model output.
+6. `reports/memo.ts` renders a short Markdown brief with citations; the LLM memo writer is optional and falls back to this renderer on failure.
+7. `core/storage.ts` persists every artifact under one run directory.
+8. `pipeline/` coordinates source discovery and the complete run.
 
 The boundaries are plain TypeScript modules. A failure for one candidate does not discard completed artifacts for others. This is deliberately not a service architecture.

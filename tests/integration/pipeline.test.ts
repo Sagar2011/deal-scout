@@ -6,7 +6,7 @@ import test from "node:test";
 
 import { renderMemo } from "../../src/reports/memo.js";
 import { runPipeline } from "../../src/pipeline/run.js";
-import { OpenAiAnalyzer, OpenAiMemoWriter } from "../../src/analysis/llm.js";
+import { OpenRouterAnalyzer, OpenRouterMemoWriter } from "../../src/analysis/llm.js";
 import { recommend } from "../../src/analysis/recommendation.js";
 import { scoreAnalysis } from "../../src/analysis/scoring.js";
 import { buildMemoPrompt } from "../../src/prompts/investment-memo.js";
@@ -54,7 +54,7 @@ test("scores and recommends a sufficiently evidenced thesis match", () => {
 });
 
 test("accepts a structured LLM analysis", async () => {
-  const analyzer = new OpenAiAnalyzer("test-key", {
+  const analyzer = new OpenRouterAnalyzer("test-key", "openrouter/free", {
     async get() {
       throw new Error("not used");
     },
@@ -81,7 +81,7 @@ test("builds an evidence-bound memo prompt and returns LLM Markdown", async () =
   assert.match(prompt, /73\/100/);
   assert.match(prompt, /Watch/);
 
-  const writer = new OpenAiMemoWriter("test-key", {
+  const writer = new OpenRouterMemoWriter("test-key", "openrouter/free", {
     async get() {
       throw new Error("not used");
     },

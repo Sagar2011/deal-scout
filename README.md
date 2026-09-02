@@ -29,13 +29,13 @@ Every memo source links to captured public evidence. Missing team, market, or tr
 
 ## LLM Mode
 
-Set `OPENAI_API_KEY` in your shell to request structured JSON analysis and a partner-style Markdown memo from OpenAI:
+Set `OPENROUTER_API_KEY` in your shell to request structured JSON analysis and a partner-style Markdown memo through OpenRouter. The default model is `openrouter/free`, which uses an available free model:
 
 ```bash
-OPENAI_API_KEY=your_key npm run dev -- run --topic "AI agents for SMBs"
+OPENROUTER_API_KEY=your_key npm run dev -- run --topic "AI agents for SMBs"
 ```
 
-`.env.example` documents the available variables. Scores and recommendations remain deterministic. Without a key, DealScout uses its documented fallback analysis and still completes a run.
+`.env.example` documents the available variables, including `OPENROUTER_MODEL` for an optional model override. Scores and recommendations remain deterministic. Without a key, DealScout uses its documented fallback analysis and still completes a run.
 
 ## Limits
 

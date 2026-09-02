@@ -10,6 +10,7 @@ const summary = await runPipeline({
   topic: command.topic,
   rootDir: config.runsDir,
   llmApiKey: config.llmApiKey,
+  llmModel: config.llmModel,
 });
 
 console.log(

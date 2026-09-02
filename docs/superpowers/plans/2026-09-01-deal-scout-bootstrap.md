@@ -104,7 +104,7 @@ export function parseCommand(argv: string[]): { topic: string; outputDir?: strin
 
 Set `package.json` scripts to `dev: "tsx src/index.ts"`, `test: "tsx --test tests/**/*.test.ts"`, `typecheck: "tsc --noEmit"`, and `build: "tsc"`. Use `"type": "module"`, `bin.deal-scout`, and a `volta` object pinned to the global-constraint versions. Make `src/index.ts` print a friendly placeholder summary after parsing.
 
-Implement `loadConfig` without an environment-loading dependency: it reads `DEAL_SCOUT_RUNS_DIR` and `OPENAI_API_KEY` from the supplied object, defaults `runsDir` to `runs`, and omits `llmApiKey` when the key is absent. The future LLM client will receive this config rather than reading `process.env` directly.
+Implement `loadConfig` without an environment-loading dependency: it reads `DEAL_SCOUT_RUNS_DIR`, `OPENROUTER_API_KEY`, and an optional `OPENROUTER_MODEL` from the supplied object, defaults `runsDir` to `runs` and the model to `openrouter/free`, and omits LLM settings when the key is absent. The future LLM client will receive this config rather than reading `process.env` directly.
 
 - [ ] **Step 4: Run the foundation checks**
 
