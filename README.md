@@ -25,7 +25,7 @@ runs/<run-id>/
   summary.json
 ```
 
-Every memo source links to captured public evidence. Missing team, market, or traction data is an open question, not an inferred fact. See `samples/demo-run/` for a stable example.
+Every memo source links to captured public evidence. Missing team, market, or traction data is an open question, not an inferred fact.
 
 ## LLM Mode
 
