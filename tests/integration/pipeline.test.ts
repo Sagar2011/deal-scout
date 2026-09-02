@@ -127,9 +127,16 @@ test("renders cited HTML with a clear call", () => {
       mindChanges: ["Verify retention.", "Verify team depth."],
     },
   });
-  assert.match(memo, /Investment call/);
+  assert.match(memo, /INVESTMENT TAKEAWAY/);
   assert.match(memo, /Score breakdown/);
   assert.match(memo, /23 \/ 25/);
+  assert.match(memo, /class="decision-pill watch"/);
+  assert.match(memo, /Source: Y Combinator/);
+  assert.match(memo, /Evidence: 1/);
+  assert.match(memo, /class="meter strong"/);
+  assert.match(memo, /class="meter mixed"/);
+  assert.match(memo, /class="meter weak"/);
+  assert.match(memo, /Thesis drivers/);
   assert.match(memo, /href="https:\/\/www\.ycombinator\.com/);
 });
 
