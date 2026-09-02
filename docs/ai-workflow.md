@@ -12,7 +12,7 @@ The implementation was validated with source-adapter tests, pipeline artifact te
 
 ## Deliberate Limits
 
-The fallback analysis is deterministic so a reviewer can run the project without an API key. LLM output structures research, while the final score and recommendation remain transparent and deterministic.
+The fallback analysis is deterministic so a reviewer can run the project without an API key. With OpenRouter enabled, the LLM structures the qualitative research at `temperature: 0`; final scores are independently calibrated from captured evidence, candidate metadata, and verified profile facts. This prevents a different free-model response from materially changing a score when the saved evidence is unchanged.
 
 The LLM analysis prompt lives in `src/prompts/` so it can be reviewed and refined independently. The optional adapter uses OpenRouter and defaults to `openrouter/free`. HTML memos are always rendered deterministically from captured evidence, structured analysis, fixed score, and fixed recommendation.
 

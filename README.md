@@ -37,13 +37,13 @@ Set `OPENROUTER_API_KEY` in your shell to request structured JSON analysis throu
 OPENROUTER_API_KEY=your_key npm run dev -- run --topic "AI agents for SMBs"
 ```
 
-`OPENROUTER_MODEL` optionally overrides the free router. Scores, recommendations, and HTML output remain deterministic. Without a key, DealScout uses its documented fallback analysis and still completes a run.
+`OPENROUTER_MODEL` optionally overrides the free router. OpenRouter produces the qualitative analysis at `temperature: 0`; final scores and recommendations are then calibrated from the saved candidate, profile, and evidence records. This keeps repeated runs stable when the captured evidence is unchanged. Without a key, DealScout uses its documented fallback analysis and still completes a run.
 
 ## Limits
 
 The first version uses YC directory results and HN story search. HN matches can be noisy: this is a triage system, not an automated investment decision. There is no frontend, database, queue, or vector store.
 
-The thesis, architecture, and AI workflow trail are in `docs/thesis.md`, `docs/architecture.md`, and `docs/ai-workflow.md`.
+The thesis, architecture, and AI workflow trail are in `docs/thesis.md`, `docs/architecture.md`, and `docs/ai-workflow.md`. See `CONTRIBUTING.md` for code contributions and `AGENTS.md` for an AI-agent working guide.
 
 ## Source Layout
 

@@ -4,13 +4,18 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 
-import { renderMemo } from "../../src/reports/memo.js";
+import { renderMemo, renderRunReport } from "../../src/reports/memo.js";
 import { runPipeline } from "../../src/pipeline/run.js";
 import { analyseCandidate } from "../../src/analysis/analysis.js";
 import { OpenRouterAnalyzer } from "../../src/analysis/llm.js";
 import { recommend } from "../../src/analysis/recommendation.js";
 import { scoreAnalysis } from "../../src/analysis/scoring.js";
-import type { Candidate, StartupAnalysis } from "../../src/core/models.js";
+import type {
+  Candidate,
+  CandidateProfile,
+  Evidence,
+  StartupAnalysis,
+} from "../../src/core/models.js";
 
 const candidate: Candidate = {
   name: "Acme Agent",
@@ -37,9 +42,28 @@ const analysis: StartupAnalysis = {
   },
 };
 
+const profile: CandidateProfile = {
+  profileUrl: candidate.sourceUrl,
+  description: candidate.description,
+  logoUrl: "https://images.example/acme-logo.png",
+  founders: [
+    {
+      name: "Ada Lovelace",
+      title: "Founder/CEO",
+      bio: "Former engineering lead.",
+      linkedinUrl: "https://www.linkedin.com/in/ada-lovelace",
+    },
+  ],
+};
+
 test("scores and recommends a sufficiently evidenced thesis match", () => {
   const score = scoreAnalysis(analysis);
   assert.equal(score.total, 73);
+  assert.deepEqual(score.breakdown[0], {
+    label: "Workflow clarity",
+    score: 23,
+    maximum: 25,
+  });
   assert.equal(
     recommend(score, [
       {
@@ -51,6 +75,50 @@ test("scores and recommends a sufficiently evidenced thesis match", () => {
     ]).decision,
     "Watch"
   );
+});
+
+test("calibrates materially different LLM criteria to the same evidence-backed score", () => {
+  const evidence: Evidence[] = [
+    {
+      claim: candidate.description,
+      url: candidate.sourceUrl,
+      source: candidate.source,
+      capturedAt: "2026-09-02T00:00:00.000Z",
+    },
+    {
+      claim: "Ada Lovelace, Founder/CEO: Former engineering lead.",
+      url: candidate.sourceUrl,
+      source: "Y Combinator",
+      capturedAt: "2026-09-02T00:00:00.000Z",
+    },
+  ];
+  const lowLlmScore = scoreAnalysis(
+    {
+      ...analysis,
+      criteria: {
+        workflowClarity: 0.1,
+        smbFit: 0.1,
+        technicalDepth: 0.1,
+        signalStrength: 0.1,
+        whyNow: 0.1,
+      },
+    },
+    { candidate, evidence, profile }
+  );
+  const highLlmScore = scoreAnalysis(
+    {
+      ...analysis,
+      criteria: {
+        workflowClarity: 1,
+        smbFit: 1,
+        technicalDepth: 1,
+        signalStrength: 1,
+        whyNow: 1,
+      },
+    },
+    { candidate, evidence, profile }
+  );
+  assert.deepEqual(lowLlmScore, highLlmScore);
 });
 
 test("passes a vague fallback candidate with no explicit SMB fit", async () => {
@@ -81,6 +149,38 @@ test("accepts a structured LLM analysis", async () => {
   assert.deepEqual(await analyzer.analyse(candidate, []), analysis);
 });
 
+test("normalizes nested LLM fields before HTML rendering", async () => {
+  const analyzer = new OpenRouterAnalyzer("test-key", "openrouter/free", {
+    async get() {
+      throw new Error("not used");
+    },
+    async post() {
+      return {
+        data: {
+          choices: [
+            {
+              message: {
+                content: JSON.stringify({
+                  ...analysis,
+                  team: { founders: ["Ada Lovelace", "Grace Hopper"], size: 2 },
+                  product: { description: "Automates finance work." },
+                  market: { segment: "SMB finance" },
+                  traction: { customers: "unknown", team: 2 },
+                }),
+              },
+            },
+          ],
+        },
+      };
+    },
+  });
+  const result = await analyzer.analyse(candidate, []);
+  assert.match(result.team, /founders: Ada Lovelace; Grace Hopper/);
+  assert.equal(result.product, "description: Automates finance work.");
+  assert.equal(result.market, "segment: SMB finance");
+  assert.match(result.traction, /team: 2/);
+});
+
 test("renders cited HTML with a clear call", () => {
   const memo = renderMemo({
     candidate,
@@ -94,14 +194,45 @@ test("renders cited HTML with a clear call", () => {
     ],
     analysis,
     score: scoreAnalysis(analysis),
+    profile,
     recommendation: {
       decision: "Watch",
       rationale: "Promising workflow fit.",
       mindChanges: ["Verify retention.", "Verify team depth."],
     },
   });
-  assert.match(memo, /Investment call/);
+  assert.match(memo, /INVESTMENT TAKEAWAY/);
+  assert.match(memo, /Score breakdown/);
+  assert.match(memo, /23 \/ 25/);
+  assert.match(memo, /class="decision-pill watch"/);
+  assert.match(memo, /Source: Y Combinator/);
+  assert.match(memo, /Evidence: 1/);
+  assert.match(memo, /class="meter strong"/);
+  assert.match(memo, /class="meter mixed"/);
+  assert.match(memo, /class="meter weak"/);
+  assert.match(memo, /Thesis drivers/);
+  assert.match(memo, /src="https:\/\/images\.example\/acme-logo\.png"/);
+  assert.match(memo, /Ada Lovelace on LinkedIn/);
   assert.match(memo, /href="https:\/\/www\.ycombinator\.com/);
+});
+
+test("renders optional logos and founder links in run cards", () => {
+  const report = renderRunReport("AI agents", [
+    {
+      candidate,
+      evidence: [],
+      analysis,
+      score: scoreAnalysis(analysis),
+      recommendation: {
+        decision: "Watch",
+        rationale: "Promising workflow fit.",
+        mindChanges: [],
+      },
+      profile,
+    },
+  ]);
+  assert.match(report, /src="https:\/\/images\.example\/acme-logo\.png"/);
+  assert.match(report, /Ada Lovelace on LinkedIn/);
 });
 
 test("writes evidence, analysis, and a memo for one candidate", async () => {
@@ -116,7 +247,9 @@ test("writes evidence, analysis, and a memo for one candidate", async () => {
     });
     assert.equal(summary.completed, 1);
     assert.ok(info.some((message) => message.includes("Starting run")));
-    assert.ok(info.some((message) => message.includes("deterministic analysis")));
+    assert.ok(
+      info.some((message) => message.includes("deterministic analysis"))
+    );
     assert.ok(info.some((message) => message.includes("rendering HTML memo")));
     const memo = await readFile(
       join(summary.runPath, "memos", "acme-agent.html"),

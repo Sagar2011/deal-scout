@@ -18,7 +18,9 @@ test("extracts YC founder biographies and team context", async () => {
     async get() {
       return {
         data: `<meta name="description" content="Acme automates finance. Founded in 2025 by Ada Lovelace and Grace Hopper, Acme has 3 employees.">
-          {&quot;founder_bio&quot;:&quot;Former engineering lead at ExampleCo.&quot;,&quot;full_name&quot;:&quot;Ada Lovelace&quot;,&quot;title&quot;:&quot;Founder/CEO&quot;}`,
+          {&quot;small_logo_url&quot;:&quot;https://images.example/acme-logo.png&quot;}
+          {&quot;founder_bio&quot;:&quot;Former engineering lead at ExampleCo.&quot;,&quot;full_name&quot;:&quot;Ada Lovelace&quot;,&quot;title&quot;:&quot;Founder/CEO&quot;}
+          <div class="text-xl font-bold">Ada Lovelace</div><a href="https://www.linkedin.com/in/ada-lovelace" aria-label="LinkedIn profile">LinkedIn</a>`,
       };
     },
     async post() {
@@ -28,13 +30,16 @@ test("extracts YC founder biographies and team context", async () => {
 
   assert.deepEqual(profile, {
     profileUrl: candidate.sourceUrl,
-    description: "Acme automates finance. Founded in 2025 by Ada Lovelace and Grace Hopper, Acme has 3 employees.",
+    description:
+      "Acme automates finance. Founded in 2025 by Ada Lovelace and Grace Hopper, Acme has 3 employees.",
     teamSize: 3,
+    logoUrl: "https://images.example/acme-logo.png",
     founders: [
       {
         name: "Ada Lovelace",
         title: "Founder/CEO",
         bio: "Former engineering lead at ExampleCo.",
+        linkedinUrl: "https://www.linkedin.com/in/ada-lovelace",
       },
     ],
   });

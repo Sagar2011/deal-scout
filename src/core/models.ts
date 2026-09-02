@@ -14,12 +14,18 @@ export type Evidence = {
   capturedAt: string;
 };
 
-export type Founder = { name: string; title: string; bio: string };
+export type Founder = {
+  name: string;
+  title: string;
+  bio: string;
+  linkedinUrl?: string;
+};
 
 export type CandidateProfile = {
   profileUrl: string;
   description: string;
   teamSize?: number;
+  logoUrl?: string;
   founders: Founder[];
 };
 
@@ -39,7 +45,12 @@ export type StartupAnalysis = {
   };
 };
 
-export type Score = { total: number; reasons: string[] };
+export type Score = {
+  total: number;
+  method: "LLM criteria" | "Evidence calibration";
+  reasons: string[];
+  breakdown: Array<{ label: string; score: number; maximum: number }>;
+};
 
 export type Recommendation = {
   decision: "Pass" | "Watch" | "Take a meeting";
