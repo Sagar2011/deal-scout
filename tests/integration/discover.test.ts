@@ -91,7 +91,7 @@ test("discovers from a supplied source registry", async () => {
     },
   };
   assert.equal(
-    (await discoverCandidates("anything", [source], 5))[0].name,
+    (await discoverCandidates("registered source", [source], 5))[0].name,
     "Extensible Source"
   );
 });
@@ -176,5 +176,46 @@ test("returns the freshest relevant candidates up to the final requested limit",
   assert.deepEqual(
     candidates.map((candidate) => candidate.name),
     ["Game agent", "Newer game studio"]
+  );
+});
+
+test("does not admit a candidate that matches only a broadened query", async () => {
+  const source: CandidateSource = {
+    async findCandidates(topic) {
+      if (topic === "video game tools") {
+        return [
+          {
+            name: "Video processing API",
+            website: "https://video.example",
+            description: "APIs for compressing video files.",
+            source: "Hacker News",
+            sourceUrl: "https://news.ycombinator.com/item?id=video",
+            signal: "10 HN points",
+          },
+        ];
+      }
+      return [
+        {
+          name: "Game creation toolkit",
+          website: "https://games.example",
+          description: "Development tools for game studios.",
+          source: "Y Combinator",
+          sourceUrl: "https://www.ycombinator.com/companies/games",
+          signal: "YC Winter 2025 company listing",
+        },
+      ];
+    },
+  };
+
+  const candidates = await discoverCandidates(
+    ["gaming startup", "video game tools"],
+    [source],
+    11,
+    "gaming startup"
+  );
+
+  assert.deepEqual(
+    candidates.map((candidate) => candidate.name),
+    ["Game creation toolkit"]
   );
 });

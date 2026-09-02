@@ -180,6 +180,38 @@ test("uses OpenRouter to return unique expanded search queries", async () => {
   ]);
 });
 
+test("rejects ecosystem queries from an LLM source plan", async () => {
+  const expander = new OpenRouterQueryExpander("test-key", "openrouter/free", {
+    async get() {
+      throw new Error("not used");
+    },
+    async post() {
+      return {
+        data: {
+          choices: [
+            {
+              message: {
+                content: JSON.stringify({
+                  queries: [
+                    "game development tools",
+                    "gaming venture capital firms",
+                    "indie game funding opportunities",
+                    "video game accelerator programs",
+                  ],
+                }),
+              },
+            },
+          ],
+        },
+      };
+    },
+  });
+
+  assert.deepEqual(await expander.expand("gaming startup"), [
+    "game development tools",
+  ]);
+});
+
 test("normalizes nested LLM fields before HTML rendering", async () => {
   const analyzer = new OpenRouterAnalyzer("test-key", "openrouter/free", {
     async get() {
@@ -314,7 +346,17 @@ test("saves the literal and expanded search queries for a pipeline run", async (
       {
         async findCandidates(topic) {
           queries.push(topic);
-          return topic === "digital health" ? [candidate] : [];
+          return topic === "digital health"
+            ? [
+                {
+                  ...candidate,
+                  name: "Digital Health Workflow",
+                  description: "Digital health workflow automation.",
+                  sourceUrl:
+                    "https://www.ycombinator.com/companies/digital-health-workflow",
+                },
+              ]
+            : [];
         },
       },
     ],
@@ -332,6 +374,7 @@ test("saves the literal and expanded search queries for a pipeline run", async (
     const summary = await runPipeline({
       topic: "healthcare startup",
       rootDir,
+      limit: 1,
       dependencies,
       logger: { info: () => undefined, error: () => undefined },
     });
@@ -346,6 +389,116 @@ test("saves the literal and expanded search queries for a pipeline run", async (
         queries: ["healthcare startup", "digital health"],
         provider: "OpenRouter query planner",
       }
+    );
+  } finally {
+    await rm(rootDir, { recursive: true, force: true });
+  }
+});
+
+test("retries bounded discovery to meet the requested candidate count", async () => {
+  const rootDir = await mkdtemp(join(tmpdir(), "deal-scout-"));
+  const expansionCalls: string[][] = [];
+  const queries: string[] = [];
+  const dependencies: PipelineDependencies = {
+    sources: [
+      {
+        async findCandidates(topic) {
+          queries.push(topic);
+          if (topic === "digital health") {
+            return [
+              {
+                ...candidate,
+                name: "Digital Health Workflow",
+                description: "Digital health workflow automation.",
+                sourceUrl:
+                  "https://www.ycombinator.com/companies/digital-health-workflow",
+              },
+            ];
+          }
+          if (topic === "care delivery software") {
+            return [
+              {
+                ...candidate,
+                name: "Care Delivery Software",
+                description: "Care delivery software for clinics.",
+                sourceUrl:
+                  "https://www.ycombinator.com/companies/care-delivery-software",
+              },
+            ];
+          }
+          return [];
+        },
+      },
+    ],
+    enrichers: [],
+    queryExpander: {
+      name: "OpenRouter query planner",
+      async expand(_topic, excludedQueries = []) {
+        expansionCalls.push(excludedQueries);
+        return excludedQueries.length
+          ? ["care delivery software"]
+          : ["digital health"];
+      },
+    },
+    renderer: { renderMemo, renderRunReport },
+    store: fileRunStore,
+  };
+  try {
+    const summary = await runPipeline({
+      topic: "healthcare startup",
+      rootDir,
+      limit: 2,
+      dependencies,
+      logger: { info: () => undefined, error: () => undefined },
+    });
+    assert.equal(summary.completed, 2);
+    assert.deepEqual(expansionCalls, [
+      [],
+      ["healthcare startup", "digital health"],
+    ]);
+    assert.deepEqual(queries, [
+      "healthcare startup",
+      "digital health",
+      "healthcare startup",
+      "digital health",
+      "care delivery software",
+    ]);
+  } finally {
+    await rm(rootDir, { recursive: true, force: true });
+  }
+});
+
+test("logs a shortfall and completes with the relevant candidates found", async () => {
+  const rootDir = await mkdtemp(join(tmpdir(), "deal-scout-"));
+  const errors: string[] = [];
+  const dependencies: PipelineDependencies = {
+    sources: [
+      {
+        async findCandidates() {
+          return [];
+        },
+      },
+    ],
+    enrichers: [],
+    renderer: { renderMemo, renderRunReport },
+    store: fileRunStore,
+  };
+  try {
+    const summary = await runPipeline({
+      topic: "very narrow category",
+      rootDir,
+      limit: 2,
+      dependencies,
+      logger: {
+        info: () => undefined,
+        error: (message) => errors.push(message),
+      },
+    });
+    assert.equal(summary.completed, 0);
+    assert.ok(
+      errors.some((message) =>
+        message.includes("Found 0/2 relevant candidates")
+      )
     );
   } finally {
     await rm(rootDir, { recursive: true, force: true });

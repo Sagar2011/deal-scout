@@ -16,6 +16,11 @@ export function matchesTopic(text: string, topic: string): boolean {
   return topicRelevance(text, topic) > 0;
 }
 
+export function matchesAllTopicTerms(text: string, topic: string): boolean {
+  const terms = topicTerms(topic);
+  return terms.length > 0 && topicRelevance(text, topic) === terms.length;
+}
+
 export function topicRelevance(text: string, topic: string): number {
   const terms = topicTerms(topic);
   if (!terms.length) return 1;

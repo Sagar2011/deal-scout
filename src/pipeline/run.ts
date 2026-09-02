@@ -30,21 +30,56 @@ export async function runPipeline(input: {
   const dependencies = input.dependencies ?? createDefaultDependencies(input);
   logger.info(`[DealScout] Starting run for "${input.topic}".`);
   const run = await dependencies.store.createRun(input.rootDir, input.topic);
-  const queries = await buildQueryPlan(
+  const requestedCount = input.limit ?? 11;
+  let queries = await buildQueryPlan(
     input.topic,
     dependencies.queryExpander,
     logger
   );
+  if (!input.candidates)
+    logger.info("[DealScout] Discovering candidates from YC and Hacker News.");
+  let candidates =
+    input.candidates ??
+    (await discoverCandidates(
+      queries,
+      dependencies.sources,
+      requestedCount,
+      input.topic
+    ));
+  if (
+    !input.candidates &&
+    candidates.length < requestedCount &&
+    dependencies.queryExpander
+  ) {
+    logger.info(
+      `[DealScout] Found ${candidates.length}/${requestedCount} candidates. Expanding discovery once more.`
+    );
+    queries = uniqueQueries([
+      ...queries,
+      ...(await expandQueries(
+        input.topic,
+        dependencies.queryExpander,
+        queries,
+        logger
+      )),
+    ]);
+    candidates = await discoverCandidates(
+      queries,
+      dependencies.sources,
+      requestedCount,
+      input.topic
+    );
+  }
   await dependencies.store.writeJson(run, "query-plan.json", {
     topic: input.topic,
     queries,
     provider: dependencies.queryExpander?.name ?? "literal topic",
   });
-  if (!input.candidates)
-    logger.info("[DealScout] Discovering candidates from YC and Hacker News.");
-  const candidates =
-    input.candidates ??
-    (await discoverCandidates(queries, dependencies.sources, input.limit));
+  if (!input.candidates && candidates.length < requestedCount) {
+    logger.error(
+      `[DealScout] Found ${candidates.length}/${requestedCount} relevant candidates after all discovery passes. Continuing with the relevant candidates found.`
+    );
+  }
   logger.info(
     `[DealScout] Found ${candidates.length} candidates. Saving source records.`
   );
@@ -170,16 +205,32 @@ async function buildQueryPlan(
   logger: PipelineLogger
 ): Promise<string[]> {
   if (!expander) return [topic];
+  return uniqueQueries([
+    topic,
+    ...(await expandQueries(topic, expander, [], logger)),
+  ]);
+}
+
+async function expandQueries(
+  topic: string,
+  expander: NonNullable<PipelineDependencies["queryExpander"]>,
+  excludedQueries: string[],
+  logger: PipelineLogger
+): Promise<string[]> {
   try {
-    logger.info(`[DealScout] Expanding source queries with ${expander.name}.`);
-    return uniqueQueries([topic, ...(await expander.expand(topic))]);
+    logger.info(
+      `[DealScout] Expanding source queries with ${expander.name}${
+        excludedQueries.length ? " (second pass)" : ""
+      }.`
+    );
+    return await expander.expand(topic, excludedQueries);
   } catch (error) {
     logger.error(
       `[DealScout] Query expansion failed (${
         error instanceof Error ? error.message : String(error)
-      }). Using the literal topic.`
+      }). Using the existing query plan.`
     );
-    return [topic];
+    return [];
   }
 }
 

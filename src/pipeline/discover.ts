@@ -1,11 +1,15 @@
 import type { Candidate } from "../core/models.js";
 import type { CandidateSource } from "../sources/types.js";
-import { topicRelevance } from "../sources/topic-match.js";
+import {
+  matchesAllTopicTerms,
+  topicRelevance,
+} from "../sources/topic-match.js";
 
 export async function discoverCandidates(
   topics: string | string[],
   sources: CandidateSource[],
-  limit = 11
+  limit = 11,
+  originalTopic = Array.isArray(topics) ? topics[0] : topics
 ): Promise<Candidate[]> {
   const fetchLimit = Math.max(limit * 5, 50);
   const queries = Array.isArray(topics) ? topics : [topics];
@@ -24,10 +28,17 @@ export async function discoverCandidates(
   return [
     ...new Map(
       candidates
+        .filter(({ candidate, topic }) => {
+          const text = `${candidate.name} ${candidate.description}`;
+          return (
+            topicRelevance(text, originalTopic) > 0 ||
+            matchesAllTopicTerms(text, topic)
+          );
+        })
         .sort(
           (left, right) =>
-            rank(right.candidate, right.topic) -
-            rank(left.candidate, left.topic)
+            rank(right.candidate, originalTopic) -
+            rank(left.candidate, originalTopic)
         )
         .map(({ candidate }) => [candidate.sourceUrl, candidate])
     ).values(),

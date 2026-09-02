@@ -21,7 +21,7 @@ export type AnalysisProvider = {
 
 export type QueryExpander = {
   name: string;
-  expand(topic: string): Promise<string[]>;
+  expand(topic: string, excludedQueries?: string[]): Promise<string[]>;
 };
 
 export type ReportRenderer = {

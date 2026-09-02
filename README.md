@@ -15,7 +15,7 @@ The command prints each pipeline stage, including whether OpenRouter or the dete
 
 Discovery fetches a wider pool from both sources, ranks candidates by topic relevance and freshness, then returns up to 11 final candidates by default. A run may return fewer when there are not enough relevant public matches; DealScout does not pad results with loose search matches.
 
-With an OpenRouter key, DealScout makes one bounded query-planning call before sourcing. It keeps the literal topic and adds two to four related source-search queries, so an arbitrary input such as `healthcare startup`, `transport`, or `AI agents for SMBs` does not depend on a hand-maintained sector alias list. The complete plan is saved as `query-plan.json`. Without a key, discovery uses the literal topic only.
+With an OpenRouter key, DealScout makes one bounded query-planning call before sourcing. It keeps the literal topic and adds four related product or technology search queries, so an arbitrary input such as `healthcare startup`, `transport`, or `AI agents for SMBs` does not depend on a hand-maintained sector alias list. Investor, funding, accelerator, and event queries are rejected. If the requested count is not met, one further non-repeating expansion pass is allowed. The complete plan is saved as `query-plan.json`; an expanded query must match all of its meaningful terms before it can admit a candidate, and final ranking still uses the original topic. If public sources still return fewer candidates than requested, the CLI logs the shortfall and continues with the relevant candidates found. Without a key, discovery uses the literal topic only and may need a broader topic or an additional source adapter to meet the requested count.
 
 ## Run Artifacts
 
