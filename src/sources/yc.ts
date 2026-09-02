@@ -18,7 +18,9 @@ export class YcSource implements CandidateSource {
   constructor(private readonly http: HttpClient) {}
 
   async findCandidates(topic: string, limit: number): Promise<Candidate[]> {
-    const directoryUrl = `https://www.ycombinator.com/companies?query=${encodeURIComponent(topic)}`;
+    const directoryUrl = `https://www.ycombinator.com/companies?query=${encodeURIComponent(
+      topic
+    )}`;
     const directory = await this.http.get<string>(directoryUrl);
     const credentials = this.extractCredentials(directory.data);
     const response = await this.http.post<{ hits: YcCompany[] }>(
@@ -30,7 +32,7 @@ export class YcSource implements CandidateSource {
           "X-Algolia-Application-Id": credentials.app,
           "X-Algolia-API-Key": credentials.key,
         },
-      },
+      }
     );
     const { hits } = response.data;
     return hits
@@ -47,7 +49,8 @@ export class YcSource implements CandidateSource {
 
   private extractCredentials(html: string): YcCredentials {
     const match = html.match(/window\.AlgoliaOpts\s*=\s*({.*?});/);
-    if (!match) throw new Error("YC directory did not provide search credentials");
+    if (!match)
+      throw new Error("YC directory did not provide search credentials");
     return JSON.parse(match[1]) as YcCredentials;
   }
 }

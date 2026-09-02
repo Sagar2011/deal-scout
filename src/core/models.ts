@@ -7,7 +7,12 @@ export type Candidate = {
   signal: string;
 };
 
-export type Evidence = { claim: string; url: string; source: string; capturedAt: string };
+export type Evidence = {
+  claim: string;
+  url: string;
+  source: string;
+  capturedAt: string;
+};
 
 export type StartupAnalysis = {
   team: string;
@@ -16,12 +21,27 @@ export type StartupAnalysis = {
   traction: string;
   risks: string[];
   openQuestions: string[];
-  criteria: { workflowClarity: number; smbFit: number; technicalDepth: number; signalStrength: number; whyNow: number };
+  criteria: {
+    workflowClarity: number;
+    smbFit: number;
+    technicalDepth: number;
+    signalStrength: number;
+    whyNow: number;
+  };
 };
 
 export type Score = { total: number; reasons: string[] };
 
-export type Recommendation = { decision: "Pass" | "Watch" | "Take a meeting"; rationale: string; mindChanges: string[] };
+export type Recommendation = {
+  decision: "Pass" | "Watch" | "Take a meeting";
+  rationale: string;
+  mindChanges: string[];
+};
 
 export type RunContext = { id: string; path: string };
-export type RunSummary = { runPath: string; completed: number; failed: number; failures: string[] };
+export type RunSummary = {
+  runPath: string;
+  completed: number;
+  failed: number;
+  failures: string[];
+};

@@ -7,7 +7,7 @@ import { YcSource } from "../sources/yc.js";
 export async function discoverCandidates(
   topic: string,
   http: HttpClient = axios,
-  limit = 5,
+  limit = 5
 ): Promise<Candidate[]> {
   const [ycCandidates, hnCandidates] = await Promise.all([
     new YcSource(http).findCandidates(topic, limit),

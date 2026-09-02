@@ -7,43 +7,45 @@ test("returns one candidate from YC and Hacker News", async () => {
   const requests: string[] = [];
   const http = {
     async get(url: string) {
-    requests.push(url);
+      requests.push(url);
 
-    if (url.startsWith("https://www.ycombinator.com/companies")) {
-      return { data: '<script>window.AlgoliaOpts = {"app":"APP123","key":"public-key"};</script>' };
-    }
+      if (url.startsWith("https://www.ycombinator.com/companies")) {
+        return {
+          data: '<script>window.AlgoliaOpts = {"app":"APP123","key":"public-key"};</script>',
+        };
+      }
 
-    if (url.startsWith("https://hn.algolia.com/api/v1/search")) {
-      return {
-        data: {
-          hits: [
-            {
-              objectID: "42",
-              title: "Show HN: HN Agent",
-              url: "https://hn-agent.example",
-              points: 120,
-            },
-          ],
-        },
-      };
-    }
+      if (url.startsWith("https://hn.algolia.com/api/v1/search")) {
+        return {
+          data: {
+            hits: [
+              {
+                objectID: "42",
+                title: "Show HN: HN Agent",
+                url: "https://hn-agent.example",
+                points: 120,
+              },
+            ],
+          },
+        };
+      }
 
-    throw new Error(`Unexpected request: ${url}`);
+      throw new Error(`Unexpected request: ${url}`);
     },
     async post(url: string) {
       requests.push(url);
       if (url.startsWith("https://app123-dsn.algolia.net")) {
         return {
           data: {
-        hits: [
-          {
-            name: "YC Agent",
-            slug: "yc-agent",
-            website: "https://yc-agent.example",
-            one_liner: "AI agents for small businesses.",
-            batch: "W25",
-          },
-        ],
+            hits: [
+              {
+                name: "YC Agent",
+                slug: "yc-agent",
+                website: "https://yc-agent.example",
+                one_liner: "AI agents for small businesses.",
+                batch: "W25",
+              },
+            ],
           },
         };
       }

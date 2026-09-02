@@ -14,5 +14,8 @@ test("rejects a run without a topic", () => {
 });
 
 test("rejects an unknown command", () => {
-  assert.throws(() => parseCommand(["inspect", "--topic", "AI agents"]), /Expected command: run/);
+  assert.throws(
+    () => parseCommand(["inspect", "--topic", "AI agents"]),
+    /Expected command: run/
+  );
 });
