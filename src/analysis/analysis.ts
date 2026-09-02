@@ -1,4 +1,4 @@
-import type { Candidate, Evidence, StartupAnalysis } from "../core/models.js";
+import type { Candidate, CandidateProfile, Evidence, StartupAnalysis } from "../core/models.js";
 
 type LlmAnalyzer = {
   analyse(candidate: Candidate, evidence: Evidence[]): Promise<StartupAnalysis>;
@@ -8,7 +8,8 @@ export async function analyseCandidate(
   candidate: Candidate,
   evidence: Evidence[],
   llm?: LlmAnalyzer,
-  onLlmError?: (error: unknown) => void
+  onLlmError?: (error: unknown) => void,
+  profile?: CandidateProfile
 ): Promise<StartupAnalysis> {
   if (llm) {
     try {
@@ -19,7 +20,7 @@ export async function analyseCandidate(
     }
   }
 
-  const text = `${candidate.description} ${candidate.signal}`.toLowerCase();
+  const text = `${profile?.description ?? candidate.description} ${candidate.signal} ${profile?.founders.map((founder) => founder.bio).join(" ") ?? ""}`.toLowerCase();
   const smbFit = /small business|small businesses|smb/.test(text) ? 0.9 : 0.2;
   const workflowClarity = /automat|workflow|agent/.test(text) ? 0.8 : 0.2;
   const hnPoints = Number(candidate.signal.match(/(\d+) HN points/)?.[1] ?? 0);
@@ -27,8 +28,8 @@ export async function analyseCandidate(
     ? hnPoints >= 100 ? 0.6 : hnPoints >= 20 ? 0.4 : 0.2
     : 0.3;
   return {
-    team: "Founder background is not available from the collected public source data.",
-    product: candidate.description,
+    team: profile?.founders.length ? profile.founders.map((founder) => `${founder.name} (${founder.title}): ${founder.bio}`).join(" ") : "Founder background is not available from the collected public source data.",
+    product: profile?.description ?? candidate.description,
     market:
       "The collected source does not establish the initial market.",
     traction: candidate.signal,
@@ -40,7 +41,7 @@ export async function analyseCandidate(
     criteria: {
       workflowClarity,
       smbFit,
-      technicalDepth: 0.2,
+      technicalDepth: /engineer|engineering|software|developer|technical|computer science/.test(text) ? 0.5 : 0.2,
       signalStrength,
       whyNow: /ai|agent/.test(text) ? 0.8 : 0.5,
     },

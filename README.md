@@ -1,6 +1,6 @@
 # DealScout
 
-DealScout is a small CLI for investment triage. It finds startup candidates from Y Combinator and Hacker News, captures source evidence, analyzes each result against a focused thesis, scores it, and writes a Markdown memo.
+DealScout is a small CLI for investment triage. It finds startup candidates from Y Combinator and Hacker News, captures source evidence, enriches YC candidates from their public profiles, analyzes each result against a focused thesis, scores it, and writes standalone HTML reports.
 
 ## Quick Start
 
@@ -11,7 +11,7 @@ npm install
 npm run dev -- run --topic "AI agents for SMBs"
 ```
 
-The command prints each pipeline stage, including whether OpenRouter or the deterministic fallback produced analysis and a memo, followed by the run path. Inspect `runs/<run-id>/memos/` for partner-readable memos. Run `npm test`, `npm run typecheck`, and `npm audit` before submission.
+The command prints each pipeline stage, including whether OpenRouter or the deterministic fallback produced analysis, followed by the run path. Open `runs/<run-id>/report.html` for the partner-readable run view. Run `npm test`, `npm run typecheck`, and `npm audit` before submission.
 
 ## Run Artifacts
 
@@ -21,7 +21,9 @@ runs/<run-id>/
   candidates.json
   evidence/<company>.json
   analysis/<company>.json
-  memos/<company>.md
+  profiles/<company>.json
+  memos/<company>.html
+  report.html
   summary.json
 ```
 
@@ -29,13 +31,13 @@ Every memo source links to captured public evidence. Missing team, market, or tr
 
 ## LLM Mode
 
-Set `OPENROUTER_API_KEY` in your shell to request structured JSON analysis and a partner-style Markdown memo through OpenRouter. The default model is `openrouter/free`, which uses an available free model:
+Set `OPENROUTER_API_KEY` in your shell to request structured JSON analysis through OpenRouter. The default model is `openrouter/free`, which uses an available free model:
 
 ```bash
 OPENROUTER_API_KEY=your_key npm run dev -- run --topic "AI agents for SMBs"
 ```
 
-`.env.example` documents the available variables, including `OPENROUTER_MODEL` for an optional model override. Scores and recommendations remain deterministic. Without a key, DealScout uses its documented fallback analysis and still completes a run.
+`OPENROUTER_MODEL` optionally overrides the free router. Scores, recommendations, and HTML output remain deterministic. Without a key, DealScout uses its documented fallback analysis and still completes a run.
 
 ## Limits
 
@@ -45,4 +47,4 @@ The thesis, architecture, and AI workflow trail are in `docs/thesis.md`, `docs/a
 
 ## Source Layout
 
-`src/index.ts` is the entry point. `cli/` parses commands, `core/` owns shared types/config/storage, `sources/` owns public-source clients, `research/` captures evidence, `prompts/` owns the independently editable LLM instructions, `analysis/` owns analysis and investment decisions, `reports/` renders memos, and `pipeline/` orchestrates the run. Tests are grouped into `tests/unit/` and `tests/integration/`.
+`src/index.ts` is the entry point. `cli/` parses commands, `core/` owns shared types/config/storage, `sources/` owns public-source clients, `research/` captures evidence and YC profile enrichment, `prompts/` owns the independently editable LLM analysis instruction, `analysis/` owns analysis and investment decisions, `reports/` renders standalone HTML reports, and `pipeline/` orchestrates the run. Tests are grouped into `tests/unit/` and `tests/integration/`.

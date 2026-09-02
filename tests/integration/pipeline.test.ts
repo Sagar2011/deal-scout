@@ -7,10 +7,9 @@ import test from "node:test";
 import { renderMemo } from "../../src/reports/memo.js";
 import { runPipeline } from "../../src/pipeline/run.js";
 import { analyseCandidate } from "../../src/analysis/analysis.js";
-import { OpenRouterAnalyzer, OpenRouterMemoWriter } from "../../src/analysis/llm.js";
+import { OpenRouterAnalyzer } from "../../src/analysis/llm.js";
 import { recommend } from "../../src/analysis/recommendation.js";
 import { scoreAnalysis } from "../../src/analysis/scoring.js";
-import { buildMemoPrompt } from "../../src/prompts/investment-memo.js";
 import type { Candidate, StartupAnalysis } from "../../src/core/models.js";
 
 const candidate: Candidate = {
@@ -82,45 +81,7 @@ test("accepts a structured LLM analysis", async () => {
   assert.deepEqual(await analyzer.analyse(candidate, []), analysis);
 });
 
-test("builds an evidence-bound memo prompt and returns LLM Markdown", async () => {
-  const score = scoreAnalysis(analysis);
-  const recommendation = recommend(score, []);
-  const prompt = buildMemoPrompt({
-    candidate,
-    evidence: [],
-    analysis,
-    score,
-    recommendation,
-  });
-  assert.match(prompt, /Acme Agent/);
-  assert.match(prompt, /73\/100/);
-  assert.match(prompt, /Watch/);
-
-  const writer = new OpenRouterMemoWriter("test-key", "openrouter/free", {
-    async get() {
-      throw new Error("not used");
-    },
-    async post() {
-      return {
-        data: {
-          choices: [{ message: { content: "# Acme Agent\n\n**Watch**" } }],
-        },
-      };
-    },
-  });
-  assert.equal(
-    await writer.write({
-      candidate,
-      evidence: [],
-      analysis,
-      score,
-      recommendation,
-    }),
-    "# Acme Agent\n\n**Watch**"
-  );
-});
-
-test("renders cited Markdown with a clear call", () => {
+test("renders cited HTML with a clear call", () => {
   const memo = renderMemo({
     candidate,
     evidence: [
@@ -139,8 +100,8 @@ test("renders cited Markdown with a clear call", () => {
       mindChanges: ["Verify retention.", "Verify team depth."],
     },
   });
-  assert.match(memo, /## Recommendation/);
-  assert.match(memo, /\[Y Combinator\]\(https:\/\/www\.ycombinator\.com/);
+  assert.match(memo, /Investment call/);
+  assert.match(memo, /href="https:\/\/www\.ycombinator\.com/);
 });
 
 test("writes evidence, analysis, and a memo for one candidate", async () => {
@@ -156,12 +117,14 @@ test("writes evidence, analysis, and a memo for one candidate", async () => {
     assert.equal(summary.completed, 1);
     assert.ok(info.some((message) => message.includes("Starting run")));
     assert.ok(info.some((message) => message.includes("deterministic analysis")));
-    assert.ok(info.some((message) => message.includes("deterministic memo")));
+    assert.ok(info.some((message) => message.includes("rendering HTML memo")));
     const memo = await readFile(
-      join(summary.runPath, "memos", "acme-agent.md"),
+      join(summary.runPath, "memos", "acme-agent.html"),
       "utf8"
     );
-    assert.match(memo, /# Acme Agent/);
+    assert.match(memo, /<title>Acme Agent/);
+    assert.match(memo, /INVESTMENT SNAPSHOT/);
+    assert.ok(await readFile(join(summary.runPath, "report.html"), "utf8"));
     assert.ok(
       await readFile(
         join(summary.runPath, "evidence", "acme-agent.json"),

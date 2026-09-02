@@ -14,6 +14,15 @@ export type Evidence = {
   capturedAt: string;
 };
 
+export type Founder = { name: string; title: string; bio: string };
+
+export type CandidateProfile = {
+  profileUrl: string;
+  description: string;
+  teamSize?: number;
+  founders: Founder[];
+};
+
 export type StartupAnalysis = {
   team: string;
   product: string;

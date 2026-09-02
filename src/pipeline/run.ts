@@ -1,11 +1,13 @@
-import type { Candidate, RunSummary } from "../core/models.js";
+import axios from "axios";
+import type { Candidate, CandidateProfile, RunSummary } from "../core/models.js";
 import { createRun, writeJson, writeText } from "../core/storage.js";
 import { analyseCandidate } from "../analysis/analysis.js";
-import { OpenRouterAnalyzer, OpenRouterMemoWriter } from "../analysis/llm.js";
+import { OpenRouterAnalyzer } from "../analysis/llm.js";
 import { recommend } from "../analysis/recommendation.js";
 import { scoreAnalysis } from "../analysis/scoring.js";
-import { renderMemo } from "../reports/memo.js";
+import { renderMemo, renderRunReport, type MemoInput } from "../reports/memo.js";
 import { collectEvidence } from "../research/evidence.js";
+import { enrichYcProfile } from "../research/yc-profile.js";
 import type { HttpClient } from "../sources/types.js";
 import { discoverCandidates } from "./discover.js";
 
@@ -32,12 +34,23 @@ export async function runPipeline(input: {
   logger.info(`[DealScout] Found ${candidates.length} candidates. Saving source records.`);
   await writeJson(run, "candidates.json", candidates);
   const failures: string[] = [];
+  const reportEntries: MemoInput[] = [];
   let completed = 0;
   for (const [index, candidate] of candidates.entries()) {
     const progress = `[DealScout] [${index + 1}/${candidates.length}] ${candidate.name}`;
     try {
+      let profile: CandidateProfile | undefined;
+      if (candidate.source === "Y Combinator" && !input.candidates) {
+        try {
+          logger.info(`${progress}: enriching from YC company profile.`);
+          profile = await enrichYcProfile(candidate, input.http ?? axios);
+          logger.info(`${progress}: found ${profile.founders.length} founder profiles.`);
+        } catch (error) {
+          logger.error(`${progress}: YC profile enrichment failed (${error instanceof Error ? error.message : String(error)}). Continuing with directory data.`);
+        }
+      }
       logger.info(`${progress}: collecting evidence.`);
-      const evidence = collectEvidence(candidate);
+      const evidence = collectEvidence(candidate, profile);
       logger.info(
         input.llmApiKey
           ? `${progress}: requesting OpenRouter analysis with ${model}.`
@@ -52,7 +65,8 @@ export async function runPipeline(input: {
               model
             )
           : undefined,
-        (error) => logger.error(`${progress}: OpenRouter analysis failed (${error instanceof Error ? error.message : String(error)}). Using deterministic analysis.`)
+        (error) => logger.error(`${progress}: OpenRouter analysis failed (${error instanceof Error ? error.message : String(error)}). Using deterministic analysis.`),
+        profile
       );
       const score = scoreAnalysis(analysis);
       const recommendation = recommend(score, evidence);
@@ -67,6 +81,7 @@ export async function runPipeline(input: {
         score,
         recommendation,
       });
+      if (profile) await writeJson(run, `profiles/${slug}.json`, profile);
       const memoInput = {
         candidate,
         evidence,
@@ -74,24 +89,10 @@ export async function runPipeline(input: {
         score,
         recommendation,
       };
-      let memo = renderMemo(memoInput);
-      if (input.llmApiKey) {
-        try {
-          logger.info(`${progress}: requesting OpenRouter memo with ${model}.`);
-          memo = await new OpenRouterMemoWriter(
-            input.llmApiKey,
-            model
-          ).write(memoInput);
-          logger.info(`${progress}: OpenRouter memo generated.`);
-        } catch (error) {
-          // Preserve a reviewable memo when a model request fails.
-          logger.error(`${progress}: OpenRouter memo failed (${error instanceof Error ? error.message : String(error)}). Using deterministic memo.`);
-        }
-      } else {
-        logger.info(`${progress}: using deterministic memo (no OpenRouter key).`);
-      }
-      await writeText(run, `memos/${slug}.md`, memo);
-      logger.info(`${progress}: memo saved.`);
+      logger.info(`${progress}: rendering HTML memo.`);
+      await writeText(run, `memos/${slug}.html`, renderMemo(memoInput));
+      reportEntries.push(memoInput);
+      logger.info(`${progress}: HTML memo saved.`);
       completed += 1;
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
@@ -104,6 +105,7 @@ export async function runPipeline(input: {
     failed: failures.length,
     failures,
   });
+  await writeText(run, "report.html", renderRunReport(input.topic, reportEntries));
   logger.info(`[DealScout] Finished: ${completed} memos saved, ${failures.length} skipped.`);
   return { runPath: run.path, completed, failed: failures.length, failures };
 }
