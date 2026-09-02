@@ -40,6 +40,7 @@ const analysis: StartupAnalysis = {
 test("scores and recommends a sufficiently evidenced thesis match", () => {
   const score = scoreAnalysis(analysis);
   assert.equal(score.total, 73);
+  assert.deepEqual(score.breakdown[0], { label: "Workflow clarity", score: 23, maximum: 25 });
   assert.equal(
     recommend(score, [
       {
@@ -81,6 +82,32 @@ test("accepts a structured LLM analysis", async () => {
   assert.deepEqual(await analyzer.analyse(candidate, []), analysis);
 });
 
+test("normalizes nested LLM fields before HTML rendering", async () => {
+  const analyzer = new OpenRouterAnalyzer("test-key", "openrouter/free", {
+    async get() {
+      throw new Error("not used");
+    },
+    async post() {
+      return {
+        data: {
+          choices: [{ message: { content: JSON.stringify({
+            ...analysis,
+            team: { founders: ["Ada Lovelace", "Grace Hopper"], size: 2 },
+            product: { description: "Automates finance work." },
+            market: { segment: "SMB finance" },
+            traction: { customers: "unknown", team: 2 },
+          }) } }],
+        },
+      };
+    },
+  });
+  const result = await analyzer.analyse(candidate, []);
+  assert.match(result.team, /founders: Ada Lovelace; Grace Hopper/);
+  assert.equal(result.product, "description: Automates finance work.");
+  assert.equal(result.market, "segment: SMB finance");
+  assert.match(result.traction, /team: 2/);
+});
+
 test("renders cited HTML with a clear call", () => {
   const memo = renderMemo({
     candidate,
@@ -101,6 +128,8 @@ test("renders cited HTML with a clear call", () => {
     },
   });
   assert.match(memo, /Investment call/);
+  assert.match(memo, /Score breakdown/);
+  assert.match(memo, /23 \/ 25/);
   assert.match(memo, /href="https:\/\/www\.ycombinator\.com/);
 });
 

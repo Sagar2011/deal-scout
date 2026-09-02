@@ -39,7 +39,11 @@ export type StartupAnalysis = {
   };
 };
 
-export type Score = { total: number; reasons: string[] };
+export type Score = {
+  total: number;
+  reasons: string[];
+  breakdown: Array<{ label: string; score: number; maximum: number }>;
+};
 
 export type Recommendation = {
   decision: "Pass" | "Watch" | "Take a meeting";

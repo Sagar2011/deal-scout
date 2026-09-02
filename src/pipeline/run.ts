@@ -124,6 +124,11 @@ export async function runPipeline(input: {
         dependencies.renderer.renderMemo(memoInput)
       );
       reportEntries.push(memoInput);
+      await dependencies.store.writeText(
+        run,
+        "report.html",
+        dependencies.renderer.renderRunReport(input.topic, reportEntries)
+      );
       logger.info(`${progress}: HTML memo saved.`);
       completed += 1;
     } catch (error) {

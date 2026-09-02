@@ -35,7 +35,9 @@ export function renderMemo(input: MemoInput): string {
     candidate.source
   )}</p></header><section class="callout"><h2>Investment call</h2><p>${escape(
     recommendation.rationale
-  )}</p></section><div class="grid"><section><h2>Product</h2><p>${escape(
+  )}</p></section><section><h2>Score breakdown</h2>${scoreBreakdown(
+    score
+  )}</section><div class="grid"><section><h2>Product</h2><p>${escape(
     analysis.product
   )}</p></section><section><h2>Team</h2><p>${escape(
     analysis.team
@@ -72,7 +74,9 @@ export function renderRunReport(topic: string, entries: MemoInput[]): string {
           recommendation.decision
         )}</span><h2>${escape(candidate.name)}</h2><p>${escape(
           candidate.description
-        )}</p><b>${score.total}/100</b></a>`
+        )}</p><b>${score.total}/100</b><small>${score.breakdown
+          .map((item) => `${item.label}: ${item.score}/${item.maximum}`)
+          .join(" · ")}</small></a>`
     )
     .join("");
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>DealScout run</title><style>${styles()}</style></head><body><main class="memo"><header><p class="eyebrow">DEALSCOUT / PIPELINE RUN</p><h1>${escape(
@@ -84,6 +88,14 @@ export function renderRunReport(topic: string, entries: MemoInput[]): string {
 
 function list(items: string[]): string {
   return `<ul>${items.map((item) => `<li>${escape(item)}</li>`).join("")}</ul>`;
+}
+function scoreBreakdown(score: Score): string {
+  return `<div class="breakdown">${score.breakdown
+    .map(
+      (item) =>
+        `<div><span>${escape(item.label)}</span><b>${item.score} / ${item.maximum}</b><i style="width:${(item.score / item.maximum) * 100}%"></i></div>`
+    )
+    .join("")}</div>`;
 }
 function slug(name: string): string {
   return name
@@ -99,5 +111,5 @@ function escape(value: string): string {
     .replace(/"/g, "&quot;");
 }
 function styles(): string {
-  return `:root{--ink:#17252a;--paper:#f8f3e8;--teal:#175b58;--line:#d8cfbc}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0,#dbe8df,transparent 35%),var(--paper);color:var(--ink);font:16px Georgia,serif}.memo{max-width:980px;margin:auto;padding:56px 24px 80px}.eyebrow{font:700 12px Arial,sans-serif;letter-spacing:.15em;color:var(--teal)}h1{font-size:clamp(42px,7vw,74px);line-height:.95;margin:12px 0}.hero{display:flex;gap:30px;justify-content:space-between}.lede{font-size:22px;line-height:1.45;max-width:680px}.score{min-width:150px;padding:18px;border:1px solid var(--line);text-align:center;background:#fffaf0}.score span{font:700 54px Arial,sans-serif}.score strong,.card span{display:block;margin-top:8px;font:700 12px Arial,sans-serif;letter-spacing:.1em}.watch{color:#9b6500}.pass{color:#9c3c31}.take-a-meeting{color:var(--teal)}.meta{font:14px Arial,sans-serif}.meta a{color:var(--teal)}section,.callout{margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}h2{font:700 20px Arial,sans-serif;margin:0 0 12px}.callout{background:var(--teal);color:#fff;padding:24px;border:0}.grid,.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.grid section{margin:0}.evidence{display:grid;gap:10px}.evidence a,.card{color:inherit;text-decoration:none;background:#fffaf0;border:1px solid var(--line);padding:14px;display:grid;gap:5px}.evidence b{font:12px Arial,sans-serif;color:var(--teal);text-transform:uppercase}.cards{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:34px}.card h2{font-size:23px}.card:hover{transform:translateY(-3px);transition:.18s ease}@media(max-width:640px){.hero,.grid,.cards{grid-template-columns:1fr;display:grid}.score{width:100%}}`;
+  return `:root{--ink:#17252a;--paper:#f8f3e8;--teal:#175b58;--line:#d8cfbc}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0,#dbe8df,transparent 35%),var(--paper);color:var(--ink);font:16px Georgia,serif}.memo{max-width:980px;margin:auto;padding:56px 24px 80px}.eyebrow{font:700 12px Arial,sans-serif;letter-spacing:.15em;color:var(--teal)}h1{font-size:clamp(42px,7vw,74px);line-height:.95;margin:12px 0}.hero{display:flex;gap:30px;justify-content:space-between}.lede{font-size:22px;line-height:1.45;max-width:680px}.score{min-width:150px;padding:18px;border:1px solid var(--line);text-align:center;background:#fffaf0}.score span{font:700 54px Arial,sans-serif}.score strong,.card span{display:block;margin-top:8px;font:700 12px Arial,sans-serif;letter-spacing:.1em}.watch{color:#9b6500}.pass{color:#9c3c31}.take-a-meeting{color:var(--teal)}.meta{font:14px Arial,sans-serif}.meta a{color:var(--teal)}section,.callout{margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}h2{font:700 20px Arial,sans-serif;margin:0 0 12px}.callout{background:var(--teal);color:#fff;padding:24px;border:0}.grid,.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.grid section{margin:0}.breakdown{display:grid;gap:10px}.breakdown div{display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center}.breakdown i{grid-column:1/-1;height:7px;background:var(--teal);border-radius:99px}.evidence{display:grid;gap:10px}.evidence a,.card{color:inherit;text-decoration:none;background:#fffaf0;border:1px solid var(--line);padding:14px;display:grid;gap:5px}.evidence b{font:12px Arial,sans-serif;color:var(--teal);text-transform:uppercase}.cards{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:34px}.card h2{font-size:23px}.card small{font:12px Arial,sans-serif;line-height:1.4}.card:hover{transform:translateY(-3px);transition:.18s ease}@media(max-width:640px){.hero,.grid,.cards{grid-template-columns:1fr;display:grid}.score{width:100%}}`;
 }
