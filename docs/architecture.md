@@ -5,7 +5,8 @@
 1. `sources/` retrieves candidates from YC and Hacker News with Axios.
 2. `research/evidence.ts` turns source-backed candidate facts into evidence records.
 3. `analysis/` contains fallback/LLM analysis, scoring, and recommendations.
-4. `reports/memo.ts` renders a short Markdown brief with citations.
+4. `prompts/` keeps the analysis and memo prompts independently reviewable and refinable.
+5. `reports/memo.ts` renders a short Markdown brief with citations; the LLM memo writer is optional and falls back to this renderer on failure.
 5. `core/storage.ts` persists every artifact under one run directory.
 6. `pipeline/` coordinates source discovery and the complete run.
 

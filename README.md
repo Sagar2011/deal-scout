@@ -29,7 +29,7 @@ Every memo source links to captured public evidence. Missing team, market, or tr
 
 ## LLM Mode
 
-Set `OPENAI_API_KEY` in your shell to request structured JSON analysis from OpenAI:
+Set `OPENAI_API_KEY` in your shell to request structured JSON analysis and a partner-style Markdown memo from OpenAI:
 
 ```bash
 OPENAI_API_KEY=your_key npm run dev -- run --topic "AI agents for SMBs"
@@ -45,4 +45,4 @@ The thesis, architecture, and AI workflow trail are in `docs/thesis.md`, `docs/a
 
 ## Source Layout
 
-`src/index.ts` is the entry point. `cli/` parses commands, `core/` owns shared types/config/storage, `sources/` owns public-source clients, `research/` captures evidence, `analysis/` owns analysis and investment decisions, `reports/` renders memos, and `pipeline/` orchestrates the run. Tests are grouped into `tests/unit/` and `tests/integration/`.
+`src/index.ts` is the entry point. `cli/` parses commands, `core/` owns shared types/config/storage, `sources/` owns public-source clients, `research/` captures evidence, `prompts/` owns the independently editable LLM instructions, `analysis/` owns analysis and investment decisions, `reports/` renders memos, and `pipeline/` orchestrates the run. Tests are grouped into `tests/unit/` and `tests/integration/`.

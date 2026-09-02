@@ -14,6 +14,8 @@ The implementation was validated with source-adapter tests, pipeline artifact te
 
 The fallback analysis is deterministic so a reviewer can run the project without an API key. LLM output structures research, while the final score and recommendation remain transparent and deterministic.
 
+The LLM prompts live in `src/prompts/` so they can be reviewed and refined independently. The memo prompt receives the captured evidence, structured analysis, fixed score, and fixed recommendation; without a key or on an LLM failure, the deterministic memo renderer is used.
+
 ## 2026-09-02: Structure Cleanup
 
 The initial working implementation had several modules at the `src/` root. The code was then reorganized by responsibility into `core`, `cli`, `sources`, `research`, `analysis`, `reports`, and `pipeline`, with unit and integration tests separated. This was a behavior-preserving refactor verified by the same test, typecheck, build, audit, and live-run checks.

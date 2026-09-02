@@ -6,9 +6,10 @@ import test from "node:test";
 
 import { renderMemo } from "../../src/reports/memo.js";
 import { runPipeline } from "../../src/pipeline/run.js";
-import { OpenAiAnalyzer } from "../../src/analysis/llm.js";
+import { OpenAiAnalyzer, OpenAiMemoWriter } from "../../src/analysis/llm.js";
 import { recommend } from "../../src/analysis/recommendation.js";
 import { scoreAnalysis } from "../../src/analysis/scoring.js";
+import { buildMemoPrompt } from "../../src/prompts/investment-memo.js";
 import type { Candidate, StartupAnalysis } from "../../src/core/models.js";
 
 const candidate: Candidate = {
@@ -44,6 +45,21 @@ test("accepts a structured LLM analysis", async () => {
     },
   });
   assert.deepEqual(await analyzer.analyse(candidate, []), analysis);
+});
+
+test("builds an evidence-bound memo prompt and returns LLM Markdown", async () => {
+  const score = scoreAnalysis(analysis);
+  const recommendation = recommend(score, []);
+  const prompt = buildMemoPrompt({ candidate, evidence: [], analysis, score, recommendation });
+  assert.match(prompt, /Acme Agent/);
+  assert.match(prompt, /73\/100/);
+  assert.match(prompt, /Watch/);
+
+  const writer = new OpenAiMemoWriter("test-key", {
+    async get() { throw new Error("not used"); },
+    async post() { return { data: { choices: [{ message: { content: "# Acme Agent\n\n**Watch**" } }] } }; },
+  });
+  assert.equal(await writer.write({ candidate, evidence: [], analysis, score, recommendation }), "# Acme Agent\n\n**Watch**");
 });
 
 test("renders cited Markdown with a clear call", () => {

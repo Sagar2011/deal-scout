@@ -1,7 +1,7 @@
 import type { Candidate, RunSummary } from "../core/models.js";
 import { createRun, writeJson, writeText } from "../core/storage.js";
 import { analyseCandidate } from "../analysis/analysis.js";
-import { OpenAiAnalyzer } from "../analysis/llm.js";
+import { OpenAiAnalyzer, OpenAiMemoWriter } from "../analysis/llm.js";
 import { recommend } from "../analysis/recommendation.js";
 import { scoreAnalysis } from "../analysis/scoring.js";
 import { renderMemo } from "../reports/memo.js";
@@ -24,7 +24,16 @@ export async function runPipeline(input: { topic: string; rootDir: string; candi
       const slug = candidate.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
       await writeJson(run, `evidence/${slug}.json`, evidence);
       await writeJson(run, `analysis/${slug}.json`, { analysis, score, recommendation });
-      await writeText(run, `memos/${slug}.md`, renderMemo({ candidate, evidence, analysis, score, recommendation }));
+      const memoInput = { candidate, evidence, analysis, score, recommendation };
+      let memo = renderMemo(memoInput);
+      if (input.llmApiKey) {
+        try {
+          memo = await new OpenAiMemoWriter(input.llmApiKey).write(memoInput);
+        } catch {
+          // Preserve a reviewable memo when a model request fails.
+        }
+      }
+      await writeText(run, `memos/${slug}.md`, memo);
       completed += 1;
     } catch (error) {
       failures.push(`${candidate.name}: ${error instanceof Error ? error.message : String(error)}`);
