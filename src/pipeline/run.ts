@@ -23,6 +23,7 @@ export async function runPipeline(input: {
   limit?: number;
   llmApiKey?: string;
   llmModel?: string;
+  concurrency?: number;
   logger?: PipelineLogger;
   dependencies?: PipelineDependencies;
 }): Promise<RunSummary> {
@@ -84,105 +85,111 @@ export async function runPipeline(input: {
     `[DealScout] Found ${candidates.length} candidates. Saving source records.`
   );
   await dependencies.store.writeJson(run, "candidates.json", candidates);
-  const failures: string[] = [];
-  const reportEntries: MemoInput[] = [];
-  let completed = 0;
-  for (const [index, candidate] of candidates.entries()) {
-    const progress = `[DealScout] [${index + 1}/${candidates.length}] ${
-      candidate.name
-    }`;
-    try {
-      let profile: CandidateProfile | undefined;
-      const enricher = dependencies.enrichers.find((item) =>
-        item.supports(candidate)
-      );
-      if (enricher && !input.candidates) {
-        try {
-          logger.info(`${progress}: enriching from ${enricher.name}.`);
-          profile = await enricher.enrich(candidate);
-          logger.info(
-            `${progress}: found ${profile.founders.length} founder profiles.`
-          );
-        } catch (error) {
-          logger.error(
-            `${progress}: YC profile enrichment failed (${
-              error instanceof Error ? error.message : String(error)
-            }). Continuing with directory data.`
-          );
+  const concurrency = normalizeConcurrency(input.concurrency);
+  logger.info(
+    `[DealScout] Processing ${candidates.length} candidates with concurrency ${concurrency}.`
+  );
+  const outcomes = await mapWithConcurrency(
+    candidates,
+    concurrency,
+    async (candidate, index) => {
+      const progress = `[DealScout] [${index + 1}/${candidates.length}] ${
+        candidate.name
+      }`;
+      try {
+        let profile: CandidateProfile | undefined;
+        const enricher = dependencies.enrichers.find((item) =>
+          item.supports(candidate)
+        );
+        if (enricher && !input.candidates) {
+          try {
+            logger.info(`${progress}: enriching from ${enricher.name}.`);
+            profile = await enricher.enrich(candidate);
+            logger.info(
+              `${progress}: found ${profile.founders.length} founder profiles.`
+            );
+          } catch (error) {
+            logger.error(
+              `${progress}: YC profile enrichment failed (${
+                error instanceof Error ? error.message : String(error)
+              }). Continuing with directory data.`
+            );
+          }
         }
-      }
-      logger.info(`${progress}: collecting evidence.`);
-      const evidence = collectEvidence(candidate, profile);
-      logger.info(
-        dependencies.analyzer
-          ? `${progress}: requesting ${dependencies.analyzer.name} analysis.`
-          : `${progress}: using deterministic analysis (no OpenRouter key).`
-      );
-      const analysis = await analyseCandidate(
-        candidate,
-        evidence,
-        dependencies.analyzer,
-        (error) =>
-          logger.error(
-            `${progress}: OpenRouter analysis failed (${
-              error instanceof Error ? error.message : String(error)
-            }). Using deterministic analysis.`
-          ),
-        profile
-      );
-      const score = scoreAnalysis(analysis, { candidate, evidence, profile });
-      const recommendation = recommend(score, evidence);
-      logger.info(
-        `${progress}: scored ${score.total}/100, ${recommendation.decision}.`
-      );
-      const slug = candidate.name
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/(^-|-$)/g, "");
-      await dependencies.store.writeJson(
-        run,
-        `evidence/${slug}.json`,
-        evidence
-      );
-      await dependencies.store.writeJson(run, `analysis/${slug}.json`, {
-        analysis,
-        score,
-        recommendation,
-      });
-      if (profile)
-        await dependencies.store.writeJson(
-          run,
-          `profiles/${slug}.json`,
+        logger.info(`${progress}: collecting evidence.`);
+        const evidence = collectEvidence(candidate, profile);
+        logger.info(
+          dependencies.analyzer
+            ? `${progress}: requesting ${dependencies.analyzer.name} analysis.`
+            : `${progress}: using deterministic analysis (no OpenRouter key).`
+        );
+        const analysis = await analyseCandidate(
+          candidate,
+          evidence,
+          dependencies.analyzer,
+          (error) =>
+            logger.error(
+              `${progress}: OpenRouter analysis failed (${
+                error instanceof Error ? error.message : String(error)
+              }). Using deterministic analysis.`
+            ),
           profile
         );
-      const memoInput = {
-        candidate,
-        evidence,
-        analysis,
-        score,
-        recommendation,
-        profile,
-      };
-      logger.info(`${progress}: rendering HTML memo.`);
-      await dependencies.store.writeText(
-        run,
-        `memos/${slug}.html`,
-        dependencies.renderer.renderMemo(memoInput)
-      );
-      reportEntries.push(memoInput);
-      await dependencies.store.writeText(
-        run,
-        "report.html",
-        dependencies.renderer.renderRunReport(input.topic, reportEntries)
-      );
-      logger.info(`${progress}: HTML memo saved.`);
-      completed += 1;
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      failures.push(`${candidate.name}: ${message}`);
-      logger.error(`${progress}: failed (${message}).`);
+        const score = scoreAnalysis(analysis, { candidate, evidence, profile });
+        const recommendation = recommend(score, evidence);
+        logger.info(
+          `${progress}: scored ${score.total}/100, ${recommendation.decision}.`
+        );
+        const slug = candidate.name
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)/g, "");
+        await dependencies.store.writeJson(
+          run,
+          `evidence/${slug}.json`,
+          evidence
+        );
+        await dependencies.store.writeJson(run, `analysis/${slug}.json`, {
+          analysis,
+          score,
+          recommendation,
+        });
+        if (profile)
+          await dependencies.store.writeJson(
+            run,
+            `profiles/${slug}.json`,
+            profile
+          );
+        const memoInput = {
+          candidate,
+          evidence,
+          analysis,
+          score,
+          recommendation,
+          profile,
+        };
+        logger.info(`${progress}: rendering HTML memo.`);
+        await dependencies.store.writeText(
+          run,
+          `memos/${slug}.html`,
+          dependencies.renderer.renderMemo(memoInput)
+        );
+        logger.info(`${progress}: HTML memo saved.`);
+        return { memoInput };
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        logger.error(`${progress}: failed (${message}).`);
+        return { failure: `${candidate.name}: ${message}` };
+      }
     }
-  }
+  );
+  const reportEntries = outcomes.flatMap((outcome) =>
+    outcome.memoInput ? [outcome.memoInput] : []
+  );
+  const failures = outcomes.flatMap((outcome) =>
+    outcome.failure ? [outcome.failure] : []
+  );
+  const completed = reportEntries.length;
   await dependencies.store.writeJson(run, "summary.json", {
     completed,
     failed: failures.length,
@@ -243,4 +250,29 @@ function uniqueQueries(queries: string[]): string[] {
         .map((query) => [query.toLowerCase(), query])
     ).values(),
   ];
+}
+
+function normalizeConcurrency(value: number | undefined): number {
+  if (!value || !Number.isFinite(value)) return 3;
+  return Math.max(1, Math.floor(value));
+}
+
+async function mapWithConcurrency<T, R>(
+  values: T[],
+  concurrency: number,
+  worker: (value: T, index: number) => Promise<R>
+): Promise<R[]> {
+  const results = new Array<R>(values.length);
+  let nextIndex = 0;
+  const runWorker = async () => {
+    while (nextIndex < values.length) {
+      const index = nextIndex;
+      nextIndex += 1;
+      results[index] = await worker(values[index], index);
+    }
+  };
+  await Promise.all(
+    Array.from({ length: Math.min(concurrency, values.length) }, runWorker)
+  );
+  return results;
 }

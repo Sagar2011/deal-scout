@@ -44,6 +44,8 @@ OPENROUTER_API_KEY=your_key npm run dev -- run --topic "AI agents for SMBs"
 
 `OPENROUTER_MODEL` optionally overrides the free router. OpenRouter first produces a small, saved set of related discovery queries, then produces the qualitative analysis at `temperature: 0`; final scores and recommendations are then calibrated from the saved candidate, profile, and evidence records. This keeps repeated runs stable when the captured evidence is unchanged. Without a key, DealScout uses its documented fallback analysis and literal-topic discovery, and still completes a run.
 
+Candidate enrichment, analysis, and memo generation run with a concurrency of three by default. Override it with `DEAL_SCOUT_CONCURRENCY` when appropriate, for example `DEAL_SCOUT_CONCURRENCY=2 npm run dev -- run --topic "AI agents for SMBs"`. Keep this low for `openrouter/free`: OpenRouter and its upstream providers can rate-limit concurrent requests, and DealScout falls back to deterministic analysis for an individual LLM failure.
+
 ## Limits
 
 The first version uses YC directory results and HN story search. HN matches can be noisy: this is a triage system, not an automated investment decision. There is no frontend, database, queue, or vector store.

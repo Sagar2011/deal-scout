@@ -504,3 +504,51 @@ test("logs a shortfall and completes with the relevant candidates found", async 
     await rm(rootDir, { recursive: true, force: true });
   }
 });
+
+test("processes candidate work with the configured concurrency limit", async () => {
+  const rootDir = await mkdtemp(join(tmpdir(), "deal-scout-"));
+  let active = 0;
+  let maxActive = 0;
+  const dependencies: PipelineDependencies = {
+    sources: [],
+    enrichers: [],
+    analyzer: {
+      name: "Delayed analyzer",
+      async analyse() {
+        active += 1;
+        maxActive = Math.max(maxActive, active);
+        await new Promise((resolve) => setTimeout(resolve, 10));
+        active -= 1;
+        return analysis;
+      },
+    },
+    renderer: { renderMemo, renderRunReport },
+    store: fileRunStore,
+  };
+  try {
+    const summary = await runPipeline({
+      topic: "AI agents for SMBs",
+      rootDir,
+      candidates: [
+        candidate,
+        {
+          ...candidate,
+          name: "Second Agent",
+          sourceUrl: "https://example.com/2",
+        },
+        {
+          ...candidate,
+          name: "Third Agent",
+          sourceUrl: "https://example.com/3",
+        },
+      ],
+      concurrency: 2,
+      dependencies,
+      logger: { info: () => undefined, error: () => undefined },
+    });
+    assert.equal(summary.completed, 3);
+    assert.equal(maxActive, 2);
+  } finally {
+    await rm(rootDir, { recursive: true, force: true });
+  }
+});
