@@ -5,6 +5,7 @@ export type Candidate = {
   source: "Y Combinator" | "Hacker News";
   sourceUrl: string;
   signal: string;
+  publishedAt?: string;
 };
 
 export type Evidence = {

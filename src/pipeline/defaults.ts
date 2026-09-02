@@ -2,6 +2,7 @@ import axios from "axios";
 import type { PipelineDependencies } from "../core/contracts.js";
 import { fileRunStore } from "../core/storage.js";
 import { OpenRouterAnalyzer } from "../analysis/llm.js";
+import { OpenRouterQueryExpander } from "../analysis/query-expander.js";
 import { renderMemo, renderRunReport } from "../reports/memo.js";
 import { enrichYcProfile } from "../research/yc-profile.js";
 import { HackerNewsSource } from "../sources/hacker-news.js";
@@ -23,6 +24,12 @@ export function createDefaultDependencies(input: {
         enrich: (candidate) => enrichYcProfile(candidate, http),
       },
     ],
+    queryExpander: input.llmApiKey
+      ? new OpenRouterQueryExpander(
+          input.llmApiKey,
+          input.llmModel ?? "openrouter/free"
+        )
+      : undefined,
     analyzer: input.llmApiKey
       ? new OpenRouterAnalyzer(
           input.llmApiKey,

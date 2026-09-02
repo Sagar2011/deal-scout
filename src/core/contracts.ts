@@ -19,6 +19,11 @@ export type AnalysisProvider = {
   analyse(candidate: Candidate, evidence: Evidence[]): Promise<StartupAnalysis>;
 };
 
+export type QueryExpander = {
+  name: string;
+  expand(topic: string): Promise<string[]>;
+};
+
 export type ReportRenderer = {
   renderMemo(input: MemoInput): string;
   renderRunReport(topic: string, entries: MemoInput[]): string;
@@ -41,6 +46,7 @@ export type RunStore = {
 export type PipelineDependencies = {
   sources: CandidateSource[];
   enrichers: CandidateEnricher[];
+  queryExpander?: QueryExpander;
   analyzer?: AnalysisProvider;
   renderer: ReportRenderer;
   store: RunStore;

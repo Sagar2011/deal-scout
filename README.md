@@ -13,11 +13,16 @@ npm run dev -- run --topic "AI agents for SMBs"
 
 The command prints each pipeline stage, including whether OpenRouter or the deterministic fallback produced analysis, followed by the run path. Open `runs/<run-id>/report.html` for the partner-readable run view. Run `npm test`, `npm run typecheck`, and `npm audit` before submission.
 
+Discovery fetches a wider pool from both sources, ranks candidates by topic relevance and freshness, then returns up to 11 final candidates by default. A run may return fewer when there are not enough relevant public matches; DealScout does not pad results with loose search matches.
+
+With an OpenRouter key, DealScout makes one bounded query-planning call before sourcing. It keeps the literal topic and adds two to four related source-search queries, so an arbitrary input such as `healthcare startup`, `transport`, or `AI agents for SMBs` does not depend on a hand-maintained sector alias list. The complete plan is saved as `query-plan.json`. Without a key, discovery uses the literal topic only.
+
 ## Run Artifacts
 
 ```text
 runs/<run-id>/
   input.json
+  query-plan.json
   candidates.json
   evidence/<company>.json
   analysis/<company>.json
@@ -37,7 +42,7 @@ Set `OPENROUTER_API_KEY` in your shell to request structured JSON analysis throu
 OPENROUTER_API_KEY=your_key npm run dev -- run --topic "AI agents for SMBs"
 ```
 
-`OPENROUTER_MODEL` optionally overrides the free router. OpenRouter produces the qualitative analysis at `temperature: 0`; final scores and recommendations are then calibrated from the saved candidate, profile, and evidence records. This keeps repeated runs stable when the captured evidence is unchanged. Without a key, DealScout uses its documented fallback analysis and still completes a run.
+`OPENROUTER_MODEL` optionally overrides the free router. OpenRouter first produces a small, saved set of related discovery queries, then produces the qualitative analysis at `temperature: 0`; final scores and recommendations are then calibrated from the saved candidate, profile, and evidence records. This keeps repeated runs stable when the captured evidence is unchanged. Without a key, DealScout uses its documented fallback analysis and literal-topic discovery, and still completes a run.
 
 ## Limits
 

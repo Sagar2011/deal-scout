@@ -1,5 +1,6 @@
 import type { Candidate } from "../core/models.js";
 import type { CandidateSource, HttpClient } from "./types.js";
+import { matchesTopic } from "./topic-match.js";
 
 type YcCompany = {
   name: string;
@@ -36,7 +37,13 @@ export class YcSource implements CandidateSource {
     );
     const { hits } = response.data;
     return hits
-      .filter((company) => company.website && company.one_liner)
+      .filter(
+        (company) =>
+          company.website &&
+          company.one_liner &&
+          matchesTopic(`${company.name} ${company.one_liner}`, topic)
+      )
+      .slice(0, limit)
       .map((company) => ({
         name: company.name,
         website: company.website!,

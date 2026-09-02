@@ -30,11 +30,21 @@ export async function runPipeline(input: {
   const dependencies = input.dependencies ?? createDefaultDependencies(input);
   logger.info(`[DealScout] Starting run for "${input.topic}".`);
   const run = await dependencies.store.createRun(input.rootDir, input.topic);
+  const queries = await buildQueryPlan(
+    input.topic,
+    dependencies.queryExpander,
+    logger
+  );
+  await dependencies.store.writeJson(run, "query-plan.json", {
+    topic: input.topic,
+    queries,
+    provider: dependencies.queryExpander?.name ?? "literal topic",
+  });
   if (!input.candidates)
     logger.info("[DealScout] Discovering candidates from YC and Hacker News.");
   const candidates =
     input.candidates ??
-    (await discoverCandidates(input.topic, dependencies.sources, input.limit));
+    (await discoverCandidates(queries, dependencies.sources, input.limit));
   logger.info(
     `[DealScout] Found ${candidates.length} candidates. Saving source records.`
   );
@@ -152,4 +162,34 @@ export async function runPipeline(input: {
     `[DealScout] Finished: ${completed} memos saved, ${failures.length} skipped.`
   );
   return { runPath: run.path, completed, failed: failures.length, failures };
+}
+
+async function buildQueryPlan(
+  topic: string,
+  expander: PipelineDependencies["queryExpander"],
+  logger: PipelineLogger
+): Promise<string[]> {
+  if (!expander) return [topic];
+  try {
+    logger.info(`[DealScout] Expanding source queries with ${expander.name}.`);
+    return uniqueQueries([topic, ...(await expander.expand(topic))]);
+  } catch (error) {
+    logger.error(
+      `[DealScout] Query expansion failed (${
+        error instanceof Error ? error.message : String(error)
+      }). Using the literal topic.`
+    );
+    return [topic];
+  }
+}
+
+function uniqueQueries(queries: string[]): string[] {
+  return [
+    ...new Map(
+      queries
+        .map((query) => query.trim())
+        .filter(Boolean)
+        .map((query) => [query.toLowerCase(), query])
+    ).values(),
+  ];
 }

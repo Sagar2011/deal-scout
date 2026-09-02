@@ -8,8 +8,11 @@ import { renderMemo, renderRunReport } from "../../src/reports/memo.js";
 import { runPipeline } from "../../src/pipeline/run.js";
 import { analyseCandidate } from "../../src/analysis/analysis.js";
 import { OpenRouterAnalyzer } from "../../src/analysis/llm.js";
+import { OpenRouterQueryExpander } from "../../src/analysis/query-expander.js";
 import { recommend } from "../../src/analysis/recommendation.js";
 import { scoreAnalysis } from "../../src/analysis/scoring.js";
+import { fileRunStore } from "../../src/core/storage.js";
+import type { PipelineDependencies } from "../../src/core/contracts.js";
 import type {
   Candidate,
   CandidateProfile,
@@ -149,6 +152,34 @@ test("accepts a structured LLM analysis", async () => {
   assert.deepEqual(await analyzer.analyse(candidate, []), analysis);
 });
 
+test("uses OpenRouter to return unique expanded search queries", async () => {
+  const expander = new OpenRouterQueryExpander("test-key", "openrouter/free", {
+    async get() {
+      throw new Error("not used");
+    },
+    async post() {
+      return {
+        data: {
+          choices: [
+            {
+              message: {
+                content: JSON.stringify({
+                  queries: ["digital health", "health AI", "digital health"],
+                }),
+              },
+            },
+          ],
+        },
+      };
+    },
+  });
+
+  assert.deepEqual(await expander.expand("healthcare startup"), [
+    "digital health",
+    "health AI",
+  ]);
+});
+
 test("normalizes nested LLM fields before HTML rendering", async () => {
   const analyzer = new OpenRouterAnalyzer("test-key", "openrouter/free", {
     async get() {
@@ -269,6 +300,52 @@ test("writes evidence, analysis, and a memo for one candidate", async () => {
         join(summary.runPath, "analysis", "acme-agent.json"),
         "utf8"
       )
+    );
+  } finally {
+    await rm(rootDir, { recursive: true, force: true });
+  }
+});
+
+test("saves the literal and expanded search queries for a pipeline run", async () => {
+  const rootDir = await mkdtemp(join(tmpdir(), "deal-scout-"));
+  const queries: string[] = [];
+  const dependencies: PipelineDependencies = {
+    sources: [
+      {
+        async findCandidates(topic) {
+          queries.push(topic);
+          return topic === "digital health" ? [candidate] : [];
+        },
+      },
+    ],
+    enrichers: [],
+    queryExpander: {
+      name: "OpenRouter query planner",
+      async expand() {
+        return ["digital health"];
+      },
+    },
+    renderer: { renderMemo, renderRunReport },
+    store: fileRunStore,
+  };
+  try {
+    const summary = await runPipeline({
+      topic: "healthcare startup",
+      rootDir,
+      dependencies,
+      logger: { info: () => undefined, error: () => undefined },
+    });
+    assert.equal(summary.completed, 1);
+    assert.deepEqual(queries, ["healthcare startup", "digital health"]);
+    assert.deepEqual(
+      JSON.parse(
+        await readFile(join(summary.runPath, "query-plan.json"), "utf8")
+      ),
+      {
+        topic: "healthcare startup",
+        queries: ["healthcare startup", "digital health"],
+        provider: "OpenRouter query planner",
+      }
     );
   } finally {
     await rm(rootDir, { recursive: true, force: true });
