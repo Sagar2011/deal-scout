@@ -13,6 +13,7 @@ import { scoreAnalysis } from "../../src/analysis/scoring.js";
 import type {
   Candidate,
   CandidateProfile,
+  Evidence,
   StartupAnalysis,
 } from "../../src/core/models.js";
 
@@ -74,6 +75,50 @@ test("scores and recommends a sufficiently evidenced thesis match", () => {
     ]).decision,
     "Watch"
   );
+});
+
+test("calibrates materially different LLM criteria to the same evidence-backed score", () => {
+  const evidence: Evidence[] = [
+    {
+      claim: candidate.description,
+      url: candidate.sourceUrl,
+      source: candidate.source,
+      capturedAt: "2026-09-02T00:00:00.000Z",
+    },
+    {
+      claim: "Ada Lovelace, Founder/CEO: Former engineering lead.",
+      url: candidate.sourceUrl,
+      source: "Y Combinator",
+      capturedAt: "2026-09-02T00:00:00.000Z",
+    },
+  ];
+  const lowLlmScore = scoreAnalysis(
+    {
+      ...analysis,
+      criteria: {
+        workflowClarity: 0.1,
+        smbFit: 0.1,
+        technicalDepth: 0.1,
+        signalStrength: 0.1,
+        whyNow: 0.1,
+      },
+    },
+    { candidate, evidence, profile }
+  );
+  const highLlmScore = scoreAnalysis(
+    {
+      ...analysis,
+      criteria: {
+        workflowClarity: 1,
+        smbFit: 1,
+        technicalDepth: 1,
+        signalStrength: 1,
+        whyNow: 1,
+      },
+    },
+    { candidate, evidence, profile }
+  );
+  assert.deepEqual(lowLlmScore, highLlmScore);
 });
 
 test("passes a vague fallback candidate with no explicit SMB fit", async () => {

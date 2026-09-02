@@ -85,7 +85,7 @@ export async function runPipeline(input: {
           ),
         profile
       );
-      const score = scoreAnalysis(analysis);
+      const score = scoreAnalysis(analysis, { candidate, evidence, profile });
       const recommendation = recommend(score, evidence);
       logger.info(
         `${progress}: scored ${score.total}/100, ${recommendation.decision}.`

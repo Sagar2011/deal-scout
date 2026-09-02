@@ -47,6 +47,7 @@ export type StartupAnalysis = {
 
 export type Score = {
   total: number;
+  method: "LLM criteria" | "Evidence calibration";
   reasons: string[];
   breakdown: Array<{ label: string; score: number; maximum: number }>;
 };

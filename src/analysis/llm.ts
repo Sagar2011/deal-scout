@@ -22,6 +22,7 @@ export class OpenRouterAnalyzer {
       "https://openrouter.ai/api/v1/chat/completions",
       {
         model: this.model,
+        temperature: 0,
         messages: [{ role: "user", content: prompt }],
       },
       { headers: { Authorization: `Bearer ${this.apiKey}` } }
