@@ -63,4 +63,6 @@ The thesis, architecture, and AI workflow trail are in `docs/thesis.md`, `docs/a
 `src/index.ts` is the entry point. `cli/` parses commands, `core/` owns shared types/config/storage, `sources/` owns public-source clients, `research/` captures evidence and YC profile enrichment, `prompts/` owns independently editable LLM instructions, `analysis/` owns research planning, analysis, and investment decisions, `reports/` renders standalone HTML reports, and `pipeline/` orchestrates the run. Tests are grouped into `tests/unit/` and `tests/integration/`.
 
 
-Demo Video: Please find it in [here](demo/video.html).
+## Demo Video: 
+
+Please find it in [here](demo/video.html).
