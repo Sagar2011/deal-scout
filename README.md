@@ -11,7 +11,7 @@ npm install
 OPENROUTER_API_KEY=your_key npm run dev -- run --topic "AI agents for SMBs"
 ```
 
-Live sourcing requires `OPENROUTER_API_KEY`; the pipeline aborts if planning or candidate selection fails rather than producing heuristic candidate results. The command prints each pipeline stage, followed by the run path. For the committed review artifact, open `demo/20260903-075025-a94173/report.html`. Run `npm test`, `npm run typecheck`, and `npm audit` before submission.
+Live sourcing requires `OPENROUTER_API_KEY`; the pipeline aborts if planning or candidate selection fails rather than producing heuristic candidate results. The command prints each pipeline stage, followed by the run path. For the committed review artifact, open `demo/20260903-075025-a94173/report.html`.
 
 Discovery has one configured target: up to 11 final candidates. It fetches a broader public pool from YC and HN, then ranks it by relevance and freshness. HN results must be `Show HN` launches. A run may return fewer when relevant public matches do not exist; DealScout does not pad results with loose search matches.
 
