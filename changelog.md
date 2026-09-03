@@ -35,3 +35,11 @@
 * feat: update memo rendering tests to reflect new HTML structure and class names
 * feat: enhance analysis normalization and scoring breakdown; update report rendering
 * feat: add AI Agent Guide and contributing guidelines; refactor pipeline for extensibility
+
+### [v2.0.0](https://github.com/Sagar2011/deal-scout/tags/v2.0.0)
+* feat: add thesis and summary JSON files for health care operation topic
+* chore: changes to chore designs
+* feat: enhance scoring and discovery logic for candidates and thesis fit
+* Refactor candidate selection and research planning
+* Add new memos, profiles, and reports for AI agents in SMBs
+* feat: implement OpenRouter query expansion and enhance candidate discovery process
