@@ -1,0 +1,81 @@
+{
+  "analysis": {
+    "team": "Ishan Balakrishnan — Co-Founder; Comp Sci & Business @ UC Berkeley; Shehbaz Virk — Co-Founder; Public Health & Biochemistry @ UC Berkeley",
+    "product": "AI agents that automate healthcare revenue cycle management (RCM) workflows: claims submission, denials follow-up, coding, and payer phone calls.",
+    "market": "Healthcare back-office / RCM automation for healthcare delivery organizations (seed-stage thesis: software or services that improve operational efficiency, administration, or workflow of healthcare delivery organizations).",
+    "traction": "Y Combinator Summer 2023 company listing; 6 employees, based in San Francisco; Hiring for 3 roles in engineering",
+    "risks": [
+      "Single-line product positioning ('AI Agents for Healthcare RCM') provides limited evidence on differentiation from other AI-RCM startups",
+      "No disclosed customers, revenue, or pilot metrics in supplied evidence",
+      "RCM is a crowded competitive space with incumbents and other AI-native entrants",
+      "Founder backgrounds are recent UC Berkeley graduates; no evidence of prior operating experience in healthcare or RCM",
+      "Scope ambiguity: agents described span claims, denials, coding, and payer calls — broad surface area for a 6-person company",
+      "No evidence of regulatory/compliance posture (HIPAA handling, BAA, data security)"
+    ],
+    "openQuestions": [
+      "Who are the named design partners or paying customers, and what workflow(s) do they use Cair for?",
+      "What measurable outcomes has the product delivered (e.g., days in A/R reduced, denial rate, claim throughput)?",
+      "How does Cair differentiate from other AI-RCM agents (e.g., vertical depth, integration breadth, model accuracy on coding)?",
+      "What is the funding status post-YC S23 (raised, runway, investors)?",
+      "What is the pricing model and unit economics?",
+      "What integrations does the product support (EHR/PM systems, clearinghouses, payer endpoints)?",
+      "How is PHI handled, and what is the compliance/security posture (HIPAA, SOC 2, HITRUST)?",
+      "What is the go-to-market motion — direct to provider organizations, RCM service companies, or via clearinghouses/payers?",
+      "Why is the founding team the right team to win RCM, and what prior experience supports this?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.75,
+      "topicFit": 0.75,
+      "technicalDepth": 0.5,
+      "signalStrength": 0.25,
+      "whyNow": 0.5
+    }
+  },
+  "score": {
+    "total": 39,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "Health Care Operation fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 19,
+        "maximum": 25
+      },
+      {
+        "label": "Health Care Operation fit",
+        "score": 13,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 0,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 7,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 0,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Pass",
+    "rationale": "Cair Health has a defined workflow (AI Agents for Healthcare RCM) and public founder evidence for 2 founders. The current record does not establish customer adoption, retention, or market-timing evidence.",
+    "mindChanges": [
+      "Confirm Cair Health's paid customer adoption and retention.",
+      "Validate measurable ROI for ai agents for healthcare rcm.",
+      "Validate the founding team's direct experience in this workflow."
+    ]
+  }
+}

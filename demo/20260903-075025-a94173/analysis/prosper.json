@@ -1,0 +1,78 @@
+{
+  "analysis": {
+    "team": "Founders Xavier de Gracia (previously VP/GM of a $120M business unit, led 800+ agents, MBA Harvard) and Josep Mingot (product leader at Coverwallet, led Insurance Health initiative, co‑founder of Arcvi AI consulting, MIT CV research). 9 employees based in NYC.",
+    "product": "AI Phone Agents that automate patient scheduling, benefits verification, and billing in a single workflow for healthcare providers.",
+    "market": "Targeting the $200B healthcare administration burden; solutions that improve back‑office, clinical operations, scheduling, billing, and compliance for care delivery organizations.",
+    "traction": "Website claims 150,000+ providers and $1.7B in care powered; Y Combinator Summer 2023 listing; currently hiring 2 sales roles.",
+    "risks": [
+      "Regulatory and compliance requirements for patient data and telephone communications in healthcare.",
+      "Integration with diverse Electronic Health Record (EHR) and practice‑management systems.",
+      "Potential customer concentration and churn if ROI is not clearly demonstrated.",
+      "Competitive landscape with existing scheduling, revenue‑cycle, and contact‑center solutions.",
+      "Scalability of AI phone agents under high call volume and varying accents/languages."
+    ],
+    "openQuestions": [
+      "What is the current revenue or ARR?",
+      "Has the company raised external funding beyond YC?",
+      "What are the unit economics (CAC, LTV, payback period)?",
+      "Which specific EHR/practice‑management systems have been integrated?",
+      "What is the customer retention or churn rate to date?",
+      "Are there any disclosed case studies or pilot results?",
+      "How does the pricing model work (per‑call, per‑provider, subscription)?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.75,
+      "topicFit": 0.75,
+      "technicalDepth": 0.5,
+      "signalStrength": 0.75,
+      "whyNow": 0.75
+    }
+  },
+  "score": {
+    "total": 58,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "Health Care Operation fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 25,
+        "maximum": 25
+      },
+      {
+        "label": "Health Care Operation fit",
+        "score": 20,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 6,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 7,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 0,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Watch",
+    "rationale": "Prosper has a defined workflow (AI Phone Agents for Healthcare Operations) and public founder evidence for 2 founders. The current record does not establish customer adoption, retention, or market-timing evidence.",
+    "mindChanges": [
+      "Confirm Prosper's paid customer adoption and retention.",
+      "Validate measurable ROI for ai phone agents for healthcare operations.",
+      "Validate the founding team's direct experience in this workflow."
+    ]
+  }
+}

@@ -25,6 +25,26 @@ test("retries a rate-limited OpenRouter request", async () => {
   assert.deepEqual(waits, [0]);
 });
 
+test("retries a canceled OpenRouter request", async () => {
+  let attempts = 0;
+  const waits: number[] = [];
+
+  const result = await retryOpenRouter(
+    async () => {
+      attempts += 1;
+      if (attempts === 1) throw new Error("canceled");
+      return "success";
+    },
+    async (milliseconds) => {
+      waits.push(milliseconds);
+    }
+  );
+
+  assert.equal(result, "success");
+  assert.equal(attempts, 2);
+  assert.deepEqual(waits, [1_000]);
+});
+
 test("does not retry a non-rate-limit failure", async () => {
   let attempts = 0;
 
@@ -46,7 +66,9 @@ test("aborts a request that exceeds the OpenRouter timeout", async () => {
       withOpenRouterTimeout(
         (signal) =>
           new Promise((_, reject) => {
-            signal.addEventListener("abort", () => reject(new Error("aborted")));
+            signal.addEventListener("abort", () =>
+              reject(new Error("aborted"))
+            );
           }),
         1
       ),

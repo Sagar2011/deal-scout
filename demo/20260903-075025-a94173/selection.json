@@ -1,0 +1,49 @@
+{
+  "mode": "llm",
+  "reasons": [
+    {
+      "sourceUrl": "https://www.ycombinator.com/companies/care-gp",
+      "reason": "Care GP offers AI agents specifically to run primary healthcare operations, directly targeting clinical workflow automation for providers."
+    },
+    {
+      "sourceUrl": "https://www.ycombinator.com/companies/ruma-care",
+      "reason": "Ruma Care provides an operations stack for biologic infusion clinics, addressing clinical operations and workflow for care delivery."
+    },
+    {
+      "sourceUrl": "https://www.ycombinator.com/companies/clicks-health",
+      "reason": "Clicks Health builds AI agents for healthcare back-office operations, squarely within administrative workflow automation for providers."
+    },
+    {
+      "sourceUrl": "https://www.ycombinator.com/companies/scheduling-wizard",
+      "reason": "Scheduling Wizard delivers logistics infrastructure to modernize healthcare operations, covering scheduling and patient flow."
+    },
+    {
+      "sourceUrl": "https://www.ycombinator.com/companies/norra",
+      "reason": "Norra automates equipment operations for nursing facilities, addressing facility operations for care delivery organizations."
+    },
+    {
+      "sourceUrl": "https://www.ycombinator.com/companies/novoflow",
+      "reason": "Novoflow provides computer-using agents for healthcare operations, targeting back-office and administrative automation."
+    },
+    {
+      "sourceUrl": "https://www.ycombinator.com/companies/morphik",
+      "reason": "Morphik deploys AI workers for Skilled Nursing and Senior Living operations, automating administrative workflows in care facilities."
+    },
+    {
+      "sourceUrl": "https://www.ycombinator.com/companies/saga-ai",
+      "reason": "Saga AI builds voice agents for healthcare operations, streamlining administrative and patient communication workflows."
+    },
+    {
+      "sourceUrl": "https://www.ycombinator.com/companies/prosper",
+      "reason": "Prosper offers AI phone agents for healthcare operations, automating scheduling, intake, and patient flow tasks."
+    },
+    {
+      "sourceUrl": "https://www.ycombinator.com/companies/cair-health",
+      "reason": "Cair Health provides AI agents for healthcare revenue cycle management, a core operational workflow for providers."
+    },
+    {
+      "sourceUrl": "https://www.ycombinator.com/companies/latent",
+      "reason": "Latent develops medical language models to automate healthcare operations, addressing documentation and back-office workflows."
+    }
+  ]
+}

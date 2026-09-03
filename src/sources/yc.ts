@@ -40,19 +40,21 @@ export class YcSource implements CandidateSource {
       }
     );
     const { hits } = response.data;
-    return hits
-      // Algolia has already matched the query. Keep recall high here; the
-      // selector (or deterministic fallback) applies the topic boundary later.
-      .filter((company) => company.website && company.one_liner)
-      .slice(0, limit)
-      .map((company) => ({
-        name: company.name,
-        website: company.website!,
-        description: company.one_liner!,
-        source: "Y Combinator",
-        sourceUrl: `https://www.ycombinator.com/companies/${company.slug}`,
-        signal: `YC ${company.batch ?? "directory"} company listing`,
-      }));
+    return (
+      hits
+        // Algolia has already matched the query. Keep recall high here; the
+        // selector (or deterministic fallback) applies the topic boundary later.
+        .filter((company) => company.website && company.one_liner)
+        .slice(0, limit)
+        .map((company) => ({
+          name: company.name,
+          website: company.website!,
+          description: company.one_liner!,
+          source: "Y Combinator",
+          sourceUrl: `https://www.ycombinator.com/companies/${company.slug}`,
+          signal: `YC ${company.batch ?? "directory"} company listing`,
+        }))
+    );
   }
 
   private extractCredentials(html: string): YcCredentials {

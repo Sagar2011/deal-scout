@@ -1,0 +1,81 @@
+{
+  "analysis": {
+    "team": "Andrei Craciunescu (Founder & CEO). Prior risk & analytics role at WTW (insurance brokerage). M.Sc. Mathematics, LMU Munich; PhD-level research in financial mathematics at TU Munich. Licensed insurance broker in CA, TX, and DE. 3 employees total, based in San Francisco.",
+    "product": "AI insurance company targeting business insurance for startups. Per website: compare top carriers, receive expert guidance, and issue Certificates of Insurance (COI) in as little as 24 hours.",
+    "market": "Digital/AI-enabled commercial insurance distribution and underwriting for startups. Specific market size, segments, or TAM figures not in evidence.",
+    "traction": "YC Fall 2024 company listing. No revenue, customer, or growth metrics disclosed in evidence.",
+    "risks": [
+      "Single-founder dependence at the leadership level (only one named exec).",
+      "Very small team (3 employees) limits execution capacity.",
+      "No disclosed traction metrics (customers, revenue, LOIs, pilots).",
+      "Distribution-dependent model (carrier comparison) faces entrenched incumbent brokers and digital agents.",
+      "Brand-new (founded 2024) with no operating history beyond YC listing.",
+      "AI usage not detailed in evidence; risk of being 'AI-labeled' without substantive ML differentiation."
+    ],
+    "openQuestions": [
+      "What is the specific AI/ML component? (e.g., underwriting model, risk classification, recommendation, agentic workflow)",
+      "How does the carrier comparison process actually work and which data sources are used?",
+      "What is the revenue model (commission, SaaS, referral fees)?",
+      "Are there any paying customers, pilots, or LOIs? Number of COIs delivered?",
+      "Total funding raised to date, including YC standard terms and any priced round?",
+      "Other founders, advisors, or technical hires beyond the 3 listed employees?",
+      "Regulatory/compliance status across states beyond broker licensing?",
+      "Defensibility vs. incumbent brokers, Insurtech competitors, and embedded insurance platforms?",
+      "Current headcount growth plans and runway?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.5,
+      "topicFit": 1,
+      "technicalDepth": 0.25,
+      "signalStrength": 0.5,
+      "whyNow": 0.5
+    }
+  },
+  "score": {
+    "total": 24,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "AI Fintech Space fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 0,
+        "maximum": 25
+      },
+      {
+        "label": "AI Fintech Space fit",
+        "score": 10,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 6,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 8,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 0,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Pass",
+    "rationale": "RiskCube has a defined workflow (AI insurance company) and public founder evidence for 1 founder. The current record does not establish customer adoption, retention, or market-timing evidence.",
+    "mindChanges": [
+      "Confirm RiskCube's paid customer adoption and retention.",
+      "Validate measurable ROI for ai insurance company.",
+      "Validate the founding team's direct experience in this workflow."
+    ]
+  }
+}

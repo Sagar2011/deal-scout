@@ -10,11 +10,11 @@ export async function retryOpenRouter<T>(
     try {
       return await request();
     } catch (error) {
-      if (!isRateLimitError(error) || attempt === MAX_ATTEMPTS) throw error;
+      if (!isRetryableError(error) || attempt === MAX_ATTEMPTS) throw error;
 
       const delay = retryDelay(error, attempt);
       console.info(
-        `[DealScout] OpenRouter rate-limited; retrying in ${delay}ms (attempt ${
+        `[DealScout] OpenRouter request failed transiently; retrying in ${delay}ms (attempt ${
           attempt + 1
         }/${MAX_ATTEMPTS}).`
       );
@@ -25,6 +25,10 @@ export async function retryOpenRouter<T>(
   throw new Error("OpenRouter retry attempts exhausted");
 }
 
+function isRetryableError(error: unknown): boolean {
+  return isRateLimitError(error) || isCanceledError(error);
+}
+
 function isRateLimitError(error: unknown): boolean {
   return (
     typeof error === "object" &&
@@ -33,6 +37,10 @@ function isRateLimitError(error: unknown): boolean {
     isRecord(error.response) &&
     error.response.status === 429
   );
+}
+
+function isCanceledError(error: unknown): boolean {
+  return error instanceof Error && /^canceled$/i.test(error.message.trim());
 }
 
 function retryDelay(error: unknown, attempt: number): number {

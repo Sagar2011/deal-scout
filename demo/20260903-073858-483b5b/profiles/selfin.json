@@ -1,0 +1,20 @@
+{
+  "profileUrl": "https://www.ycombinator.com/companies/selfin",
+  "description": "Building the first AI Bank. Founded in 2025 by Paula Gutierrez and Joel Tomas Pimentel, Selfin has 2 employees based in San Francisco.",
+  "teamSize": 2,
+  "logoUrl": "https://bookface-images.s3.amazonaws.com/small_logos/c62fd75050245643921b794ea15f1786d2ee9033.png",
+  "founders": [
+    {
+      "name": "Paula Gutierrez",
+      "title": "Founder/CEO",
+      "bio": "-Aerospace @Imperial, MIT, UC Berkeley -Quant @Bank of America, NASA, Rolls Royce, Software engineer startups",
+      "linkedinUrl": "https://www.linkedin.com/in/paula-gutierrez-/"
+    },
+    {
+      "name": "Joel Tomas Pimentel",
+      "title": "Founder/CTO",
+      "bio": "Rocket Science @ Imperial & Stanford -&gt; building the next fintech revolution",
+      "linkedinUrl": "https://www.linkedin.com/in/joel-tomas-pimentel"
+    }
+  ]
+}

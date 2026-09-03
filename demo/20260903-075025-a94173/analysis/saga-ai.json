@@ -1,0 +1,77 @@
+{
+  "analysis": {
+    "team": "Founded in 2024 by Jenica Zhong (Founder/CEO). Jenica previously co‑founded Tile and spent 4 years at Palantir as a PM on big‑data and AI products. She holds a math degree from Harvard and is a math Olympian. The company currently has 2 employees based in San Francisco.",
+    "product": "Saga AI provides voice‑based AI agents that automate back‑office patient‑access workflows. The agents read referrals, faxes, and forms, then act on them directly in the EHR for tasks such as prior authorization, eligibility verification, intake, and record updates. The solution is marketed as HIPAA‑compliant, SOC 2 Type II certified, and includes a Business Associate Agreement (BAA).",
+    "market": "Unknown. The product targets healthcare operations (patient‑access and administrative workflows), a sector with substantial demand, but no specific market size, segmentation, or competitive landscape data is provided.",
+    "traction": "Unknown. No evidence of customer count, pilot deployments, revenue, usage metrics, or other traction indicators.",
+    "risks": [
+      "Early‑stage risk: only 2 employees, limited team depth. No demonstrated customer adoption or revenue. Regulatory risk: must maintain HIPAA and SOC 2 compliance across diverse healthcare environments. Technical risk: voice‑agent accuracy, EHR integration complexity, and scalability of AI processing for high‑volume clerical tasks. Competitive risk: numerous startups and incumbents target healthcare back‑office automation."
+    ],
+    "openQuestions": [
+      "What is the size and composition of the full team (e.g., engineering, sales, compliance)?",
+      "Are there any pilot customers or signed contracts?",
+      "What are the pricing and business model details?",
+      "Which EHR systems are currently supported, and what is the integration effort?",
+      "What are the key performance metrics (e.g., error rates, processing time, throughput)?",
+      "What is the go‑to‑market strategy and sales pipeline?",
+      "Has the company raised seed or other funding, and if so, from whom?",
+      "What are the plans for scaling both technology and customer base?",
+      "Are there any additional regulatory certifications beyond HIPAA and SOC 2?",
+      "What is the competitive differentiation beyond voice interface?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.75,
+      "topicFit": 1,
+      "technicalDepth": 0.5,
+      "signalStrength": 0.75,
+      "whyNow": 0.5
+    }
+  },
+  "score": {
+    "total": 47,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "Health Care Operation fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 19,
+        "maximum": 25
+      },
+      {
+        "label": "Health Care Operation fit",
+        "score": 20,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 0,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 8,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 0,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Pass",
+    "rationale": "Saga AI has a defined workflow (Voice Agents for Healthcare Operations) and public founder evidence for 1 founder. The current record does not establish customer adoption, retention, or market-timing evidence.",
+    "mindChanges": [
+      "Confirm Saga AI's paid customer adoption and retention.",
+      "Validate measurable ROI for voice agents for healthcare operations.",
+      "Validate the founding team's direct experience in this workflow."
+    ]
+  }
+}

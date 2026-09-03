@@ -1,0 +1,67 @@
+{
+  "analysis": {
+    "team": "Cornelius Schramm (Founder/CEO): CEO of Avallon. Before Avallon, Cornelius was the founding U.S. engineer at FINN, building the fleet operations platform behind $15M ARR and witnessing firsthand how broken fleet claims processes are. Bryan Guin (Founder/CPO): Bryan was previously a machine learning researcher at Cornell and a software engineer at Agentive (YC S23) where he built AI systems for auditors. He also led product consulting teams at EY, advising Fortune 500 clients on new product development and deployment.",
+    "product": "AI agents for insurance claims operations. Founded in 2025 by Bryan Guin and Cornelius Schramm, Avallon AI has 7 employees based in New York City. Avallon AI is hiring for 3 roles in engineering and sales.",
+    "market": "The collected source does not establish the initial market.",
+    "traction": "YC Spring 2025 company listing",
+    "risks": ["Company claims have not been independently validated."],
+    "openQuestions": [
+      "Who are the founders and what is their relevant operating experience?",
+      "What evidence supports retention and willingness to pay?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.8,
+      "topicFit": 0,
+      "technicalDepth": 0.5,
+      "signalStrength": 0.3,
+      "whyNow": 0.8
+    }
+  },
+  "score": {
+    "total": 58,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "AI Fintech Space fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 25,
+        "maximum": 25
+      },
+      {
+        "label": "AI Fintech Space fit",
+        "score": 10,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 12,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 11,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 0,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Watch",
+    "rationale": "Avallon AI has a defined workflow (AI agents for insurance claims operations) and public founder evidence for 2 founders. The current record does not establish customer adoption, retention, or market-timing evidence.",
+    "mindChanges": [
+      "Confirm Avallon AI's paid customer adoption and retention.",
+      "Validate measurable ROI for ai agents for insurance claims operations.",
+      "Validate the founding team's direct experience in this workflow."
+    ]
+  }
+}

@@ -33,19 +33,17 @@ export function createRunThesis(topic: string | ResearchBrief): RunThesis {
     fitQueries:
       typeof topic === "string"
         ? [focus]
-        : uniquePhrases([
-            focus,
-            ...topic.queries,
-            ...topic.inclusionCriteria,
-          ]),
+        : uniquePhrases([focus, ...topic.queries, ...topic.inclusionCriteria]),
   };
 }
 
 export function createFallbackResearchBrief(topic: string): ResearchBrief {
   const focus = topic.trim();
   const subject =
-    focus.replace(/\bstartups?\b/gi, "").replace(/\s+/g, " ").trim() ||
-    focus;
+    focus
+      .replace(/\bstartups?\b/gi, "")
+      .replace(/\s+/g, " ")
+      .trim() || focus;
   const narrowedQuery = focus
     .split(/[^a-z0-9]+/i)
     .filter(

@@ -1,0 +1,20 @@
+{
+  "profileUrl": "https://www.ycombinator.com/companies/norra",
+  "description": "Automating equipment operations for nursing facilities. Founded in 2025 by Ben Rubin and Yining Zhang, Norra has 2 employees based in New York City.",
+  "teamSize": 2,
+  "logoUrl": "https://bookface-images.s3.amazonaws.com/small_logos/e02b3e396920957fb568e6c31817205cde3dbd2a.png",
+  "founders": [
+    {
+      "name": "Ben Rubin",
+      "title": "Founder/CEO",
+      "bio": "Building the AI equipment operations platform for nursing facilities.  CS + Math at Rice. Spent 1,000+ hours in hospitals and nursing facilities observing broken operations firsthand.",
+      "linkedinUrl": "https://www.linkedin.com/in/ben-rubin-b771b8237/"
+    },
+    {
+      "name": "Yining Zhang",
+      "title": "Founder/CTO",
+      "bio": "Norra",
+      "linkedinUrl": "https://www.linkedin.com/in/yining-z/"
+    }
+  ]
+}

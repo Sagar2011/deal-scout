@@ -23,7 +23,7 @@ export class OpenRouterAnalyzer {
     const response = await retryOpenRouter(() =>
       withOpenRouterTimeout((signal) =>
         this.http.post<{
-        choices: Array<{ message: { content: string } }>;
+          choices: Array<{ message: { content: string } }>;
         }>(
           "https://openrouter.ai/api/v1/chat/completions",
           {
@@ -34,7 +34,7 @@ export class OpenRouterAnalyzer {
           {
             headers: { Authorization: `Bearer ${this.apiKey}` },
             signal,
-            timeout: 30_000,
+            timeout: 60_000,
           }
         )
       )

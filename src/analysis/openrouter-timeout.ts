@@ -1,4 +1,4 @@
-const OPENROUTER_TIMEOUT_MS = 30_000;
+const OPENROUTER_TIMEOUT_MS = 60_000;
 
 export async function withOpenRouterTimeout<T>(
   request: (signal: AbortSignal) => Promise<T>,

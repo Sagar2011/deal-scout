@@ -1,0 +1,20 @@
+{
+  "profileUrl": "https://www.ycombinator.com/companies/clicks-health",
+  "description": "AI agents for your healthcare back-office operations. Founded in 2025 by Dominik Helmreich and Oliver Knapp, Clicks Health has 8 employees based in San Francisco. Clicks Health is hiring for 2 roles in sales.",
+  "teamSize": 8,
+  "logoUrl": "https://bookface-images.s3.amazonaws.com/small_logos/9ba947944afd3b1dfe85a7f3891e69a0b39e5fe9.png",
+  "founders": [
+    {
+      "name": "Dominik Helmreich",
+      "title": "Founder/CEO",
+      "bio": "ETH Zurich CSE Grad, Stanford AI Researcher, Ex-BCG Consultant",
+      "linkedinUrl": "https://www.linkedin.com/in/dominik-helmreich-30574a1b0/"
+    },
+    {
+      "name": "Oliver Knapp",
+      "title": "Founder/CTO",
+      "bio": "Repeated AI founder. Developed 10+ enterprise AI applications in the past 2 years. Studied Physics at ETH Zurich.",
+      "linkedinUrl": "https://www.linkedin.com/in/oliverkn/"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "analysis": {
+    "team": "Founder: Hemant Gangolia. Background includes large-scale systems work at Meta and Walmart, and C-suite consulting at McKinsey & Company. Current team size: 5 employees, headquartered in San Francisco. Other team members are not specified in evidence.",
+    "product": "AI-native tax planning and filing platform targeting US individuals. The product is described as helping users discover tax savings and optimize taxes year-round. It is positioned as an AI-powered, digital, data-driven solution for a financial process (personal taxation).",
+    "market": "US personal tax preparation and optimization market, with the company's framing suggesting a $1T+ aggregate savings opportunity for Americans. Direct market size, segmentation, and competitor data are not present in the supplied evidence.",
+    "traction": "Backed by Y Combinator (Winter 2023 batch listing, though evidence also notes 'Founded in 2025' — flagged inconsistency). No revenue, user counts, growth metrics, pilots, partnerships, or funding amounts are provided in evidence.",
+    "risks": [
+      "Evidence inconsistency: company is listed in YC Winter 2023 but also described as 'Founded in 2025' — timeline clarity is unclear.",
+      "Extremely early stage (5 employees) with no disclosed traction metrics, implying execution and go-to-market risk.",
+      "Personal tax is a crowded, regulated space with entrenched incumbents (e.g., Intuit/TurboTax, H&R Block) and prior AI entrants; competitive defensibility is unproven based on evidence.",
+      "Regulatory and liability risk around automated tax advice/filing for individuals is not addressed in evidence.",
+      "Headline '$1T+ savings for Americans' is a top-of-funnel claim without methodology or basis provided in evidence; potential credibility risk if not substantiated.",
+      "Solo-founder evidence profile (only one named founder); key-person and team-depth risk."
+    ],
+    "openQuestions": [
+      "What is the actual founding date, and how does it reconcile with the YC Winter 2023 batch listing?",
+      "Is the founder the sole founder, and who else is on the leadership team?",
+      "What is the specific AI/ML approach (models, data sources, differentiation vs. generic LLM-based tax tools)?",
+      "What is the regulatory/compliance posture for automated individual tax filing and advisory?",
+      "What traction metrics exist (users, ARR, retention, filing volume, savings delivered)?",
+      "What is the funding history to date (YC standard deal, any priced rounds, investors)?",
+      "What is the go-to-market strategy and primary customer acquisition channel?",
+      "How is the '$1T+ savings for Americans' figure derived, and what is the addressable subset realistically capturable?",
+      "Who are the direct AI-tax competitors and what is the structural moat?",
+      "What is the pricing model and unit economics?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.75,
+      "topicFit": 0.75,
+      "technicalDepth": 0.25,
+      "signalStrength": 0.5,
+      "whyNow": 0.5
+    }
+  },
+  "score": {
+    "total": 14,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "AI Fintech Space fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 0,
+        "maximum": 25
+      },
+      {
+        "label": "AI Fintech Space fit",
+        "score": 7,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 0,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 7,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 0,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Pass",
+    "rationale": "Rally Tax has a defined workflow (AI-native tax platform to save $1T+ for Americans) and public founder evidence for 1 founder. The current record does not establish customer adoption, retention, or market-timing evidence.",
+    "mindChanges": [
+      "Confirm Rally Tax's paid customer adoption and retention.",
+      "Validate measurable ROI for ai-native tax platform to save $1t+ for americans.",
+      "Validate the founding team's direct experience in this workflow."
+    ]
+  }
+}

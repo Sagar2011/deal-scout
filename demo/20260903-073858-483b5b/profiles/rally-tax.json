@@ -1,0 +1,14 @@
+{
+  "profileUrl": "https://www.ycombinator.com/companies/rally-tax",
+  "description": "AI-native tax platform to save $1T+ for Americans. Founded in 2025 by Hemant Gangolia, Rally Tax has 5 employees based in San Francisco.",
+  "teamSize": 5,
+  "logoUrl": "https://bookface-images.s3.amazonaws.com/small_logos/17a3819aca58bd07bb9f186d6233961e242ceff9.png",
+  "founders": [
+    {
+      "name": "Hemant Gangolia",
+      "title": "Founder",
+      "bio": "Building Rally Tax, AI-native US tax advisory for individuals.  Previously, Hemant has built large scale systems at Meta, Walmart and consulted C-Suite while at McKinsey & Company.",
+      "linkedinUrl": "https://www.linkedin.com/in/hemantgangolia/"
+    }
+  ]
+}

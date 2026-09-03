@@ -24,9 +24,8 @@ export function recommend(
   const signalStrength = score.breakdown.find(
     (item) => item.label === "Signal strength"
   )?.score;
-  const independentEvidenceUrls = new Set(
-    evidence.map((item) => item.url)
-  ).size;
+  const independentEvidenceUrls = new Set(evidence.map((item) => item.url))
+    .size;
   const hasEvidenceToWatch =
     independentEvidenceUrls >= 2 &&
     Boolean(technicalDepth) &&
@@ -40,7 +39,15 @@ export function recommend(
   const { candidate, profile } = context;
   const founderCount = profile?.founders.length ?? 0;
   const rationale = candidate
-    ? `${candidate.name} has a defined workflow (${candidate.description}) and ${founderCount ? `public founder evidence for ${founderCount} ${founderCount === 1 ? "founder" : "founders"}` : "no public founder profile"}. The current record does not establish customer adoption, retention, or market-timing evidence.`
+    ? `${candidate.name} has a defined workflow (${
+        candidate.description
+      }) and ${
+        founderCount
+          ? `public founder evidence for ${founderCount} ${
+              founderCount === 1 ? "founder" : "founders"
+            }`
+          : "no public founder profile"
+      }. The current record does not establish customer adoption, retention, or market-timing evidence.`
     : `${score.total}/100 against ${
         thesis?.topic ?? "the selected"
       } thesis with ${evidence.length} captured evidence records.`;

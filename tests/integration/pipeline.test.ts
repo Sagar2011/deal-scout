@@ -166,6 +166,98 @@ test("calibrates materially different LLM criteria to the same evidence-backed s
   assert.deepEqual(lowLlmScore, highLlmScore);
 });
 
+test("varies calibrated scores when public evidence differs", () => {
+  const richerProfile: CandidateProfile = {
+    ...profile,
+    teamSize: 12,
+    founders: [
+      ...profile.founders,
+      {
+        name: "Grace Hopper",
+        title: "Co-founder/CTO",
+        bio: "Computer science researcher and engineering leader.",
+      },
+    ],
+  };
+  const richer = scoreAnalysis(analysis, {
+    candidate: {
+      ...candidate,
+      signal: "YC Summer 2026 company listing",
+    },
+    evidence: [
+      {
+        claim: "AI agents automate invoice follow-up and billing workflows.",
+        url: candidate.sourceUrl,
+        source: "Y Combinator",
+        capturedAt: "2026-09-03T00:00:00.000Z",
+      },
+      {
+        claim: "Customers use the product for clinic operations.",
+        url: candidate.website,
+        source: "Company website",
+        capturedAt: "2026-09-03T00:00:00.000Z",
+      },
+    ],
+    profile: richerProfile,
+    thesis: createRunThesis("AI agents for SMBs"),
+  });
+  const weaker = scoreAnalysis(analysis, {
+    candidate: {
+      ...candidate,
+      description: "Business software.",
+      signal: "YC Winter 2024 company listing",
+    },
+    evidence: [
+      {
+        claim: "Business software.",
+        url: candidate.sourceUrl,
+        source: "Y Combinator",
+        capturedAt: "2026-09-03T00:00:00.000Z",
+      },
+    ],
+    thesis: createRunThesis("AI agents for SMBs"),
+  });
+
+  assert.ok(richer.total > weaker.total);
+  assert.notDeepEqual(richer.breakdown, weaker.breakdown);
+  assert.equal(richer.breakdown[0]?.score, 25);
+  assert.equal(richer.breakdown[2]?.score, 12);
+});
+
+test("caps agent-fit scoring when the company website contradicts an uncorroborated agent claim", () => {
+  const score = scoreAnalysis(analysis, {
+    candidate: {
+      ...candidate,
+      description: "AI agents for dental operations.",
+    },
+    evidence: [
+      {
+        claim: "AI agents for dental operations.",
+        url: candidate.sourceUrl,
+        source: "Y Combinator",
+        capturedAt: "2026-09-03T00:00:00.000Z",
+      },
+      {
+        claim:
+          "AI-powered clinical documentation platform for dental practices.",
+        url: candidate.website,
+        source: "Company website",
+        capturedAt: "2026-09-03T00:00:00.000Z",
+      },
+    ],
+    thesis: createRunThesis("AI agents for healthcare operations"),
+  });
+
+  assert.deepEqual(score.breakdown.slice(0, 2), [
+    { label: "Workflow clarity", score: 15, maximum: 25 },
+    {
+      label: "AI Agents For Healthcare Operations fit",
+      score: 12,
+      maximum: 20,
+    },
+  ]);
+});
+
 test("gives zero points to dimensions without supporting evidence", () => {
   const score = scoreAnalysis(analysis, {
     candidate: {
@@ -230,7 +322,7 @@ test("scores a candidate against the supplied topic instead of SMB fit", () => {
 
   assert.deepEqual(score.breakdown[1], {
     label: "Healthcare Startup fit",
-    score: 15,
+    score: 20,
     maximum: 20,
   });
 });
@@ -263,7 +355,7 @@ test("scores thesis fit from a generated research query", () => {
 
   assert.deepEqual(score.breakdown[1], {
     label: "Fintech Startups fit",
-    score: 15,
+    score: 10,
     maximum: 20,
   });
 });
@@ -473,6 +565,12 @@ test("saves the LLM research brief and uses its source queries", async () => {
         };
       },
     },
+    candidateSelector: {
+      name: "OpenRouter candidate selector",
+      async select(_brief, candidates) {
+        return { candidates, reasons: [] };
+      },
+    },
     renderer: { renderMemo, renderRunReport },
     store: fileRunStore,
   };
@@ -553,6 +651,12 @@ test("runs every planned source query once without a second LLM planning call", 
         };
       },
     },
+    candidateSelector: {
+      name: "OpenRouter candidate selector",
+      async select(_brief, candidates) {
+        return { candidates, reasons: [] };
+      },
+    },
     renderer: { renderMemo, renderRunReport },
     store: fileRunStore,
   };
@@ -584,6 +688,25 @@ test("logs a shortfall and completes with the relevant candidates found", async 
       },
     ],
     enrichers: [],
+    researchPlanner: {
+      name: "Research planner",
+      async plan(topic) {
+        return {
+          topic,
+          thesis: "A narrow test thesis.",
+          targetCustomer: "Test customer",
+          inclusionCriteria: [],
+          exclusions: [],
+          queries: [topic],
+        };
+      },
+    },
+    candidateSelector: {
+      name: "Candidate selector",
+      async select(_brief, candidates) {
+        return { candidates, reasons: [] };
+      },
+    },
     renderer: { renderMemo, renderRunReport },
     store: fileRunStore,
   };
@@ -603,6 +726,77 @@ test("logs a shortfall and completes with the relevant candidates found", async 
       errors.some((message) =>
         message.includes("Found 0/2 relevant candidates")
       )
+    );
+  } finally {
+    await rm(rootDir, { recursive: true, force: true });
+  }
+});
+
+test("fails a live run when the candidate selector fails", async () => {
+  const rootDir = await mkdtemp(join(tmpdir(), "deal-scout-"));
+  const dependencies: PipelineDependencies = {
+    sources: [
+      {
+        async findCandidates() {
+          return [candidate];
+        },
+      },
+    ],
+    enrichers: [],
+    researchPlanner: {
+      name: "Available planner",
+      async plan(topic) {
+        return {
+          topic,
+          thesis: "Test thesis.",
+          targetCustomer: "Test customer",
+          inclusionCriteria: [],
+          exclusions: [],
+          queries: [topic],
+        };
+      },
+    },
+    candidateSelector: {
+      name: "Unavailable selector",
+      async select() {
+        throw new Error("rate limited");
+      },
+    },
+    renderer: { renderMemo, renderRunReport },
+    store: fileRunStore,
+  };
+  try {
+    await assert.rejects(
+      runPipeline({
+        topic: "AI agents for SMBs",
+        rootDir,
+        limit: 1,
+        dependencies,
+        logger: { info: () => undefined, error: () => undefined },
+      }),
+      /Candidate selection failed: rate limited/
+    );
+  } finally {
+    await rm(rootDir, { recursive: true, force: true });
+  }
+});
+
+test("fails a live run when the research planner is unavailable", async () => {
+  const rootDir = await mkdtemp(join(tmpdir(), "deal-scout-"));
+  try {
+    await assert.rejects(
+      runPipeline({
+        topic: "AI agents for SMBs",
+        rootDir,
+        dependencies: {
+          sources: [],
+          enrichers: [],
+          renderer: { renderMemo, renderRunReport },
+          store: fileRunStore,
+        },
+        logger: { info: () => undefined, error: () => undefined },
+      }),
+      /Live discovery requires an LLM research planner/
     );
   } finally {
     await rm(rootDir, { recursive: true, force: true });

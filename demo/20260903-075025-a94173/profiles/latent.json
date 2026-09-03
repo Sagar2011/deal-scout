@@ -1,0 +1,20 @@
+{
+  "profileUrl": "https://www.ycombinator.com/companies/latent",
+  "description": "Medical language models to automate healthcare operations. Founded in 2022 by Rishabh Jain and Sri Somasundaram, Latent has 50 employees based in San Francisco. Latent is hiring for 2 roles in engineering and design.",
+  "teamSize": 50,
+  "logoUrl": "https://bookface-images.s3.amazonaws.com/small_logos/d464e72e759603ce78169d56b1ef679252bf2dae.png",
+  "founders": [
+    {
+      "name": "Rishabh Jain",
+      "title": "Founder",
+      "bio": "Co-founder at Latent. Repeat founder.",
+      "linkedinUrl": "https://linkedin.com/in/rj254"
+    },
+    {
+      "name": "Sri Somasundaram",
+      "title": "Founder",
+      "bio": "Co-founder at Latent. At Stanford, Sri investigated molecular binding patterns responsible for adaptive immunity and built deep RL robots with publications at ICML, ICLR, and Nature. He also operationalized language models for the largest financial institutions while on the founding team of Hebbia.",
+      "linkedinUrl": "https://www.linkedin.com/in/ssomasundaram/"
+    }
+  ]
+}

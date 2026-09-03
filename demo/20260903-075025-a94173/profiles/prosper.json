@@ -1,0 +1,20 @@
+{
+  "profileUrl": "https://www.ycombinator.com/companies/prosper",
+  "description": "AI Phone Agents for Healthcare Operations. Founded in 2023 by Xavier de Gracia and Josep Mingot, Prosper has 9 employees based in New York City. Prosper is hiring for 2 roles in sales.",
+  "teamSize": 9,
+  "logoUrl": "https://bookface-images.s3.amazonaws.com/small_logos/dbf5a3fe66d78955d591f3cbd3eee3f1635749ff.png",
+  "founders": [
+    {
+      "name": "Xavier de Gracia",
+      "title": "Founder",
+      "bio": "Co-founder of Prosper, building AI agents to fix healthcare's $200B admin burden. Previously VP/GM of a $120M business unit, leading 800+ customer service agents, 300 phone sales reps, and 30+ ops staff. Advised healthcare PE and tech companies on GTM and operations at Bain & Co. MBA from Harvard, BBA from ESADE.",
+      "linkedinUrl": "https://linkedin.com/in/xavierdegracia"
+    },
+    {
+      "name": "Josep Mingot",
+      "title": "Founder",
+      "bio": "Co-founder of Prosper,  building AI agents to fix healthcare's $200B admin burden. Previously Product leader at Coverwallet (acq. by Aon), where I led the Insurance Health initiative that drove the acquisition, scaling the team from 3 PMs to 40+ and 200+ engineers. Co-founder of Arcvi, an AI consulting firm across Insurance, Health and Banking - top 2% in the Data Science Bowl for lung cancer image prediction. Former MIT Computer Vision research assistant.",
+      "linkedinUrl": "https://linkedin.com/in/mingot"
+    }
+  ]
+}

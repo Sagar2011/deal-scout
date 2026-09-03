@@ -11,7 +11,7 @@ import { scoreAnalysis } from "../analysis/scoring.js";
 import type { MemoInput } from "../reports/memo.js";
 import { collectEvidence } from "../research/evidence.js";
 import type { HttpClient } from "../sources/types.js";
-import { discoverCandidatePool, discoverCandidates } from "./discover.js";
+import { discoverCandidatePool } from "./discover.js";
 import { createDefaultDependencies } from "./defaults.js";
 import {
   createFallbackResearchBrief,
@@ -34,21 +34,27 @@ export async function runPipeline(input: {
 }): Promise<RunSummary> {
   const logger = input.logger ?? console;
   const dependencies = input.dependencies ?? createDefaultDependencies(input);
+  const isLiveDiscovery = !input.candidates;
   logger.info(`[DealScout] Starting run for "${input.topic}".`);
   const run = await dependencies.store.createRun(input.rootDir, input.topic);
   const requestedCount = input.limit ?? 11;
   const brief = await buildResearchBrief(
     input.topic,
     dependencies.researchPlanner,
-    logger
+    logger,
+    isLiveDiscovery
   );
   const thesis = createRunThesis(brief);
   await dependencies.store.writeJson(run, "research-brief.json", brief);
   await dependencies.store.writeJson(run, "thesis.json", thesis);
-  if (!input.candidates)
+  if (isLiveDiscovery)
     logger.info("[DealScout] Discovering candidates from YC and Hacker News.");
   let selection:
-    | { reasons: Array<{ sourceUrl: string; reason: string }> }
+    | {
+        mode: "llm" | "deterministic-fallback";
+        reasons: Array<{ sourceUrl: string; reason: string }>;
+        error?: string;
+      }
     | undefined;
   let candidatePool: Candidate[] | undefined;
   const candidates = input.candidates ?? (await discover(brief));
@@ -65,7 +71,7 @@ export async function runPipeline(input: {
       "candidate-pool.json",
       candidatePool
     );
-  if (!input.candidates && candidates.length < requestedCount) {
+  if (isLiveDiscovery && candidates.length < requestedCount) {
     logger.error(
       `[DealScout] Found ${candidates.length}/${requestedCount} relevant candidates after all discovery passes. Continuing with the relevant candidates found.`
     );
@@ -218,12 +224,7 @@ export async function runPipeline(input: {
 
   async function discover(researchBrief: ResearchBrief): Promise<Candidate[]> {
     if (!dependencies.candidateSelector)
-      return discoverCandidates(
-        researchBrief.queries,
-        dependencies.sources,
-        requestedCount,
-        input.topic
-      );
+      throw new Error("Live discovery requires an LLM candidate selector.");
     const pool = await discoverCandidatePool(
       researchBrief.queries,
       dependencies.sources,
@@ -240,20 +241,14 @@ export async function runPipeline(input: {
         pool,
         requestedCount
       );
-      selection = { reasons: result.reasons };
+      selection = { mode: "llm", reasons: result.reasons };
       return result.candidates;
     } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
       logger.error(
-        `[DealScout] Candidate selection failed (${
-          error instanceof Error ? error.message : String(error)
-        }). Using deterministic relevance filtering.`
+        `[DealScout] Candidate selection failed (${message}). Aborting the run.`
       );
-      return discoverCandidates(
-        researchBrief.queries,
-        dependencies.sources,
-        requestedCount,
-        input.topic
-      );
+      throw new Error(`Candidate selection failed: ${message}`);
     }
   }
 }
@@ -261,9 +256,14 @@ export async function runPipeline(input: {
 async function buildResearchBrief(
   topic: string,
   planner: PipelineDependencies["researchPlanner"],
-  logger: PipelineLogger
+  logger: PipelineLogger,
+  required: boolean
 ): Promise<ResearchBrief> {
-  if (!planner) return createFallbackResearchBrief(topic);
+  if (!planner) {
+    if (required)
+      throw new Error("Live discovery requires an LLM research planner.");
+    return createFallbackResearchBrief(topic);
+  }
   try {
     logger.info(`[DealScout] Interpreting the topic with ${planner.name}.`);
     const brief = await planner.plan(topic);
@@ -273,10 +273,10 @@ async function buildResearchBrief(
       queries: uniqueQueries([topic, ...brief.queries]),
     };
   } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    if (required) throw new Error(`Research planning failed: ${message}`);
     logger.error(
-      `[DealScout] Topic interpretation failed (${
-        error instanceof Error ? error.message : String(error)
-      }). Using the literal topic.`
+      `[DealScout] Topic interpretation failed (${message}). Using the literal topic.`
     );
     return createFallbackResearchBrief(topic);
   }

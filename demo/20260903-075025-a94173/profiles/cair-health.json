@@ -1,0 +1,20 @@
+{
+  "profileUrl": "https://www.ycombinator.com/companies/cair-health",
+  "description": "AI Agents for Healthcare RCM. Founded in 2023 by Ishan Balakrishnan and Shehbaz Virk, Cair Health has 6 employees based in San Francisco. Cair Health is hiring for 3 roles in engineering.",
+  "teamSize": 6,
+  "logoUrl": "https://bookface-images.s3.amazonaws.com/small_logos/174cf352bddd34701bef4a958ce1e21e7d49de3d.png",
+  "founders": [
+    {
+      "name": "Shehbaz Virk",
+      "title": "Founder",
+      "bio": "Co-Founder @ Cair Health, Public Health & Biochemistry @ UC Berkeley",
+      "linkedinUrl": "https://www.linkedin.com/in/shehbazvirk/"
+    },
+    {
+      "name": "Ishan Balakrishnan",
+      "title": "Founder",
+      "bio": "Co-Founder @ Cair Health, Comp Sci & Business @ UC Berkeley",
+      "linkedinUrl": "https://linkedin.com/in/ishanbalakrishnan"
+    }
+  ]
+}

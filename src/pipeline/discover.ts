@@ -2,7 +2,8 @@ import type { Candidate } from "../core/models.js";
 import type { CandidateSource } from "../sources/types.js";
 import {
   matchesAllTopicTerms,
-  matchesStrongExpandedTopic,
+  matchesPlannedTopic,
+  matchesResearchCriteria,
   topicRelevance,
 } from "../sources/topic-match.js";
 
@@ -10,10 +11,18 @@ export async function discoverCandidates(
   topics: string | string[],
   sources: CandidateSource[],
   limit = 11,
-  originalTopic = Array.isArray(topics) ? topics[0] : topics
+  originalTopic = Array.isArray(topics) ? topics[0] : topics,
+  inclusionCriteria: string[] = []
 ): Promise<Candidate[]> {
   const candidates = await fetchCandidateMatches(topics, sources, limit);
-  return uniqueAndRank(candidates, originalTopic, limit, true);
+  return uniqueAndRank(
+    candidates,
+    originalTopic,
+    limit,
+    true,
+    normalizeTopics(topics),
+    inclusionCriteria
+  );
 }
 
 export async function discoverCandidatePool(
@@ -27,7 +36,8 @@ export async function discoverCandidatePool(
     candidates,
     originalTopic,
     Math.max(limit * 8, 80),
-    false
+    false,
+    normalizeTopics(topics)
   );
 }
 
@@ -84,7 +94,9 @@ function uniqueAndRank(
   candidates: CandidateMatch[],
   originalTopic: string,
   limit: number,
-  applyDeterministicFilter: boolean
+  applyDeterministicFilter: boolean,
+  plannedTopics: string[],
+  inclusionCriteria: string[] = []
 ): Candidate[] {
   return [
     ...new Map(
@@ -97,10 +109,17 @@ function uniqueAndRank(
               `${candidate.name} ${candidate.description}`,
               originalTopic
             ) ||
-            (topic !== originalTopic &&
-              matchesStrongExpandedTopic(
+            (plannedTopics.some(
+              (plannedTopic) =>
+                plannedTopic.toLowerCase() !== originalTopic.toLowerCase() &&
+                matchesPlannedTopic(
+                  `${candidate.name} ${candidate.description}`,
+                  plannedTopic
+                )
+            ) &&
+              matchesResearchCriteria(
                 `${candidate.name} ${candidate.description}`,
-                topic
+                inclusionCriteria
               ))
         )
         .sort(
@@ -111,6 +130,10 @@ function uniqueAndRank(
         .map(({ candidate }) => [candidate.sourceUrl, candidate])
     ).values(),
   ].slice(0, limit);
+}
+
+function normalizeTopics(topics: string | string[]): string[] {
+  return Array.isArray(topics) ? topics : [topics];
 }
 
 function isCurrentCandidate({ candidate }: CandidateMatch): boolean {

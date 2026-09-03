@@ -173,9 +173,10 @@ test("excludes stale YC companies from the candidate pool", async () => {
 
   const candidates = await discoverCandidatePool("fintech", [source], 11);
 
-  assert.deepEqual(candidates.map((candidate) => candidate.name), [
-    "Current Fintech",
-  ]);
+  assert.deepEqual(
+    candidates.map((candidate) => candidate.name),
+    ["Current Fintech"]
+  );
 });
 
 test("keeps YC search hits for later topic selection", async () => {
@@ -229,6 +230,96 @@ test("matches a startup to the domain anchor of a generated query", () => {
     ),
     true
   );
+});
+
+test("uses a planned query when deterministic fallback evaluates a long topic", async () => {
+  const source: CandidateSource = {
+    async findCandidates(topic) {
+      if (topic !== "AI agents for outpatient healthcare operations") return [];
+      return [
+        {
+          name: "Dodo",
+          website: "https://dodo.example",
+          description: "AI agents that handle communications for clinics.",
+          source: "Y Combinator",
+          sourceUrl: "https://www.ycombinator.com/companies/dodo",
+          signal: "YC Summer 2024 company listing",
+        },
+      ];
+    },
+  };
+
+  const candidates = await discoverCandidates(
+    [
+      "AI agents for outpatient healthcare operations",
+      "AI agent for clinic scheduling",
+    ],
+    [source],
+    11,
+    "AI agents for outpatient healthcare operations"
+  );
+
+  assert.deepEqual(
+    candidates.map((candidate) => candidate.name),
+    ["Dodo"]
+  );
+});
+
+test("does not admit generic operations software for an agentic clinical query", async () => {
+  const source: CandidateSource = {
+    async findCandidates() {
+      return [
+        {
+          name: "Generic Operations AI",
+          website: "https://operations.example",
+          description: "The AI workforce for business operations.",
+          source: "Y Combinator",
+          sourceUrl: "https://www.ycombinator.com/companies/operations-ai",
+          signal: "YC Summer 2025 company listing",
+        },
+      ];
+    },
+  };
+
+  const candidates = await discoverCandidates(
+    ["AI agents for healthcare operations", "agentic AI clinical operations"],
+    [source],
+    11,
+    "AI agents for healthcare operations"
+  );
+
+  assert.deepEqual(candidates, []);
+});
+
+test("requires two AI-brief criteria during deterministic fallback", async () => {
+  const source: CandidateSource = {
+    async findCandidates() {
+      return [
+        {
+          name: "AI Puzzle Game",
+          website: "https://puzzles.example",
+          description: "AI credit game where players earn credits.",
+          source: "Hacker News",
+          sourceUrl: "https://news.ycombinator.com/item?id=puzzles",
+          signal: "1 HN points",
+        },
+      ];
+    },
+  };
+
+  const candidates = await discoverCandidates(
+    ["AI fintech space", "AI lending credit decisioning"],
+    [source],
+    11,
+    "AI fintech space",
+    [
+      "Product is an AI agent or AI-driven automation for financial workflows",
+      "Operates within financial services such as banking, payments, lending, investing, insurance, or accounting",
+      "Sells a software or technology product rather than acting as a financial intermediary",
+    ]
+  );
+
+  assert.deepEqual(candidates, []);
 });
 
 test("returns only candidates that satisfy every original-topic constraint", async () => {

@@ -41,7 +41,7 @@ export class OpenRouterCandidateSelector {
           {
             headers: { Authorization: `Bearer ${this.apiKey}` },
             signal,
-            timeout: 30_000,
+            timeout: 60_000,
           }
         )
       )

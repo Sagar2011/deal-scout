@@ -1,0 +1,17 @@
+{
+  "topic": "health care operation",
+  "statement": "Seed-stage startups whose software or services improve the operational efficiency, administration, or workflow of health care delivery organizations.",
+  "fitLabel": "Health Care Operation fit",
+  "fitQueries": [
+    "health care operation",
+    "healthcare operations workflow automation",
+    "clinic scheduling and patient flow software",
+    "revenue cycle management for medical practices",
+    "hospital staffing and scheduling platform",
+    "healthcare back office automation startup",
+    "healthcare compliance and credentialing software",
+    "Software or services targeting back-office, clinical operations, scheduling, billing, or supply-chain workflows within health care",
+    "Solutions addressing scheduling, staffing, revenue cycle, patient flow, or compliance for care delivery organizations",
+    "Tools that automate administrative, clinical workflow, or facility operations tasks for health care providers and payers"
+  ]
+}

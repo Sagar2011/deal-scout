@@ -1,0 +1,84 @@
+{
+  "analysis": {
+    "team": "name: Jeanot Dawson; role: Founder/CEO; background: Previously Head of US Loans at Lendable; name: Oliver Lambson; role: Founder/CTO; background: 0 lines of code to first loan in 45 days; name: Hugo Markland; role: Founder; background: Early stage employee at Lendable; led UK capital markets; raised billions of funding",
+    "product": "description: AI-native consumer lending platform offering personal loans from $500 to $5,000 with seconds-long approvals and funds delivered in hours. Fully online with no phone calls, branch visits, or extra fees.; stage: Live consumer product; company founded 2024; differentiators: AI-native architecture (per company description); Underwriting speed (seconds to approval); Fully digital onboarding; Focus on underserved US consumers",
+    "market": "segment: US consumer credit / small-dollar personal lending for underserved borrowers; geography: United States (customers); team based in Toronto, ON, Canada; sizeClaim: ; thesisRelevance: Operates within financial services (lending) and applies AI/ML to a financial process — directly aligned with the AI fintech thesis",
+    "traction": "ycBatch: Y Combinator Winter 2025; headcount: 3 employees; loanProductLive: true; loanRange: $500–$5,000; fundingRaised: ; revenue: ; userCount: ; loanVolume: ; notes: Product is live and accepting applications; no public metrics captured.",
+    "risks": [
+      "Regulatory risk: small-dollar consumer lending to underserved US borrowers is heavily regulated at federal and state levels (e.g., state usury caps, CFPB oversight); cross-border team (Canada) adds compliance complexity.",
+      "Credit risk: serving underserved borrowers implies elevated default rates; underwriting model performance is unverified in public evidence.",
+      "Capital risk: lending requires balance-sheet funding; no evidence of warehouse facility, bank partnership, or securitization capacity.",
+      "Concentration risk: founding team of three with limited prior US consumer-lending operating experience at scale.",
+      "Competition risk: incumbent fintech lenders (e.g., OppFi, Possible Finance, LendUp successors) and bank-affiliated digital lenders.",
+      "Execution risk: very early stage (3 employees, founded 2024) — no evidence of unit economics, default rates, or customer cohorts.",
+      "Geographic/structural risk: Canadian-incorporated entity lending to US borrowers raises licensing and enforceability questions."
+    ],
+    "openQuestions": [
+      "What AI/ML techniques does the underwriting model use, and how is it validated or audited?",
+      "How many loans have been originated to date, and what are observed default/charge-off rates?",
+      "What is the average APR and total cost of credit to borrowers?",
+      "What funding facility supports loan originations (warehouse line, securitization, bank partnership)?",
+      "What US state lending licenses or regulatory registrations does Karoo hold?",
+      "What legal entity lends to US borrowers, and how is consumer lending compliance handled across states?",
+      "What is the size of the round being raised, and what is the post-money valuation?",
+      "What is the current customer acquisition cost and customer lifetime value?",
+      "How does the AI-native stack materially differ from rule-based or ML-assisted decisioning used by existing lenders?",
+      "What is the cap table, and how much founder dilution has occurred to date?",
+      "Are there any signed bank partnerships, payout providers, or bureau integrations publicly disclosed?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.75,
+      "topicFit": 1,
+      "technicalDepth": 0.5,
+      "signalStrength": 0.5,
+      "whyNow": 0.75
+    }
+  },
+  "score": {
+    "total": 17,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "AI Fintech Space fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 0,
+        "maximum": 25
+      },
+      {
+        "label": "AI Fintech Space fit",
+        "score": 7,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 0,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 10,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 0,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Pass",
+    "rationale": "Karoo has a defined workflow (AI native consumer lending platform for underserved Americans) and public founder evidence for 3 founders. The current record does not establish customer adoption, retention, or market-timing evidence.",
+    "mindChanges": [
+      "Confirm Karoo's paid customer adoption and retention.",
+      "Validate measurable ROI for ai native consumer lending platform for underserved americans.",
+      "Validate the founding team's direct experience in this workflow."
+    ]
+  }
+}

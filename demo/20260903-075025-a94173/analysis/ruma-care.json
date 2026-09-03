@@ -1,0 +1,75 @@
+{
+  "analysis": {
+    "team": "Founder Meng Fei Shen (CEO). Previously led Uber One global to 13M+ members and AI integrations for 100K+ suppliers at Walmart Data Ventures; runs a 120+ person music collective in SF. The company has 5 employees and is hiring for 2 roles in engineering and sales. No other team members disclosed.",
+    "product": "Operations stack for biologic infusion clinics, providing AI‑driven prior authorizations for buy‑and‑bill and infusions to help clinics get patients on biologics faster.",
+    "market": "Target market is biologic infusion clinics—a niche segment of health‑care delivery organizations. No explicit market size, growth rate, or competitive landscape data provided.",
+    "traction": "No disclosed customers, revenue, pilots, or usage metrics. Evidence limited to YC Winter 2026 listing and company website.",
+    "risks": [
+      "Early‑stage with a small team (5 employees); limited traction; niche market may constrain scale; regulatory and compliance requirements for health‑care software; potential competition from existing prior‑authorization and practice‑management vendors; product‑market fit unproven."
+    ],
+    "openQuestions": [
+      "What is the total addressable market for biologic infusion clinic operations software?",
+      "Which clinics or health systems are currently using the product?",
+      "What are the revenue, customer acquisition, and retention metrics?",
+      "How does the AI prior‑authorization engine work, and what is its accuracy or turnaround time?",
+      "What is the go‑to‑market strategy and sales cycle?",
+      "What are the key regulatory hurdles (e.g., HIPAA, FDA) and how are they addressed?",
+      "Who are the main competitors, and what is the differentiation?",
+      "What is the funding status and runway?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.5,
+      "topicFit": 0.75,
+      "technicalDepth": 0.5,
+      "signalStrength": 0.5,
+      "whyNow": 0.5
+    }
+  },
+  "score": {
+    "total": 31,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "Health Care Operation fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 6,
+        "maximum": 25
+      },
+      {
+        "label": "Health Care Operation fit",
+        "score": 13,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 0,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 12,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 0,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Pass",
+    "rationale": "Ruma Care has a defined workflow (The operations stack for biologic infusion clinics) and public founder evidence for 1 founder. The current record does not establish customer adoption, retention, or market-timing evidence.",
+    "mindChanges": [
+      "Confirm Ruma Care's paid customer adoption and retention.",
+      "Validate measurable ROI for the operations stack for biologic infusion clinics.",
+      "Validate the founding team's direct experience in this workflow."
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "mode": "llm",
+  "reasons": [
+    {
+      "sourceUrl": "https://www.ycombinator.com/companies/accend",
+      "reason": "AI agents for commercial underwriting directly serve banks and fintechs with AI-driven credit processes."
+    },
+    {
+      "sourceUrl": "https://www.ycombinator.com/companies/kelai",
+      "reason": "Autonomous AI quant engine for funds and traders applies AI to investment/trading workflows in financial services."
+    },
+    {
+      "sourceUrl": "https://www.ycombinator.com/companies/fenrock-ai",
+      "reason": "AI agents purpose-built for banks target AI-enhanced financial services processes."
+    },
+    {
+      "sourceUrl": "https://www.ycombinator.com/companies/selfin",
+      "reason": "Building an AI-native bank is a direct play applying AI across core financial services."
+    },
+    {
+      "sourceUrl": "https://www.ycombinator.com/companies/avallon-ai",
+      "reason": "AI agents for insurance claims operations apply ML to a core insurance process."
+    },
+    {
+      "sourceUrl": "https://www.ycombinator.com/companies/karoo",
+      "reason": "AI-native consumer lending platform applies AI to lending for underserved borrowers."
+    },
+    {
+      "sourceUrl": "https://www.ycombinator.com/companies/riskcube",
+      "reason": "AI insurance company applies AI across insurance operations end-to-end."
+    },
+    {
+      "sourceUrl": "https://www.ycombinator.com/companies/truewind",
+      "reason": "AI-powered accounting delivers a data-driven, AI-enhanced financial process solution."
+    },
+    {
+      "sourceUrl": "https://www.ycombinator.com/companies/corgi-labs",
+      "reason": "AI to increase payment acceptance and reduce fraud is AI-driven payment optimization for businesses."
+    },
+    {
+      "sourceUrl": "https://www.ycombinator.com/companies/rally-tax",
+      "reason": "AI-native tax platform applies AI to a financial process (tax preparation/savings)."
+    },
+    {
+      "sourceUrl": "https://www.ycombinator.com/companies/kita",
+      "reason": "Automates credit assessment for lenders, applying AI to lending workflows."
+    }
+  ]
+}

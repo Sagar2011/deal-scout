@@ -1,0 +1,75 @@
+{
+  "analysis": {
+    "team": "Three co-founders: Pranjal Daga (previously Product for AI initiatives in Risk at Brex; dropped out of AI/ML PhD at Purdue; scaled Cisco Innovation Labs team from 1 to 35 in 4 years); Yutong Pei (previously Engineering Manager on Fraud Risk team at Brex; prior Fraud Engineering and Security roles at IoTeX, Uber, and Amazon); Joseph Zhou (previously CFO of a mobile gaming startup with 50M ARR; scaled team from 0 to 80 in Europe). 18 employees; hiring for 2 roles in engineering and sales. Founded 2023.",
+    "product": "AI agents for commercial underwriting at banks and fintechs.",
+    "market": "Commercial underwriting workflows within banks and fintech lending. Specific market sizing, customer count, or verticals served are not stated in the evidence.",
+    "traction": "Backed by Y Combinator (Summer 2023 batch). 18 employees. Hiring in engineering and sales. No disclosed revenue, customers, pilots, funding amount, or logos in supplied evidence.",
+    "risks": [
+      "No disclosed customers, revenue, or pilot results; commercial underwriting is a regulated, high-trust workflow where switching costs favor incumbents; AI-agent reliability and explainability are critical in credit decisions; concentration of domain experience among founders (Brex) may limit breadth of bank relationships; competitive landscape (other AI underwriting vendors) not characterized in evidence."
+    ],
+    "openQuestions": [
+      "Who are the named customers or design partners, and are any banks vs. fintechs in production?",
+      "What is the funding raised to date (amount, lead investors, post-money)?",
+      "What are the key metrics (ARR, pilots, processing volume, accuracy vs. human underwriters)?",
+      "What is the product's technical differentiation (e.g., proprietary models, data sources, integration layer, explainability)?",
+      "What is the regulatory and compliance posture for use in bank credit decisions (model governance, audits, FCRA/ECOA/OCC alignment)?",
+      "What is the pricing model and sales cycle length for bank vs. fintech customers?",
+      "What is the competitive landscape and what is the moat?",
+      "Has the company expanded beyond commercial underwriting (roadmap)?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.75,
+      "topicFit": 1,
+      "technicalDepth": 0.5,
+      "signalStrength": 0.5,
+      "whyNow": 0.5
+    }
+  },
+  "score": {
+    "total": 37,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "AI Fintech Space fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 13,
+        "maximum": 25
+      },
+      {
+        "label": "AI Fintech Space fit",
+        "score": 10,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 6,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 8,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 0,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Pass",
+    "rationale": "Accend has a defined workflow (AI agents for commercial underwriting at banks and fintechs) and public founder evidence for 3 founders. The current record does not establish customer adoption, retention, or market-timing evidence.",
+    "mindChanges": [
+      "Confirm Accend's paid customer adoption and retention.",
+      "Validate measurable ROI for ai agents for commercial underwriting at banks and fintechs.",
+      "Validate the founding team's direct experience in this workflow."
+    ]
+  }
+}

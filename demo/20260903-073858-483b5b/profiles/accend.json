@@ -1,0 +1,25 @@
+{
+  "profileUrl": "https://www.ycombinator.com/companies/accend",
+  "description": "AI agents for commercial underwriting at banks and fintechs. Founded in 2023 by Pranjal Daga, Yutong Pei, and Joseph Zhou, Accend has 18 employees based in . Accend is hiring for 2 roles in engineering and sales.",
+  "teamSize": 18,
+  "logoUrl": "https://bookface-images.s3.amazonaws.com/small_logos/31a4d8ba6cbc31b7799b329fce2d820cfe3ca234.png",
+  "founders": [
+    {
+      "name": "Pranjal Daga",
+      "title": "Founder",
+      "bio": "Currently, Cofounder of Accend. Previously, I led Product for AI initiatives, particularly in Risk at Brex. Before that, I dropped out of my PhD in AI/ML at Purdue University to help set up Cisco Innovation Labs where I grew the team from 1 to 35 in 4 years.",
+      "linkedinUrl": "https://linkedin.com/in/pranjaldaga"
+    },
+    {
+      "name": "Yutong Pei",
+      "title": "Founder",
+      "bio": "Yutong Pei was most recently the Engineering Manager on the Fraud Risk team at Brex where he built the Disputes service, worked on fraud controls by managing engineers and data scientists. Previously, he has led Fraud Engineering and Security for IoTeX, Uber and Amazon.",
+      "linkedinUrl": "https://linkedin.com/in/yutong-pei-81006842"
+    },
+    {
+      "name": "Joseph Zhou",
+      "title": "Founder",
+      "bio": "I'm one of the Co-Founders of Accend. Previously, I served as the CFO of a mobile gaming startup with a 50M ARR. I established the company’s operation in Europe and scaled the team from 0 to 80 members."
+    }
+  ]
+}

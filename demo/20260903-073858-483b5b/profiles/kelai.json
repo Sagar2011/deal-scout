@@ -1,0 +1,14 @@
+{
+  "profileUrl": "https://www.ycombinator.com/companies/kelai",
+  "description": "The AI Quant: Autonomous Alpha Engine for Funds and Traders. Founded in 2025 by Jeremie Cohen, KelAI has 3 employees based in New York City. KelAI is hiring for 3 roles in engineering.",
+  "teamSize": 3,
+  "logoUrl": "https://bookface-images.s3.amazonaws.com/small_logos/173bcf6c0b9d00045db94da34f174baaafeb2255.png",
+  "founders": [
+    {
+      "name": "Jeremie Cohen",
+      "title": "Founder/CEO",
+      "bio": "Founder and CEO of KelAI. Managed a large global systematic equity book at WorldQuant and lead an ML team at Millennium Management. Nuclear engineer by training.",
+      "linkedinUrl": "https://www.linkedin.com/in/jeremcoh/"
+    }
+  ]
+}
