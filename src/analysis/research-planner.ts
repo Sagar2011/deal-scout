@@ -3,6 +3,7 @@ import type { ResearchBrief } from "../core/models.js";
 import { buildResearchBriefPrompt } from "../prompts/research-brief.js";
 import type { HttpClient } from "../sources/types.js";
 import { retryOpenRouter } from "./openrouter-retry.js";
+import { withOpenRouterTimeout } from "./openrouter-timeout.js";
 
 const ECOSYSTEM_QUERY_PATTERN =
   /\b(?:venture capital|vc|investors?|fund(?:ing|s)?|angels?|accelerators?|incubators?|networks?|opportunit(?:y|ies)|firms?|events?|jobs?)\b/i;
@@ -18,19 +19,22 @@ export class OpenRouterResearchPlanner {
 
   async plan(topic: string): Promise<ResearchBrief> {
     const response = await retryOpenRouter(() =>
-      this.http.post<{ choices: Array<{ message: { content: string } }> }>(
-        "https://openrouter.ai/api/v1/chat/completions",
-        {
-          model: this.model,
-          temperature: 0,
-          messages: [
-            { role: "user", content: buildResearchBriefPrompt(topic) },
-          ],
-        },
-        {
-          headers: { Authorization: `Bearer ${this.apiKey}` },
-          timeout: 30_000,
-        }
+      withOpenRouterTimeout((signal) =>
+        this.http.post<{ choices: Array<{ message: { content: string } }> }>(
+          "https://openrouter.ai/api/v1/chat/completions",
+          {
+            model: this.model,
+            temperature: 0,
+            messages: [
+              { role: "user", content: buildResearchBriefPrompt(topic) },
+            ],
+          },
+          {
+            headers: { Authorization: `Bearer ${this.apiKey}` },
+            signal,
+            timeout: 30_000,
+          }
+        )
       )
     );
     const content = (

@@ -1,6 +1,5 @@
 import type { Candidate } from "../core/models.js";
 import type { CandidateSource, HttpClient } from "./types.js";
-import { matchesStrongExpandedTopic } from "./topic-match.js";
 
 const SOURCE_TIMEOUT_MS = 15_000;
 
@@ -20,9 +19,9 @@ type YcCredentials = {
 export class YcSource implements CandidateSource {
   constructor(private readonly http: HttpClient) {}
 
-  async findCandidates(topic: string, limit: number): Promise<Candidate[]> {
+  async findCandidates(query: string, limit: number): Promise<Candidate[]> {
     const directoryUrl = `https://www.ycombinator.com/companies?query=${encodeURIComponent(
-      topic
+      query
     )}`;
     const directory = await this.http.get<string>(directoryUrl, {
       timeout: SOURCE_TIMEOUT_MS,
@@ -30,7 +29,7 @@ export class YcSource implements CandidateSource {
     const credentials = this.extractCredentials(directory.data);
     const response = await this.http.post<{ hits: YcCompany[] }>(
       `https://${credentials.app.toLowerCase()}-dsn.algolia.net/1/indexes/YCCompany_production/query`,
-      { query: topic, hitsPerPage: limit, tagFilters: ["ycdc_public"] },
+      { query, hitsPerPage: limit, tagFilters: ["ycdc_public"] },
       {
         headers: {
           "Content-Type": "application/json",
@@ -42,15 +41,9 @@ export class YcSource implements CandidateSource {
     );
     const { hits } = response.data;
     return hits
-      .filter(
-        (company) =>
-          company.website &&
-          company.one_liner &&
-          matchesStrongExpandedTopic(
-            `${company.name} ${company.one_liner}`,
-            topic
-          )
-      )
+      // Algolia has already matched the query. Keep recall high here; the
+      // selector (or deterministic fallback) applies the topic boundary later.
+      .filter((company) => company.website && company.one_liner)
       .slice(0, limit)
       .map((company) => ({
         name: company.name,

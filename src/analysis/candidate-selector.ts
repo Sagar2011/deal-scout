@@ -7,6 +7,7 @@ import type {
 import { buildCandidateSelectionPrompt } from "../prompts/candidate-selection.js";
 import type { HttpClient } from "../sources/types.js";
 import { retryOpenRouter } from "./openrouter-retry.js";
+import { withOpenRouterTimeout } from "./openrouter-timeout.js";
 
 export class OpenRouterCandidateSelector {
   readonly name = "OpenRouter candidate selector";
@@ -24,22 +25,25 @@ export class OpenRouterCandidateSelector {
   ): Promise<CandidateSelection> {
     const pool = candidates.slice(0, 80);
     const response = await retryOpenRouter(() =>
-      this.http.post<{ choices: Array<{ message: { content: string } }> }>(
-        "https://openrouter.ai/api/v1/chat/completions",
-        {
-          model: this.model,
-          temperature: 0,
-          messages: [
-            {
-              role: "user",
-              content: buildCandidateSelectionPrompt(brief, pool, limit),
-            },
-          ],
-        },
-        {
-          headers: { Authorization: `Bearer ${this.apiKey}` },
-          timeout: 30_000,
-        }
+      withOpenRouterTimeout((signal) =>
+        this.http.post<{ choices: Array<{ message: { content: string } }> }>(
+          "https://openrouter.ai/api/v1/chat/completions",
+          {
+            model: this.model,
+            temperature: 0,
+            messages: [
+              {
+                role: "user",
+                content: buildCandidateSelectionPrompt(brief, pool, limit),
+              },
+            ],
+          },
+          {
+            headers: { Authorization: `Bearer ${this.apiKey}` },
+            signal,
+            timeout: 30_000,
+          }
+        )
       )
     );
     return normalizeSelection(

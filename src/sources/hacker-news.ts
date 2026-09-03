@@ -1,6 +1,5 @@
 import type { Candidate } from "../core/models.js";
 import type { CandidateSource, HttpClient } from "./types.js";
-import { matchesStrongExpandedTopic } from "./topic-match.js";
 
 const SOURCE_TIMEOUT_MS = 15_000;
 
@@ -15,9 +14,9 @@ type HnStory = {
 export class HackerNewsSource implements CandidateSource {
   constructor(private readonly http: HttpClient) {}
 
-  async findCandidates(topic: string, limit: number): Promise<Candidate[]> {
+  async findCandidates(query: string, limit: number): Promise<Candidate[]> {
     const params = new URLSearchParams({
-      query: topic,
+      query,
       tags: "story",
       hitsPerPage: String(limit),
     });
@@ -35,8 +34,7 @@ export class HackerNewsSource implements CandidateSource {
           story.url &&
           story.created_at_i &&
           story.created_at_i >= newestAllowedAge &&
-          /^show hn:/i.test(title) &&
-          matchesStrongExpandedTopic(title, topic)
+          /^show hn:/i.test(title)
         );
       })
       .map((story) => ({

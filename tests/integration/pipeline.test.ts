@@ -68,8 +68,9 @@ test("scores and recommends a sufficiently evidenced thesis match", () => {
     score: 23,
     maximum: 25,
   });
-  assert.equal(
-    recommend(score, [
+  const recommendation = recommend(
+    score,
+    [
       {
         claim: "YC listing",
         url: candidate.sourceUrl,
@@ -94,9 +95,31 @@ test("scores and recommends a sufficiently evidenced thesis match", () => {
         source: "Company website",
         capturedAt: "2026-09-02T00:00:00.000Z",
       },
-    ]).decision,
-    "Watch"
+    ],
+    createRunThesis("AI agents for SMBs"),
+    { candidate, profile }
   );
+  assert.equal(recommendation.decision, "Watch");
+  assert.match(recommendation.rationale, /Acme Agent/);
+  assert.match(recommendation.rationale, /workflow/i);
+  assert.match(recommendation.mindChanges[0] ?? "", /Acme Agent/);
+});
+
+test("does not upgrade a recommendation from duplicate evidence records", () => {
+  const score = scoreAnalysis(analysis);
+  const recommendation = recommend(
+    score,
+    Array.from({ length: 4 }, () => ({
+      claim: "Repeated YC profile claim",
+      url: candidate.sourceUrl,
+      source: "YC company profile",
+      capturedAt: "2026-09-03T00:00:00.000Z",
+    })),
+    createRunThesis("AI agents for SMBs"),
+    { candidate, profile }
+  );
+
+  assert.equal(recommendation.decision, "Pass");
 });
 
 test("calibrates materially different LLM criteria to the same evidence-backed score", () => {

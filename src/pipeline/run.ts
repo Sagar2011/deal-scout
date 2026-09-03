@@ -143,7 +143,10 @@ export async function runPipeline(input: {
           profile,
           thesis,
         });
-        const recommendation = recommend(score, evidence, thesis);
+        const recommendation = recommend(score, evidence, thesis, {
+          candidate,
+          profile,
+        });
         logger.info(
           `${progress}: scored ${score.total}/100, ${recommendation.decision}.`
         );

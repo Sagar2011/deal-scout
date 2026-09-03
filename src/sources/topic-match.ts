@@ -17,6 +17,17 @@ const GENERIC_EXPANSION_TERMS = new Set([
   "ai",
   "automation",
   "automated",
+  "application",
+  "demand",
+  "digital",
+  "infrastructure",
+  "modern",
+  "on",
+  "platform",
+  "processing",
+  "service",
+  "services",
+  "solution",
   "software",
   "tool",
   "tools",
@@ -43,11 +54,11 @@ export function matchesStrongExpandedTopic(
   const contextTerms = terms.filter(
     (term) => !GENERIC_EXPANSION_TERMS.has(term)
   );
-  return (
-    matchedTerms.length >= Math.min(2, terms.length) &&
-    (!contextTerms.length ||
-      contextTerms.every((term) => termPattern(term).test(normalizedText)))
-  );
+  // Generated queries include descriptive modifiers. Require all domain anchors,
+  // while allowing those modifiers to differ from a company's wording.
+  return contextTerms.length > 0
+    ? contextTerms.every((term) => termPattern(term).test(normalizedText))
+    : matchedTerms.length >= Math.min(2, terms.length);
 }
 
 export function topicRelevance(text: string, topic: string): number {

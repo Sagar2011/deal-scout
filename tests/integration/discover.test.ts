@@ -6,6 +6,7 @@ import {
   discoverCandidates,
 } from "../../src/pipeline/discover.js";
 import { HackerNewsSource } from "../../src/sources/hacker-news.js";
+import { matchesStrongExpandedTopic } from "../../src/sources/topic-match.js";
 import type { CandidateSource } from "../../src/sources/types.js";
 import { YcSource } from "../../src/sources/yc.js";
 
@@ -177,7 +178,7 @@ test("excludes stale YC companies from the candidate pool", async () => {
   ]);
 });
 
-test("filters loose YC matches using meaningful topic terms", async () => {
+test("keeps YC search hits for later topic selection", async () => {
   const source = new YcSource({
     async get() {
       return {
@@ -216,7 +217,17 @@ test("filters loose YC matches using meaningful topic terms", async () => {
 
   assert.deepEqual(
     candidates.map((candidate) => candidate.name),
-    ["Nitrode", "Fello"]
+    ["GiveAway", "Nitrode"]
+  );
+});
+
+test("matches a startup to the domain anchor of a generated query", () => {
+  assert.equal(
+    matchesStrongExpandedTopic(
+      "Stablecoin API for global payments",
+      "automated digital payment processing platform"
+    ),
+    true
   );
 });
 
@@ -385,7 +396,7 @@ test("requires the complete thesis match instead of a generic AI-agent term", as
   );
 });
 
-test("keeps only Show HN product launches", async () => {
+test("keeps recent Show HN product launches for later topic selection", async () => {
   const source = new HackerNewsSource({
     async get() {
       return {
@@ -425,6 +436,6 @@ test("keeps only Show HN product launches", async () => {
     (await source.findCandidates("AI agents for small businesses", 5)).map(
       (candidate) => candidate.name
     ),
-    ["AI agents for small businesses"]
+    ["AI agents for small businesses", "AI image generator"]
   );
 });

@@ -43,6 +43,9 @@ export function createRunThesis(topic: string | ResearchBrief): RunThesis {
 
 export function createFallbackResearchBrief(topic: string): ResearchBrief {
   const focus = topic.trim();
+  const subject =
+    focus.replace(/\bstartups?\b/gi, "").replace(/\s+/g, " ").trim() ||
+    focus;
   const narrowedQuery = focus
     .split(/[^a-z0-9]+/i)
     .filter(
@@ -51,7 +54,7 @@ export function createFallbackResearchBrief(topic: string): ResearchBrief {
     .join(" ");
   return {
     topic: focus,
-    thesis: `Seed-stage startups addressing ${focus}, prioritizing a clearly evidenced workflow, direct topic fit, technical execution, credible public signals, and traceable market timing.`,
+    thesis: `This run evaluates seed-stage companies in ${subject}, prioritizing a clearly evidenced workflow, direct topic fit, technical execution, credible public signals, and traceable market timing.`,
     targetCustomer: "Not inferred without an LLM research planner.",
     inclusionCriteria: ["Directly addresses the supplied topic."],
     exclusions: ["Investor, funding, accelerator, and event content."],

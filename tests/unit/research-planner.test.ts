@@ -113,6 +113,17 @@ test("derives a generic fallback query when LLM planning is unavailable", () => 
   ]);
 });
 
+test("writes a readable fallback thesis for a broad startup topic", () => {
+  assert.match(
+    createFallbackResearchBrief("healthcare startups").thesis,
+    /seed-stage companies in healthcare/i
+  );
+  assert.doesNotMatch(
+    createFallbackResearchBrief("healthcare startups").thesis,
+    /addressing healthcare startups/i
+  );
+});
+
 test("reports a malformed OpenRouter response without a TypeError", async () => {
   const planner = new OpenRouterResearchPlanner("test-key", "openrouter/free", {
     async get() {

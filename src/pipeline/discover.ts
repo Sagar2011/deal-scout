@@ -97,10 +97,11 @@ function uniqueAndRank(
               `${candidate.name} ${candidate.description}`,
               originalTopic
             ) ||
-            matchesStrongExpandedTopic(
-              `${candidate.name} ${candidate.description}`,
-              topic
-            )
+            (topic !== originalTopic &&
+              matchesStrongExpandedTopic(
+                `${candidate.name} ${candidate.description}`,
+                topic
+              ))
         )
         .sort(
           (left, right) =>

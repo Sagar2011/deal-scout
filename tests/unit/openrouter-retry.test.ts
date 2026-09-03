@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { retryOpenRouter } from "../../src/analysis/openrouter-retry.js";
+import { withOpenRouterTimeout } from "../../src/analysis/openrouter-timeout.js";
 
 test("retries a rate-limited OpenRouter request", async () => {
   let attempts = 0;
@@ -37,4 +38,18 @@ test("does not retry a non-rate-limit failure", async () => {
   );
 
   assert.equal(attempts, 1);
+});
+
+test("aborts a request that exceeds the OpenRouter timeout", async () => {
+  await assert.rejects(
+    () =>
+      withOpenRouterTimeout(
+        (signal) =>
+          new Promise((_, reject) => {
+            signal.addEventListener("abort", () => reject(new Error("aborted")));
+          }),
+        1
+      ),
+    /aborted/
+  );
 });

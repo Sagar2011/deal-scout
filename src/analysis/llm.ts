@@ -3,6 +3,7 @@ import type { Candidate, Evidence, StartupAnalysis } from "../core/models.js";
 import { buildAnalysisPrompt } from "../prompts/investment-analysis.js";
 import type { HttpClient } from "../sources/types.js";
 import { retryOpenRouter } from "./openrouter-retry.js";
+import { withOpenRouterTimeout } from "./openrouter-timeout.js";
 import type { RunThesis } from "../core/thesis.js";
 
 export class OpenRouterAnalyzer {
@@ -20,19 +21,22 @@ export class OpenRouterAnalyzer {
   ): Promise<StartupAnalysis> {
     const prompt = buildAnalysisPrompt(candidate, evidence, thesis);
     const response = await retryOpenRouter(() =>
-      this.http.post<{
+      withOpenRouterTimeout((signal) =>
+        this.http.post<{
         choices: Array<{ message: { content: string } }>;
-      }>(
-        "https://openrouter.ai/api/v1/chat/completions",
-        {
-          model: this.model,
-          temperature: 0,
-          messages: [{ role: "user", content: prompt }],
-        },
-        {
-          headers: { Authorization: `Bearer ${this.apiKey}` },
-          timeout: 30_000,
-        }
+        }>(
+          "https://openrouter.ai/api/v1/chat/completions",
+          {
+            model: this.model,
+            temperature: 0,
+            messages: [{ role: "user", content: prompt }],
+          },
+          {
+            headers: { Authorization: `Bearer ${this.apiKey}` },
+            signal,
+            timeout: 30_000,
+          }
+        )
       )
     );
     const result = normalizeAnalysis(
