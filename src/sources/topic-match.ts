@@ -31,7 +31,10 @@ export function matchesAllTopicTerms(text: string, topic: string): boolean {
   return terms.length > 0 && topicRelevance(text, topic) === terms.length;
 }
 
-export function matchesStrongExpandedTopic(text: string, topic: string): boolean {
+export function matchesStrongExpandedTopic(
+  text: string,
+  topic: string
+): boolean {
   const terms = topicTerms(topic);
   const normalizedText = text.toLowerCase();
   const matchedTerms = terms.filter((term) =>

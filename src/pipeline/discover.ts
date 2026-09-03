@@ -12,30 +12,95 @@ export async function discoverCandidates(
   limit = 11,
   originalTopic = Array.isArray(topics) ? topics[0] : topics
 ): Promise<Candidate[]> {
+  const candidates = await fetchCandidateMatches(topics, sources, limit);
+  return uniqueAndRank(candidates, originalTopic, limit, true);
+}
+
+export async function discoverCandidatePool(
+  topics: string | string[],
+  sources: CandidateSource[],
+  limit = 11,
+  originalTopic = Array.isArray(topics) ? topics[0] : topics
+): Promise<Candidate[]> {
+  const candidates = await fetchCandidateMatches(topics, sources, limit);
+  return uniqueAndRank(
+    candidates,
+    originalTopic,
+    Math.max(limit * 8, 80),
+    false
+  );
+}
+
+type CandidateMatch = { candidate: Candidate; topic: string };
+type DiscoveryJob = { topic: string; source: CandidateSource };
+
+const SOURCE_CONCURRENCY = 2;
+
+async function fetchCandidateMatches(
+  topics: string | string[],
+  sources: CandidateSource[],
+  limit: number
+): Promise<CandidateMatch[]> {
   const fetchLimit = Math.max(limit * 5, 50);
   const queries = Array.isArray(topics) ? topics : [topics];
-  const candidates = (
-    await Promise.all(
-      queries.flatMap((topic) =>
-        sources.map(async (source) => ({
-          topic,
-          candidates: await source.findCandidates(topic, fetchLimit),
-        }))
-      )
+  const jobs: DiscoveryJob[] = queries.flatMap((topic) =>
+    sources.map((source) => ({ topic, source }))
+  );
+  return (
+    await mapWithConcurrency(
+      jobs,
+      SOURCE_CONCURRENCY,
+      async ({ topic, source }) => ({
+        topic,
+        candidates: await source.findCandidates(topic, fetchLimit),
+      })
     )
   ).flatMap(({ topic, candidates }) =>
     candidates.map((candidate) => ({ candidate, topic }))
   );
+}
+
+async function mapWithConcurrency<T, R>(
+  values: T[],
+  concurrency: number,
+  worker: (value: T) => Promise<R>
+): Promise<R[]> {
+  const results = new Array<R>(values.length);
+  let nextIndex = 0;
+  const runWorker = async () => {
+    while (nextIndex < values.length) {
+      const index = nextIndex;
+      nextIndex += 1;
+      results[index] = await worker(values[index]);
+    }
+  };
+  await Promise.all(
+    Array.from({ length: Math.min(concurrency, values.length) }, runWorker)
+  );
+  return results;
+}
+
+function uniqueAndRank(
+  candidates: CandidateMatch[],
+  originalTopic: string,
+  limit: number,
+  applyDeterministicFilter: boolean
+): Candidate[] {
   return [
     ...new Map(
       candidates
-        .filter(({ candidate, topic }) => {
-          const text = `${candidate.name} ${candidate.description}`;
-          return (
-            matchesAllTopicTerms(text, originalTopic) ||
-            matchesStrongExpandedTopic(text, topic)
-          );
-        })
+        .filter(
+          ({ candidate, topic }) =>
+            !applyDeterministicFilter ||
+            matchesAllTopicTerms(
+              `${candidate.name} ${candidate.description}`,
+              originalTopic
+            ) ||
+            matchesStrongExpandedTopic(
+              `${candidate.name} ${candidate.description}`,
+              topic
+            )
+        )
         .sort(
           (left, right) =>
             rank(right.candidate, originalTopic) -

@@ -8,6 +8,20 @@ export type Candidate = {
   publishedAt?: string;
 };
 
+export type CandidateSelection = {
+  candidates: Candidate[];
+  reasons: Array<{ sourceUrl: string; reason: string }>;
+};
+
+export type ResearchBrief = {
+  topic: string;
+  thesis: string;
+  targetCustomer: string;
+  inclusionCriteria: string[];
+  exclusions: string[];
+  queries: string[];
+};
+
 export type Evidence = {
   claim: string;
   url: string;

@@ -14,7 +14,9 @@ export async function retryOpenRouter<T>(
 
       const delay = retryDelay(error, attempt);
       console.info(
-        `[DealScout] OpenRouter rate-limited; retrying in ${delay}ms (attempt ${attempt + 1}/${MAX_ATTEMPTS}).`
+        `[DealScout] OpenRouter rate-limited; retrying in ${delay}ms (attempt ${
+          attempt + 1
+        }/${MAX_ATTEMPTS}).`
       );
       await sleep(delay);
     }

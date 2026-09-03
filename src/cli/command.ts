@@ -1,6 +1,5 @@
 export type RunCommand = {
   topic: string;
-  limit?: number;
 };
 
 export function parseCommand(argv: string[]): RunCommand {
@@ -15,12 +14,5 @@ export function parseCommand(argv: string[]): RunCommand {
     throw new Error("--topic is required");
   }
 
-  const limitIndex = argv.indexOf("--limit");
-  const limitValue = limitIndex === -1 ? undefined : argv[limitIndex + 1];
-  const limit = limitValue === undefined ? undefined : Number(limitValue);
-  if (limit !== undefined && (!Number.isInteger(limit) || limit < 1)) {
-    throw new Error("--limit must be a positive integer");
-  }
-
-  return limit === undefined ? { topic } : { topic, limit };
+  return { topic };
 }

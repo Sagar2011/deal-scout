@@ -2,7 +2,8 @@ import axios from "axios";
 import type { PipelineDependencies } from "../core/contracts.js";
 import { fileRunStore } from "../core/storage.js";
 import { OpenRouterAnalyzer } from "../analysis/llm.js";
-import { OpenRouterQueryExpander } from "../analysis/query-expander.js";
+import { OpenRouterCandidateSelector } from "../analysis/candidate-selector.js";
+import { OpenRouterResearchPlanner } from "../analysis/research-planner.js";
 import { renderMemo, renderRunReport } from "../reports/memo.js";
 import { enrichYcProfile } from "../research/yc-profile.js";
 import { collectCompanyWebsiteEvidence } from "../research/company-website.js";
@@ -31,8 +32,14 @@ export function createDefaultDependencies(input: {
         collect: (candidate) => collectCompanyWebsiteEvidence(candidate, http),
       },
     ],
-    queryExpander: input.llmApiKey
-      ? new OpenRouterQueryExpander(
+    researchPlanner: input.llmApiKey
+      ? new OpenRouterResearchPlanner(
+          input.llmApiKey,
+          input.llmModel ?? "openrouter/free"
+        )
+      : undefined,
+    candidateSelector: input.llmApiKey
+      ? new OpenRouterCandidateSelector(
           input.llmApiKey,
           input.llmModel ?? "openrouter/free"
         )

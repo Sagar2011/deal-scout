@@ -8,7 +8,6 @@ import { renderMemo, renderRunReport } from "../../src/reports/memo.js";
 import { runPipeline } from "../../src/pipeline/run.js";
 import { analyseCandidate } from "../../src/analysis/analysis.js";
 import { OpenRouterAnalyzer } from "../../src/analysis/llm.js";
-import { OpenRouterQueryExpander } from "../../src/analysis/query-expander.js";
 import { recommend } from "../../src/analysis/recommendation.js";
 import { scoreAnalysis } from "../../src/analysis/scoring.js";
 import { collectCompanyWebsiteEvidence } from "../../src/research/company-website.js";
@@ -181,7 +180,10 @@ test("does not score why-now without a dedicated market-timing source", () => {
     ],
   });
 
-  assert.equal(score.breakdown.find((item) => item.label === "Why now")?.score, 0);
+  assert.equal(
+    score.breakdown.find((item) => item.label === "Why now")?.score,
+    0
+  );
 });
 
 test("scores a candidate against the supplied topic instead of SMB fit", () => {
@@ -251,66 +253,6 @@ test("accepts a structured LLM analysis", async () => {
     },
   });
   assert.deepEqual(await analyzer.analyse(candidate, []), analysis);
-});
-
-test("uses OpenRouter to return unique expanded search queries", async () => {
-  const expander = new OpenRouterQueryExpander("test-key", "openrouter/free", {
-    async get() {
-      throw new Error("not used");
-    },
-    async post() {
-      return {
-        data: {
-          choices: [
-            {
-              message: {
-                content: JSON.stringify({
-                  queries: ["digital health", "health AI", "digital health"],
-                }),
-              },
-            },
-          ],
-        },
-      };
-    },
-  });
-
-  assert.deepEqual(await expander.expand("healthcare startup"), [
-    "digital health",
-    "health AI",
-  ]);
-});
-
-test("rejects ecosystem queries from an LLM source plan", async () => {
-  const expander = new OpenRouterQueryExpander("test-key", "openrouter/free", {
-    async get() {
-      throw new Error("not used");
-    },
-    async post() {
-      return {
-        data: {
-          choices: [
-            {
-              message: {
-                content: JSON.stringify({
-                  queries: [
-                    "game development tools",
-                    "gaming venture capital firms",
-                    "indie game funding opportunities",
-                    "video game accelerator programs",
-                  ],
-                }),
-              },
-            },
-          ],
-        },
-      };
-    },
-  });
-
-  assert.deepEqual(await expander.expand("gaming startup"), [
-    "game development tools",
-  ]);
 });
 
 test("normalizes nested LLM fields before HTML rendering", async () => {
@@ -439,7 +381,7 @@ test("writes evidence, analysis, and a memo for one candidate", async () => {
   }
 });
 
-test("saves the literal and expanded search queries for a pipeline run", async () => {
+test("saves the LLM research brief and uses its source queries", async () => {
   const rootDir = await mkdtemp(join(tmpdir(), "deal-scout-"));
   const queries: string[] = [];
   const dependencies: PipelineDependencies = {
@@ -462,10 +404,17 @@ test("saves the literal and expanded search queries for a pipeline run", async (
       },
     ],
     enrichers: [],
-    queryExpander: {
-      name: "OpenRouter query planner",
-      async expand() {
-        return ["digital health"];
+    researchPlanner: {
+      name: "OpenRouter research planner",
+      async plan(topic) {
+        return {
+          topic,
+          thesis: "Digital-health workflow software for care teams.",
+          targetCustomer: "Care teams",
+          inclusionCriteria: ["Digital-health workflow", "Care delivery user"],
+          exclusions: ["Generic healthcare news"],
+          queries: ["digital health"],
+        };
       },
     },
     renderer: { renderMemo, renderRunReport },
@@ -488,7 +437,20 @@ test("saves the literal and expanded search queries for a pipeline run", async (
       {
         topic: "healthcare startup",
         queries: ["healthcare startup", "digital health"],
-        provider: "OpenRouter query planner",
+        provider: "OpenRouter research planner",
+      }
+    );
+    assert.deepEqual(
+      JSON.parse(
+        await readFile(join(summary.runPath, "research-brief.json"), "utf8")
+      ),
+      {
+        topic: "healthcare startup",
+        thesis: "Digital-health workflow software for care teams.",
+        targetCustomer: "Care teams",
+        inclusionCriteria: ["Digital-health workflow", "Care delivery user"],
+        exclusions: ["Generic healthcare news"],
+        queries: ["healthcare startup", "digital health"],
       }
     );
   } finally {
@@ -496,9 +458,9 @@ test("saves the literal and expanded search queries for a pipeline run", async (
   }
 });
 
-test("retries bounded discovery to meet the requested candidate count", async () => {
+test("runs every planned source query once without a second LLM planning call", async () => {
   const rootDir = await mkdtemp(join(tmpdir(), "deal-scout-"));
-  const expansionCalls: string[][] = [];
+  let planningCalls = 0;
   const queries: string[] = [];
   const dependencies: PipelineDependencies = {
     sources: [
@@ -516,29 +478,23 @@ test("retries bounded discovery to meet the requested candidate count", async ()
               },
             ];
           }
-          if (topic === "care delivery software") {
-            return [
-              {
-                ...candidate,
-                name: "Care Delivery Software",
-                description: "Care delivery software for clinics.",
-                sourceUrl:
-                  "https://www.ycombinator.com/companies/care-delivery-software",
-              },
-            ];
-          }
           return [];
         },
       },
     ],
     enrichers: [],
-    queryExpander: {
-      name: "OpenRouter query planner",
-      async expand(_topic, excludedQueries = []) {
-        expansionCalls.push(excludedQueries);
-        return excludedQueries.length
-          ? ["care delivery software"]
-          : ["digital health"];
+    researchPlanner: {
+      name: "OpenRouter research planner",
+      async plan(topic) {
+        planningCalls += 1;
+        return {
+          topic,
+          thesis: "Digital-health workflow software.",
+          targetCustomer: "Care teams",
+          inclusionCriteria: ["Digital health", "Workflow software"],
+          exclusions: [],
+          queries: ["digital health"],
+        };
       },
     },
     renderer: { renderMemo, renderRunReport },
@@ -552,18 +508,9 @@ test("retries bounded discovery to meet the requested candidate count", async ()
       dependencies,
       logger: { info: () => undefined, error: () => undefined },
     });
-    assert.equal(summary.completed, 2);
-    assert.deepEqual(expansionCalls, [
-      [],
-      ["healthcare startup", "digital health"],
-    ]);
-    assert.deepEqual(queries, [
-      "healthcare startup",
-      "digital health",
-      "healthcare startup",
-      "digital health",
-      "care delivery software",
-    ]);
+    assert.equal(summary.completed, 1);
+    assert.equal(planningCalls, 1);
+    assert.deepEqual(queries, ["healthcare startup", "digital health"]);
   } finally {
     await rm(rootDir, { recursive: true, force: true });
   }

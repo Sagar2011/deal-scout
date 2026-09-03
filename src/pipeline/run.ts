@@ -1,6 +1,7 @@
 import type {
   Candidate,
   CandidateProfile,
+  ResearchBrief,
   RunSummary,
 } from "../core/models.js";
 import type { PipelineDependencies } from "../core/contracts.js";
@@ -10,9 +11,12 @@ import { scoreAnalysis } from "../analysis/scoring.js";
 import type { MemoInput } from "../reports/memo.js";
 import { collectEvidence } from "../research/evidence.js";
 import type { HttpClient } from "../sources/types.js";
-import { discoverCandidates } from "./discover.js";
+import { discoverCandidatePool, discoverCandidates } from "./discover.js";
 import { createDefaultDependencies } from "./defaults.js";
-import { createRunThesis } from "../core/thesis.js";
+import {
+  createFallbackResearchBrief,
+  createRunThesis,
+} from "../core/thesis.js";
 
 type PipelineLogger = Pick<Console, "info" | "error">;
 
@@ -30,55 +34,37 @@ export async function runPipeline(input: {
 }): Promise<RunSummary> {
   const logger = input.logger ?? console;
   const dependencies = input.dependencies ?? createDefaultDependencies(input);
-  const thesis = createRunThesis(input.topic);
   logger.info(`[DealScout] Starting run for "${input.topic}".`);
   const run = await dependencies.store.createRun(input.rootDir, input.topic);
-  await dependencies.store.writeJson(run, "thesis.json", thesis);
   const requestedCount = input.limit ?? 11;
-  let queries = await buildQueryPlan(
+  const brief = await buildResearchBrief(
     input.topic,
-    dependencies.queryExpander,
+    dependencies.researchPlanner,
     logger
   );
+  const thesis = createRunThesis(brief);
+  await dependencies.store.writeJson(run, "research-brief.json", brief);
+  await dependencies.store.writeJson(run, "thesis.json", thesis);
   if (!input.candidates)
     logger.info("[DealScout] Discovering candidates from YC and Hacker News.");
-  let candidates =
-    input.candidates ??
-    (await discoverCandidates(
-      queries,
-      dependencies.sources,
-      requestedCount,
-      input.topic
-    ));
-  if (
-    !input.candidates &&
-    candidates.length < requestedCount &&
-    dependencies.queryExpander
-  ) {
-    logger.info(
-      `[DealScout] Found ${candidates.length}/${requestedCount} candidates. Expanding discovery once more.`
-    );
-    queries = uniqueQueries([
-      ...queries,
-      ...(await expandQueries(
-        input.topic,
-        dependencies.queryExpander,
-        queries,
-        logger
-      )),
-    ]);
-    candidates = await discoverCandidates(
-      queries,
-      dependencies.sources,
-      requestedCount,
-      input.topic
-    );
-  }
+  let selection:
+    | { reasons: Array<{ sourceUrl: string; reason: string }> }
+    | undefined;
+  let candidatePool: Candidate[] | undefined;
+  const candidates = input.candidates ?? (await discover(brief));
   await dependencies.store.writeJson(run, "query-plan.json", {
     topic: input.topic,
-    queries,
-    provider: dependencies.queryExpander?.name ?? "literal topic",
+    queries: brief.queries,
+    provider: dependencies.researchPlanner?.name ?? "literal topic",
   });
+  if (selection)
+    await dependencies.store.writeJson(run, "selection.json", selection);
+  if (candidatePool)
+    await dependencies.store.writeJson(
+      run,
+      "candidate-pool.json",
+      candidatePool
+    );
   if (!input.candidates && candidates.length < requestedCount) {
     logger.error(
       `[DealScout] Found ${candidates.length}/${requestedCount} relevant candidates after all discovery passes. Continuing with the relevant candidates found.`
@@ -127,7 +113,9 @@ export async function runPipeline(input: {
             evidence.push(...(await collector.collect(candidate)));
           } catch (error) {
             logger.error(
-              `${progress}: ${collector.name} failed (${error instanceof Error ? error.message : String(error)}). Continuing with captured source evidence.`
+              `${progress}: ${collector.name} failed (${
+                error instanceof Error ? error.message : String(error)
+              }). Continuing with captured source evidence.`
             );
           }
         }
@@ -224,40 +212,70 @@ export async function runPipeline(input: {
     `[DealScout] Finished: ${completed} memos saved, ${failures.length} skipped.`
   );
   return { runPath: run.path, completed, failed: failures.length, failures };
-}
 
-async function buildQueryPlan(
-  topic: string,
-  expander: PipelineDependencies["queryExpander"],
-  logger: PipelineLogger
-): Promise<string[]> {
-  if (!expander) return [topic];
-  return uniqueQueries([
-    topic,
-    ...(await expandQueries(topic, expander, [], logger)),
-  ]);
-}
-
-async function expandQueries(
-  topic: string,
-  expander: NonNullable<PipelineDependencies["queryExpander"]>,
-  excludedQueries: string[],
-  logger: PipelineLogger
-): Promise<string[]> {
-  try {
-    logger.info(
-      `[DealScout] Expanding source queries with ${expander.name}${
-        excludedQueries.length ? " (second pass)" : ""
-      }.`
+  async function discover(researchBrief: ResearchBrief): Promise<Candidate[]> {
+    if (!dependencies.candidateSelector)
+      return discoverCandidates(
+        researchBrief.queries,
+        dependencies.sources,
+        requestedCount,
+        input.topic
+      );
+    const pool = await discoverCandidatePool(
+      researchBrief.queries,
+      dependencies.sources,
+      requestedCount,
+      input.topic
     );
-    return await expander.expand(topic, excludedQueries);
+    candidatePool = pool;
+    try {
+      logger.info(
+        `[DealScout] Selecting topic-relevant candidates with ${dependencies.candidateSelector.name}.`
+      );
+      const result = await dependencies.candidateSelector.select(
+        researchBrief,
+        pool,
+        requestedCount
+      );
+      selection = { reasons: result.reasons };
+      return result.candidates;
+    } catch (error) {
+      logger.error(
+        `[DealScout] Candidate selection failed (${
+          error instanceof Error ? error.message : String(error)
+        }). Using deterministic relevance filtering.`
+      );
+      return discoverCandidates(
+        researchBrief.queries,
+        dependencies.sources,
+        requestedCount,
+        input.topic
+      );
+    }
+  }
+}
+
+async function buildResearchBrief(
+  topic: string,
+  planner: PipelineDependencies["researchPlanner"],
+  logger: PipelineLogger
+): Promise<ResearchBrief> {
+  if (!planner) return createFallbackResearchBrief(topic);
+  try {
+    logger.info(`[DealScout] Interpreting the topic with ${planner.name}.`);
+    const brief = await planner.plan(topic);
+    return {
+      ...brief,
+      // The literal request is always searched; LLM expansions improve recall but cannot replace it.
+      queries: uniqueQueries([topic, ...brief.queries]),
+    };
   } catch (error) {
     logger.error(
-      `[DealScout] Query expansion failed (${
+      `[DealScout] Topic interpretation failed (${
         error instanceof Error ? error.message : String(error)
-      }). Using the existing query plan.`
+      }). Using the literal topic.`
     );
-    return [];
+    return createFallbackResearchBrief(topic);
   }
 }
 

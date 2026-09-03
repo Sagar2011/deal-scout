@@ -2,6 +2,8 @@ import type { Candidate } from "../core/models.js";
 import type { CandidateSource, HttpClient } from "./types.js";
 import { matchesTopic } from "./topic-match.js";
 
+const SOURCE_TIMEOUT_MS = 15_000;
+
 type HnStory = {
   objectID: string;
   title?: string;
@@ -20,7 +22,8 @@ export class HackerNewsSource implements CandidateSource {
       hitsPerPage: String(limit),
     });
     const response = await this.http.get<{ hits: HnStory[] }>(
-      `https://hn.algolia.com/api/v1/search?${params}`
+      `https://hn.algolia.com/api/v1/search?${params}`,
+      { timeout: SOURCE_TIMEOUT_MS }
     );
     const { hits } = response.data;
     const newestAllowedAge =

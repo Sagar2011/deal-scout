@@ -1,16 +1,19 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { discoverCandidates } from "../../src/pipeline/discover.js";
+import {
+  discoverCandidatePool,
+  discoverCandidates,
+} from "../../src/pipeline/discover.js";
 import { HackerNewsSource } from "../../src/sources/hacker-news.js";
 import type { CandidateSource } from "../../src/sources/types.js";
 import { YcSource } from "../../src/sources/yc.js";
 
 test("returns one candidate from YC and Hacker News", async () => {
-  const requests: string[] = [];
+  const requests: Array<{ url: string; config?: unknown }> = [];
   const http = {
-    async get(url: string) {
-      requests.push(url);
+    async get(url: string, config?: unknown) {
+      requests.push({ url, config });
 
       if (url.startsWith("https://www.ycombinator.com/companies")) {
         return {
@@ -43,8 +46,8 @@ test("returns one candidate from YC and Hacker News", async () => {
 
       throw new Error(`Unexpected request: ${url}`);
     },
-    async post(url: string) {
-      requests.push(url);
+    async post(url: string, _body?: unknown, config?: unknown) {
+      requests.push({ url, config });
       if (url.startsWith("https://app123-dsn.algolia.net")) {
         return {
           data: {
@@ -73,6 +76,21 @@ test("returns one candidate from YC and Hacker News", async () => {
   assert.equal(candidates.length, 1);
   assert.equal(candidates[0].name, "AI Agent");
   assert.equal(requests.length, 3);
+  assert.deepEqual(
+    requests.map((request) => request.config),
+    [
+      { timeout: 15_000 },
+      { timeout: 15_000 },
+      {
+        timeout: 15_000,
+        headers: {
+          "Content-Type": "application/json",
+          "X-Algolia-Application-Id": "APP123",
+          "X-Algolia-API-Key": "public-key",
+        },
+      },
+    ]
+  );
 });
 
 test("discovers from a supplied source registry", async () => {
@@ -94,6 +112,38 @@ test("discovers from a supplied source registry", async () => {
     (await discoverCandidates("registered source", [source], 5))[0].name,
     "Extensible Source"
   );
+});
+
+test("limits concurrent public-source requests", async () => {
+  let active = 0;
+  let maxActive = 0;
+  const source: CandidateSource = {
+    async findCandidates(topic) {
+      active += 1;
+      maxActive = Math.max(maxActive, active);
+      await new Promise((resolve) => setTimeout(resolve, 10));
+      active -= 1;
+      return [
+        {
+          name: topic,
+          website: "https://example.com",
+          description: topic,
+          source: "Y Combinator",
+          sourceUrl: `https://example.com/${topic}`,
+          signal: "YC W25 company listing",
+        },
+      ];
+    },
+  };
+
+  await discoverCandidatePool(
+    ["fintech", "payments", "lending", "banking", "insurance"],
+    [source],
+    11,
+    "fintech startups"
+  );
+
+  assert.equal(maxActive, 2);
 });
 
 test("filters loose YC matches using meaningful topic terms", async () => {
@@ -260,9 +310,10 @@ test("requires a contextual match from an expanded query", async () => {
     "AI agents for SMBs"
   );
 
-  assert.deepEqual(candidates.map((candidate) => candidate.name), [
-    "Invoice Agent",
-  ]);
+  assert.deepEqual(
+    candidates.map((candidate) => candidate.name),
+    ["Invoice Agent"]
+  );
 });
 
 test("requires the complete thesis match instead of a generic AI-agent term", async () => {

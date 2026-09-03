@@ -84,5 +84,7 @@ function topicMatches(text: string, topic: string): boolean {
     .toLowerCase()
     .split(/[^a-z0-9]+/)
     .filter((term) => term.length > 2 && term !== "startup");
-  return terms.length > 0 && terms.every((term) => text.includes(term.slice(0, 5)));
+  return (
+    terms.length > 0 && terms.every((term) => text.includes(term.slice(0, 5)))
+  );
 }

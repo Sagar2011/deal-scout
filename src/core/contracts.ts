@@ -1,7 +1,9 @@
 import type {
   Candidate,
+  CandidateSelection,
   CandidateProfile,
   Evidence,
+  ResearchBrief,
   RunContext,
   StartupAnalysis,
 } from "./models.js";
@@ -29,9 +31,18 @@ export type AnalysisProvider = {
   ): Promise<StartupAnalysis>;
 };
 
-export type QueryExpander = {
+export type ResearchPlanner = {
   name: string;
-  expand(topic: string, excludedQueries?: string[]): Promise<string[]>;
+  plan(topic: string): Promise<ResearchBrief>;
+};
+
+export type CandidateSelector = {
+  name: string;
+  select(
+    brief: ResearchBrief,
+    candidates: Candidate[],
+    limit: number
+  ): Promise<CandidateSelection>;
 };
 
 export type ReportRenderer = {
@@ -57,7 +68,8 @@ export type PipelineDependencies = {
   sources: CandidateSource[];
   enrichers: CandidateEnricher[];
   evidenceCollectors?: EvidenceCollector[];
-  queryExpander?: QueryExpander;
+  researchPlanner?: ResearchPlanner;
+  candidateSelector?: CandidateSelector;
   analyzer?: AnalysisProvider;
   renderer: ReportRenderer;
   store: RunStore;

@@ -2,6 +2,8 @@ import type { Candidate } from "../core/models.js";
 import type { CandidateSource, HttpClient } from "./types.js";
 import { matchesTopic } from "./topic-match.js";
 
+const SOURCE_TIMEOUT_MS = 15_000;
+
 type YcCompany = {
   name: string;
   slug: string;
@@ -22,7 +24,9 @@ export class YcSource implements CandidateSource {
     const directoryUrl = `https://www.ycombinator.com/companies?query=${encodeURIComponent(
       topic
     )}`;
-    const directory = await this.http.get<string>(directoryUrl);
+    const directory = await this.http.get<string>(directoryUrl, {
+      timeout: SOURCE_TIMEOUT_MS,
+    });
     const credentials = this.extractCredentials(directory.data);
     const response = await this.http.post<{ hits: YcCompany[] }>(
       `https://${credentials.app.toLowerCase()}-dsn.algolia.net/1/indexes/YCCompany_production/query`,
@@ -33,6 +37,7 @@ export class YcSource implements CandidateSource {
           "X-Algolia-Application-Id": credentials.app,
           "X-Algolia-API-Key": credentials.key,
         },
+        timeout: SOURCE_TIMEOUT_MS,
       }
     );
     const { hits } = response.data;

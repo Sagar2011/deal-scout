@@ -19,8 +19,15 @@ export type MemoInput = {
 };
 
 export function renderMemo(input: MemoInput): string {
-  const { candidate, evidence, analysis, score, recommendation, profile, thesis } =
-    input;
+  const {
+    candidate,
+    evidence,
+    analysis,
+    score,
+    recommendation,
+    profile,
+    thesis,
+  } = input;
   const decisionClass = decisionSlug(recommendation.decision);
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${escape(
     candidate.name
@@ -46,7 +53,8 @@ export function renderMemo(input: MemoInput): string {
   )}</h2><p>${escape(
     recommendation.rationale
   )}</p></section><section><div class="section-heading"><div><p class="section-kicker">THESIS FIT</p><h2>Score breakdown</h2></div><p class="section-note">${escape(
-    thesis?.statement ?? "Each factor is scored independently against the selected thesis."
+    thesis?.statement ??
+      "Each factor is scored independently against the selected thesis."
   )}</p></div>${scoreBreakdown(
     score
   )}</section><section><div class="section-heading"><div><p class="section-kicker">AT A GLANCE</p><h2>Thesis drivers</h2></div></div>${thesisDrivers(

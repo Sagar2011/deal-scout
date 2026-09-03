@@ -29,7 +29,10 @@ export class OpenRouterAnalyzer {
           temperature: 0,
           messages: [{ role: "user", content: prompt }],
         },
-        { headers: { Authorization: `Bearer ${this.apiKey}` } }
+        {
+          headers: { Authorization: `Bearer ${this.apiKey}` },
+          timeout: 30_000,
+        }
       )
     );
     const result = normalizeAnalysis(

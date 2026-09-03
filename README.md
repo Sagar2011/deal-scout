@@ -1,6 +1,6 @@
 # DealScout
 
-DealScout is a small CLI for investment triage. It finds startup candidates from Y Combinator and Hacker News, captures source evidence, enriches YC candidates from their public profiles, analyzes each result against a thesis generated deterministically from the supplied topic, scores it, and writes standalone HTML reports.
+DealScout is a small CLI for investment triage. It interprets a human investment topic into a saved research brief, finds candidates from Y Combinator and Hacker News, captures source evidence, enriches YC candidates from public profiles, scores each result, and writes standalone HTML reports.
 
 ## Quick Start
 
@@ -11,21 +11,22 @@ npm install
 npm run dev -- run --topic "AI agents for SMBs"
 ```
 
-Use `--limit` to set the maximum number of startup memos for a run, for example `npm run dev -- run --topic "healthcare startup" --limit 3`.
-
 The command prints each pipeline stage, including whether OpenRouter or the deterministic fallback produced analysis, followed by the run path. Open `runs/<run-id>/report.html` for the partner-readable run view. Run `npm test`, `npm run typecheck`, and `npm audit` before submission.
 
-Discovery fetches a wider pool from both sources, ranks candidates by topic relevance and freshness, then returns up to 11 final candidates by default. A candidate must match all meaningful terms in the original topic or in a related planned query; HN results must be `Show HN` launches. A run may return fewer when there are not enough relevant public matches; DealScout does not pad results with loose search matches.
+Discovery has one configured target: up to 11 final candidates. It fetches a broader public pool from YC and HN, then ranks it by relevance and freshness. HN results must be `Show HN` launches. A run may return fewer when relevant public matches do not exist; DealScout does not pad results with loose search matches.
 
-With an OpenRouter key, DealScout makes one bounded query-planning call before sourcing. It keeps the literal topic and adds four related product or technology search queries, so an arbitrary input such as `healthcare startup`, `transport`, or `AI agents for SMBs` does not depend on a hand-maintained sector alias list. Investor, funding, accelerator, and event queries are rejected. If the requested count is not met, one further non-repeating expansion pass is allowed. The complete plan is saved as `query-plan.json`; an expanded query must match all of its meaningful terms before it can admit a candidate, and final ranking still uses the original topic. If public sources still return fewer candidates than requested, the CLI logs the shortfall and continues with the relevant candidates found. Without a key, discovery uses the literal topic only and may need a broader topic or an additional source adapter to meet the requested count.
+With an OpenRouter key, DealScout makes one planning call before sourcing. It turns the full human input into a specific thesis, target customer, inclusion criteria, exclusions, and six source-search phrases. The literal human topic is always searched alongside those expansions, so the LLM cannot replace a broad request such as `fintech startups` with a narrower one. This is generated per run; there is no hand-maintained industry alias table. Investor, funding, accelerator, event, and job queries are rejected. The saved `research-brief.json` and `query-plan.json` make the interpretation reviewable. The same brief is given to the candidate selector, which may choose only from the retrieved public YC/HN pool. If OpenRouter is unavailable, discovery uses the literal topic plus its meaningful non-generic terms.
 
 ## Run Artifacts
 
 ```text
 runs/<run-id>/
   input.json
+  research-brief.json
   thesis.json
   query-plan.json
+  candidate-pool.json
+  selection.json
   candidates.json
   evidence/<company>.json
   analysis/<company>.json
@@ -45,9 +46,9 @@ Set `OPENROUTER_API_KEY` in your shell to request structured JSON analysis throu
 OPENROUTER_API_KEY=your_key npm run dev -- run --topic "AI agents for SMBs"
 ```
 
-`OPENROUTER_MODEL` optionally overrides the free router. OpenRouter first produces a small, saved set of related discovery queries, then produces the qualitative analysis at `temperature: 0`; final scores and recommendations are then calibrated from the saved candidate, profile, and evidence records. This keeps repeated runs stable when the captured evidence is unchanged. Without a key, DealScout uses its documented fallback analysis and literal-topic discovery, and still completes a run.
+`OPENROUTER_MODEL` optionally overrides the free router. OpenRouter first produces `research-brief.json`, then selects only candidates from the broader YC/HN pool using that same brief and saves its reasons in `selection.json`. It then produces qualitative analysis at `temperature: 0`; final scores and recommendations are calibrated from saved candidate, profile, and evidence records. Without a key, DealScout uses deterministic discovery and analysis, and still completes a run.
 
-Candidate enrichment, analysis, and memo generation run with a concurrency of two by default. Override it with `DEAL_SCOUT_CONCURRENCY` when appropriate, for example `DEAL_SCOUT_CONCURRENCY=1 npm run dev -- run --topic "AI agents for SMBs"`. Keep this low for `openrouter/free`: DealScout retries an OpenRouter `429` up to two times, honoring `Retry-After` when provided, before using deterministic analysis for that individual failure. Run separate CLI processes sequentially rather than in parallel when using a free model.
+Public-source discovery is capped at two concurrent requests to avoid overloading YC and HN. Candidate enrichment, analysis, and memo generation also run with a concurrency of two by default. Override that latter setting with `DEAL_SCOUT_CONCURRENCY` when appropriate, for example `DEAL_SCOUT_CONCURRENCY=1 npm run dev -- run --topic "AI agents for SMBs"`. Keep this low for `openrouter/free`: DealScout retries an OpenRouter `429` up to two times, honoring `Retry-After` when provided, before using deterministic analysis for that individual failure. Run separate CLI processes sequentially rather than in parallel when using a free model.
 
 ## Limits
 
@@ -57,4 +58,4 @@ The thesis, architecture, and AI workflow trail are in `docs/thesis.md`, `docs/a
 
 ## Source Layout
 
-`src/index.ts` is the entry point. `cli/` parses commands, `core/` owns shared types/config/storage, `sources/` owns public-source clients, `research/` captures evidence and YC profile enrichment, `prompts/` owns the independently editable LLM analysis instruction, `analysis/` owns analysis and investment decisions, `reports/` renders standalone HTML reports, and `pipeline/` orchestrates the run. Tests are grouped into `tests/unit/` and `tests/integration/`.
+`src/index.ts` is the entry point. `cli/` parses commands, `core/` owns shared types/config/storage, `sources/` owns public-source clients, `research/` captures evidence and YC profile enrichment, `prompts/` owns independently editable LLM instructions, `analysis/` owns research planning, analysis, and investment decisions, `reports/` renders standalone HTML reports, and `pipeline/` orchestrates the run. Tests are grouped into `tests/unit/` and `tests/integration/`.

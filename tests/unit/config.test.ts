@@ -3,8 +3,12 @@ import test from "node:test";
 
 import { loadConfig } from "../../src/core/config.js";
 
-test("uses the standard runs directory when none is configured", () => {
-  assert.deepEqual(loadConfig({}), { runsDir: "runs", concurrency: 2 });
+test("uses standard run settings when none are configured", () => {
+  assert.deepEqual(loadConfig({}), {
+    runsDir: "runs",
+    concurrency: 2,
+    candidateLimit: 11,
+  });
 });
 
 test("reads configured run and LLM settings", () => {
@@ -16,6 +20,7 @@ test("reads configured run and LLM settings", () => {
     {
       runsDir: "tmp/runs",
       concurrency: 2,
+      candidateLimit: 11,
       llmApiKey: "test-key",
       llmModel: "openrouter/free",
     }
@@ -31,6 +36,7 @@ test("accepts an optional OpenRouter model override", () => {
     {
       runsDir: "runs",
       concurrency: 2,
+      candidateLimit: 11,
       llmApiKey: "test-key",
       llmModel: "meta-llama/llama-3.3-70b-instruct:free",
     }

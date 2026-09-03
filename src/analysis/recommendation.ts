@@ -22,7 +22,9 @@ export function recommend(
       : "Pass";
   return {
     decision,
-    rationale: `${score.total}/100 against ${thesis?.topic ?? "the selected"} thesis with ${evidence.length} captured evidence records.`,
+    rationale: `${score.total}/100 against ${
+      thesis?.topic ?? "the selected"
+    } thesis with ${evidence.length} captured evidence records.`,
     mindChanges: [
       "Verify founder background and technical depth.",
       "Verify customer retention and willingness to pay.",

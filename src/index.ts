@@ -12,7 +12,7 @@ const summary = await runPipeline({
   llmApiKey: config.llmApiKey,
   llmModel: config.llmModel,
   concurrency: config.concurrency,
-  limit: command.limit,
+  limit: config.candidateLimit,
 });
 
 console.log(
