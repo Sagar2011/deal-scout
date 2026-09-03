@@ -65,4 +65,4 @@ The thesis, architecture, and AI workflow trail are in `docs/thesis.md`, `docs/a
 
 ## Demo Video: 
 
-Please find it in [here](demo/video.html).
+Please find it in [here](https://www.loom.com/share/649f85a0270a4d778805ca9c73b475c4).
