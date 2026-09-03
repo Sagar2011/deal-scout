@@ -89,6 +89,7 @@ function uniqueAndRank(
   return [
     ...new Map(
       candidates
+        .filter(isCurrentCandidate)
         .filter(
           ({ candidate, topic }) =>
             !applyDeterministicFilter ||
@@ -109,6 +110,18 @@ function uniqueAndRank(
         .map(({ candidate }) => [candidate.sourceUrl, candidate])
     ).values(),
   ].slice(0, limit);
+}
+
+function isCurrentCandidate({ candidate }: CandidateMatch): boolean {
+  if (candidate.source !== "Y Combinator") return true;
+  const match = candidate.signal.match(
+    /(?:Winter|Spring|Summer|Fall)\s+(\d{4})|\b[WSF](\d{2})\b/i
+  );
+  const rawYear = match?.[1] ?? match?.[2];
+  if (!rawYear) return true;
+  const year = rawYear.length === 2 ? 2000 + Number(rawYear) : Number(rawYear);
+  // YC batch date is the available freshness proxy; it does not prove funding stage.
+  return year >= new Date().getUTCFullYear() - 3;
 }
 
 function rank(candidate: Candidate, topic: string): number {

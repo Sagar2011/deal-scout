@@ -212,6 +212,39 @@ test("scores a candidate against the supplied topic instead of SMB fit", () => {
   });
 });
 
+test("scores thesis fit from a generated research query", () => {
+  const expenseCandidate: Candidate = {
+    ...candidate,
+    name: "Expense Acme",
+    description: "Expense management for growing businesses.",
+  };
+  const score = scoreAnalysis(analysis, {
+    candidate: expenseCandidate,
+    evidence: [
+      {
+        claim: expenseCandidate.description,
+        url: expenseCandidate.sourceUrl,
+        source: "Y Combinator",
+        capturedAt: "2026-09-03T00:00:00.000Z",
+      },
+    ],
+    thesis: createRunThesis({
+      topic: "fintech startups",
+      thesis: "Fintech startups modernize financial services.",
+      targetCustomer: "Consumers and businesses",
+      inclusionCriteria: ["Financial-service technology"],
+      exclusions: [],
+      queries: ["real-time expense management", "cross-border payments"],
+    }),
+  });
+
+  assert.deepEqual(score.breakdown[1], {
+    label: "Fintech Startups fit",
+    score: 15,
+    maximum: 20,
+  });
+});
+
 test("captures a public company website description as evidence", async () => {
   const evidence = await collectCompanyWebsiteEvidence(candidate, {
     async post() {

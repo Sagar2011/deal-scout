@@ -18,6 +18,7 @@ export type RunThesis = {
   topic: string;
   statement: string;
   fitLabel: string;
+  fitQueries: string[];
 };
 
 export function createRunThesis(topic: string | ResearchBrief): RunThesis {
@@ -29,6 +30,14 @@ export function createRunThesis(topic: string | ResearchBrief): RunThesis {
         ? `Seed-stage startups addressing ${focus}, prioritizing a clearly evidenced workflow, direct topic fit, technical execution, credible public signals, and traceable market timing.`
         : topic.thesis,
     fitLabel: `${toTitleCase(focus)} fit`,
+    fitQueries:
+      typeof topic === "string"
+        ? [focus]
+        : uniquePhrases([
+            focus,
+            ...topic.queries,
+            ...topic.inclusionCriteria,
+          ]),
   };
 }
 
@@ -52,4 +61,15 @@ export function createFallbackResearchBrief(topic: string): ResearchBrief {
 
 function toTitleCase(value: string): string {
   return value.replace(/\b\w/g, (character) => character.toUpperCase());
+}
+
+function uniquePhrases(values: string[]): string[] {
+  return [
+    ...new Map(
+      values
+        .map((value) => value.trim())
+        .filter(Boolean)
+        .map((value) => [value.toLowerCase(), value])
+    ).values(),
+  ];
 }

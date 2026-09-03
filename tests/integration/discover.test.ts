@@ -146,6 +146,37 @@ test("limits concurrent public-source requests", async () => {
   assert.equal(maxActive, 2);
 });
 
+test("excludes stale YC companies from the candidate pool", async () => {
+  const source: CandidateSource = {
+    async findCandidates() {
+      return [
+        {
+          name: "Current Fintech",
+          website: "https://current.example",
+          description: "Digital expense management for businesses.",
+          source: "Y Combinator",
+          sourceUrl: "https://www.ycombinator.com/companies/current-fintech",
+          signal: "YC Winter 2025 company listing",
+        },
+        {
+          name: "Stale Fintech",
+          website: "https://stale.example",
+          description: "Digital expense management for businesses.",
+          source: "Y Combinator",
+          sourceUrl: "https://www.ycombinator.com/companies/stale-fintech",
+          signal: "YC Winter 2014 company listing",
+        },
+      ];
+    },
+  };
+
+  const candidates = await discoverCandidatePool("fintech", [source], 11);
+
+  assert.deepEqual(candidates.map((candidate) => candidate.name), [
+    "Current Fintech",
+  ]);
+});
+
 test("filters loose YC matches using meaningful topic terms", async () => {
   const source = new YcSource({
     async get() {
@@ -374,6 +405,13 @@ test("keeps only Show HN product launches", async () => {
               points: 20,
               created_at_i: Math.floor(Date.now() / 1000),
             },
+            {
+              objectID: "generic-ai",
+              title: "Show HN: AI image generator",
+              url: "https://image.example",
+              points: 20,
+              created_at_i: Math.floor(Date.now() / 1000),
+            },
           ],
         },
       };
@@ -384,7 +422,7 @@ test("keeps only Show HN product launches", async () => {
   });
 
   assert.deepEqual(
-    (await source.findCandidates("AI agents for SMBs", 5)).map(
+    (await source.findCandidates("AI agents for small businesses", 5)).map(
       (candidate) => candidate.name
     ),
     ["AI agents for small businesses"]

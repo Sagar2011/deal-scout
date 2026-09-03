@@ -1,6 +1,6 @@
 import type { Candidate } from "../core/models.js";
 import type { CandidateSource, HttpClient } from "./types.js";
-import { matchesTopic } from "./topic-match.js";
+import { matchesStrongExpandedTopic } from "./topic-match.js";
 
 const SOURCE_TIMEOUT_MS = 15_000;
 
@@ -46,7 +46,10 @@ export class YcSource implements CandidateSource {
         (company) =>
           company.website &&
           company.one_liner &&
-          matchesTopic(`${company.name} ${company.one_liner}`, topic)
+          matchesStrongExpandedTopic(
+            `${company.name} ${company.one_liner}`,
+            topic
+          )
       )
       .slice(0, limit)
       .map((company) => ({

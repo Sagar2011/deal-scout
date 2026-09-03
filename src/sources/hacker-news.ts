@@ -1,6 +1,6 @@
 import type { Candidate } from "../core/models.js";
 import type { CandidateSource, HttpClient } from "./types.js";
-import { matchesTopic } from "./topic-match.js";
+import { matchesStrongExpandedTopic } from "./topic-match.js";
 
 const SOURCE_TIMEOUT_MS = 15_000;
 
@@ -36,7 +36,7 @@ export class HackerNewsSource implements CandidateSource {
           story.created_at_i &&
           story.created_at_i >= newestAllowedAge &&
           /^show hn:/i.test(title) &&
-          matchesTopic(title, topic)
+          matchesStrongExpandedTopic(title, topic)
         );
       })
       .map((story) => ({

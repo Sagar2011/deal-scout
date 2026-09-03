@@ -73,7 +73,7 @@ function evidenceCriteria(context: ScoreContext): StartupAnalysis["criteria"] {
   );
   return {
     workflowClarity: /automat|workflow|agent/.test(text) ? 0.75 : 0,
-    topicFit: context.thesis ? topicFit(text, context.thesis.topic) : 0,
+    topicFit: context.thesis ? topicFit(text, context.thesis) : 0,
     technicalDepth: hasFounderSignal && hasTechnicalSignal ? 0.5 : 0,
     signalStrength:
       context.candidate.source === "Hacker News"
@@ -91,13 +91,23 @@ function evidenceCriteria(context: ScoreContext): StartupAnalysis["criteria"] {
   };
 }
 
-function topicFit(text: string, topic: string): number {
-  const terms = topic
-    .toLowerCase()
-    .split(/[^a-z0-9]+/)
-    .filter((term) => term.length > 2 && term !== "startup");
-  return terms.length > 0 &&
-    terms.every((term) => text.includes(term.slice(0, 5)))
+function topicFit(text: string, thesis: RunThesis): number {
+  if (matchesPhrase(text, thesis.topic)) return 0.75;
+  return thesis.fitQueries.some((query) => matchesPhrase(text, query))
     ? 0.75
     : 0;
+}
+
+function matchesPhrase(text: string, phrase: string): boolean {
+  const terms = phrase
+    .toLowerCase()
+    .split(/[^a-z0-9]+/)
+    .filter(
+      (term) =>
+        term.length > 2 &&
+        !["and", "for", "startup", "startups", "with"].includes(term)
+    );
+  if (!terms.length) return false;
+  const matches = terms.filter((term) => text.includes(term.slice(0, 5)));
+  return matches.length >= Math.min(2, terms.length);
 }
