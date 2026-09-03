@@ -1,1 +1,662 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>DealScout run</title><style>:root{--ink:#1b292d;--paper:#f7f2e8;--surface:#fffdf8;--line:#ddd4c2;--muted:#657176;--teal:#176c68;--green:#247054;--green-bg:#e3f0e8;--amber:#9c6100;--amber-bg:#fff1d5;--red:#a63c36;--red-bg:#f9e3e0}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 92% 2%,#dbeade 0,transparent 28%),radial-gradient(circle at 8% 25%,#f3e5cc 0,transparent 24%),var(--paper);color:var(--ink);font:17px/1.52 Baskerville,"Iowan Old Style",Georgia,serif}.memo{max-width:1040px;margin:auto;padding:52px 28px 88px}.memo-header{padding-bottom:32px;border-bottom:1px solid var(--line)}.topline,.hero,.card-top,.section-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}.eyebrow,.section-kicker{margin:0;font:700 11px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.13em;color:var(--teal)}h1{max-width:720px;margin:15px 0 10px;font-size:clamp(44px,6vw,68px);line-height:.98;letter-spacing:-.045em}.lede{max-width:670px;margin:0;color:#405257;font-size:22px;line-height:1.35}.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}.tags span,.tags a{padding:5px 9px;border:1px solid var(--line);border-radius:999px;background:rgba(255,253,248,.72);color:var(--muted);font:600 11px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;text-decoration:none}.tags a{color:var(--teal);border-color:#a9ceca}.hero{margin-top:18px}.company-mark,.card-logo{display:grid;width:68px;height:68px;place-items:center;overflow:hidden;border:1px solid var(--line);background:var(--surface);box-shadow:4px 4px 0 #eadfca}.company-logo{display:block;width:100%;height:100%;object-fit:contain}.company-initials{display:grid;width:100%;height:100%;place-items:center;background:#e6efeb;color:var(--teal);font:800 20px ui-sans-serif,system-ui,sans-serif}.score-card{min-width:144px;padding:18px 16px 16px;border:1px solid var(--line);background:var(--surface);box-shadow:4px 4px 0 #eadfca}.score-card small{display:block;color:var(--muted);font:700 10px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em}.score-card strong{font:700 52px/.92 ui-sans-serif,system-ui,sans-serif;letter-spacing:-.07em}.score-card span{color:var(--muted);font:700 13px ui-sans-serif,system-ui,sans-serif}.decision-pill{display:inline-block;width:max-content;padding:7px 10px;border-radius:999px;font:800 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase}.decision-pill.pass{background:var(--red-bg);color:var(--red)}.decision-pill.watch{background:var(--amber-bg);color:var(--amber)}.decision-pill.take-a-meeting{background:var(--green-bg);color:var(--green)}section,.callout{margin-top:28px;padding-top:25px;border-top:1px solid var(--line)}h2{margin:4px 0 10px;font:800 22px/1.15 ui-sans-serif,system-ui,sans-serif;letter-spacing:-.035em}.callout{padding:23px 25px;border:1px solid var(--line);background:var(--surface);border-left:5px solid var(--teal)}.callout.pass{border-left-color:var(--red)}.callout.watch{border-left-color:var(--amber)}.callout.take-a-meeting{border-left-color:var(--green)}.callout h2{margin-top:5px}.callout p:last-child{max-width:800px;margin:0;font-size:19px}.section-note{max-width:300px;margin:0;color:var(--muted);font:13px/1.35 ui-sans-serif,system-ui,sans-serif}.breakdown{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.meter{padding:14px 13px;border:1px solid var(--line);background:var(--surface)}.meter>div{display:flex;justify-content:space-between;gap:8px;font:700 12px/1.25 ui-sans-serif,system-ui,sans-serif}.meter b{white-space:nowrap}.meter i{display:block;height:7px;margin-top:12px;overflow:hidden;border-radius:9px;background:#edf0ed}.meter em{display:block;height:100%;border-radius:9px}.meter.strong em{background:var(--green)}.meter.mixed em{background:var(--amber)}.meter.weak em{background:var(--red)}.drivers,.grid,.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.driver{padding:16px 18px;border:1px solid var(--line);background:var(--surface)}.driver>p{margin:0 0 10px;font:800 10px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.1em}.driver.strengths>p{color:var(--green)}.driver.concerns>p{color:var(--red)}.driver ul{display:grid;gap:8px;margin:0;padding:0;list-style:none}.driver li{display:flex;justify-content:space-between;gap:12px;font:14px ui-sans-serif,system-ui,sans-serif}.grid{margin-top:0}.grid section{margin:0;padding:20px 0 0}.grid p{margin:0}.founder-section{padding:20px;border:1px solid var(--line);background:var(--surface)}.founder-section h2{font-size:18px}.founder-links{display:flex;flex-wrap:wrap;gap:8px}.founder-links a{padding:7px 9px;border:1px solid #a9ceca;border-radius:4px;color:var(--teal);font:700 12px ui-sans-serif,system-ui,sans-serif;text-decoration:none}.evidence{display:grid;gap:10px}.evidence a,.card{color:inherit;text-decoration:none;background:var(--surface);border:1px solid var(--line);padding:16px;display:grid;gap:6px}.evidence a:hover,.card:hover{border-color:#91bdb8}.evidence b{font:800 10px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;color:var(--teal);text-transform:uppercase}.cards{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:34px}.card{min-height:215px}.card-main{display:grid;gap:6px;color:inherit;text-decoration:none}.card-top{align-items:center}.card-top>b{font:800 26px/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:-.06em}.card-top>b small{color:var(--muted);font:700 11px ui-sans-serif,system-ui,sans-serif;letter-spacing:0}.card h2{margin:18px 0 0;font-size:24px}.card-logo{width:38px;height:38px;box-shadow:none}.card-logo .company-initials{font-size:12px}.card p{margin:0;color:#4f5e61}.card-meta{margin-top:auto;color:var(--muted);font:11px/1.35 ui-monospace,SFMono-Regular,Menlo,monospace}@media(max-width:760px){.breakdown{grid-template-columns:repeat(2,minmax(0,1fr))}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.memo{padding:32px 18px 60px}.topline,.hero,.section-heading{display:grid;grid-template-columns:1fr}.score-card{width:max-content}.lede{font-size:19px}.breakdown,.drivers,.grid,.cards{grid-template-columns:1fr}.section-note{max-width:none}.card{min-height:auto}}</style></head><body><main class="memo"><header><p class="eyebrow">DEALSCOUT / PIPELINE RUN</p><h1>health care operation</h1><p class="lede">11 researched startup candidates</p></header><div class="cards"><article class="card"><a class="card-main" href="memos/care-gp.html"><div class="card-top"><span class="decision-pill watch">Watch</span><b>58<small>/100</small></b></div><h2>Care GP</h2><div class="card-logo"><img class="company-logo" src="https://bookface-images.s3.amazonaws.com/small_logos/3f871fa8c32b501e71ef06d881893d564e003fbd.png" alt="Care GP logo"></div><p>AI agents to run primary healthcare operations</p><small class="card-meta">Y Combinator · YC Summer 2026 company listing</small></a><div class="founder-links"><a href="https://www.linkedin.com/in/melvinchen/" target="_blank" rel="noreferrer">Melvin Chen on LinkedIn</a></div></article><article class="card"><a class="card-main" href="memos/ruma-care.html"><div class="card-top"><span class="decision-pill pass">Pass</span><b>31<small>/100</small></b></div><h2>Ruma Care</h2><div class="card-logo"><img class="company-logo" src="https://bookface-images.s3.amazonaws.com/small_logos/34241c57767208be0982fd04163c52d69a91a82c.png" alt="Ruma Care logo"></div><p>The operations stack for biologic infusion clinics</p><small class="card-meta">Y Combinator · YC Winter 2026 company listing</small></a><div class="founder-links"><a href="https://www.linkedin.com/in/mengfei-shen/" target="_blank" rel="noreferrer">Meng Fei Shen on LinkedIn</a></div></article><article class="card"><a class="card-main" href="memos/clicks-health.html"><div class="card-top"><span class="decision-pill watch">Watch</span><b>56<small>/100</small></b></div><h2>Clicks Health</h2><div class="card-logo"><img class="company-logo" src="https://bookface-images.s3.amazonaws.com/small_logos/9ba947944afd3b1dfe85a7f3891e69a0b39e5fe9.png" alt="Clicks Health logo"></div><p>AI agents for your healthcare back-office operations.</p><small class="card-meta">Y Combinator · YC Fall 2025 company listing</small></a><div class="founder-links"><a href="https://www.linkedin.com/in/dominik-helmreich-30574a1b0/" target="_blank" rel="noreferrer">Dominik Helmreich on LinkedIn</a><a href="https://www.linkedin.com/in/oliverkn/" target="_blank" rel="noreferrer">Oliver Knapp on LinkedIn</a></div></article><article class="card"><a class="card-main" href="memos/scheduling-wizard.html"><div class="card-top"><span class="decision-pill watch">Watch</span><b>56<small>/100</small></b></div><h2>Scheduling Wizard</h2><div class="card-logo"><img class="company-logo" src="https://bookface-images.s3.amazonaws.com/small_logos/a941d8028fafa95dd706134a19099c733b0726ff.png" alt="Scheduling Wizard logo"></div><p>Logistics infrastructure to modernize healthcare operations</p><small class="card-meta">Y Combinator · YC Winter 2026 company listing</small></a><div class="founder-links"><a href="https://www.linkedin.com/in/sam-oberly" target="_blank" rel="noreferrer">Samuel Oberly on LinkedIn</a><a href="https://www.linkedin.com/in/zachary-dermody-41238a202" target="_blank" rel="noreferrer">Zachary Dermody on LinkedIn</a><a href="https://www.linkedin.com/in/abdelrahman-hamimi-2064ab202/" target="_blank" rel="noreferrer">Abdelrahman Hamimi on LinkedIn</a></div></article><article class="card"><a class="card-main" href="memos/norra.html"><div class="card-top"><span class="decision-pill pass">Pass</span><b>33<small>/100</small></b></div><h2>Norra</h2><div class="card-logo"><img class="company-logo" src="https://bookface-images.s3.amazonaws.com/small_logos/e02b3e396920957fb568e6c31817205cde3dbd2a.png" alt="Norra logo"></div><p>Automating equipment operations for nursing facilities</p><small class="card-meta">Y Combinator · YC Fall 2025 company listing</small></a><div class="founder-links"><a href="https://www.linkedin.com/in/ben-rubin-b771b8237/" target="_blank" rel="noreferrer">Ben Rubin on LinkedIn</a><a href="https://www.linkedin.com/in/yining-z/" target="_blank" rel="noreferrer">Yining Zhang on LinkedIn</a></div></article><article class="card"><a class="card-main" href="memos/novoflow.html"><div class="card-top"><span class="decision-pill pass">Pass</span><b>56<small>/100</small></b></div><h2>Novoflow</h2><div class="card-logo"><img class="company-logo" src="https://bookface-images.s3.amazonaws.com/small_logos/5dc1e2e5cc8a224ba29a91be64f14ab1fbc9cde3.png" alt="Novoflow logo"></div><p>Computer-using agents for healthcare operations</p><small class="card-meta">Y Combinator · YC Spring 2025 company listing</small></a><div class="founder-links"><a href="https://www.linkedin.com/in/mathieurihet/" target="_blank" rel="noreferrer">Mathieu Rihet on LinkedIn</a><a href="https://www.linkedin.com/in/thegeorgesc/" target="_blank" rel="noreferrer">Georges Casassovici on LinkedIn</a></div></article><article class="card"><a class="card-main" href="memos/morphik.html"><div class="card-top"><span class="decision-pill watch">Watch</span><b>51<small>/100</small></b></div><h2>Morphik</h2><div class="card-logo"><img class="company-logo" src="https://bookface-images.s3.amazonaws.com/small_logos/1a260c523f9c222814023a16c76c6a2b22616cd5.png" alt="Morphik logo"></div><p>AI workers for Skilled Nursing and Senior Living Operations</p><small class="card-meta">Y Combinator · YC Spring 2025 company listing</small></a><div class="founder-links"><a href="https://www.linkedin.com/in/adityav369/" target="_blank" rel="noreferrer">Adityavardhan Agrawal on LinkedIn</a><a href="https://www.linkedin.com/in/arnavagrawal03/" target="_blank" rel="noreferrer">Arnav Agrawal on LinkedIn</a></div></article><article class="card"><a class="card-main" href="memos/saga-ai.html"><div class="card-top"><span class="decision-pill pass">Pass</span><b>47<small>/100</small></b></div><h2>Saga AI</h2><div class="card-logo"><img class="company-logo" src="https://bookface-images.s3.amazonaws.com/small_logos/072186e7f08d3f47c6fb58088ebab611a4e67cd8.png" alt="Saga AI logo"></div><p>Voice Agents for Healthcare Operations</p><small class="card-meta">Y Combinator · YC Winter 2024 company listing</small></a><div class="founder-links"><a href="https://linkedin.com/in/jenica-zhong" target="_blank" rel="noreferrer">Jenica Zhong on LinkedIn</a></div></article><article class="card"><a class="card-main" href="memos/prosper.html"><div class="card-top"><span class="decision-pill watch">Watch</span><b>58<small>/100</small></b></div><h2>Prosper</h2><div class="card-logo"><img class="company-logo" src="https://bookface-images.s3.amazonaws.com/small_logos/dbf5a3fe66d78955d591f3cbd3eee3f1635749ff.png" alt="Prosper logo"></div><p>AI Phone Agents for Healthcare Operations</p><small class="card-meta">Y Combinator · YC Summer 2023 company listing</small></a><div class="founder-links"><a href="https://linkedin.com/in/xavierdegracia" target="_blank" rel="noreferrer">Xavier de Gracia on LinkedIn</a><a href="https://linkedin.com/in/mingot" target="_blank" rel="noreferrer">Josep Mingot on LinkedIn</a></div></article><article class="card"><a class="card-main" href="memos/cair-health.html"><div class="card-top"><span class="decision-pill pass">Pass</span><b>39<small>/100</small></b></div><h2>Cair Health</h2><div class="card-logo"><img class="company-logo" src="https://bookface-images.s3.amazonaws.com/small_logos/174cf352bddd34701bef4a958ce1e21e7d49de3d.png" alt="Cair Health logo"></div><p>AI Agents for Healthcare RCM</p><small class="card-meta">Y Combinator · YC Summer 2023 company listing</small></a><div class="founder-links"><a href="https://www.linkedin.com/in/shehbazvirk/" target="_blank" rel="noreferrer">Shehbaz Virk on LinkedIn</a><a href="https://linkedin.com/in/ishanbalakrishnan" target="_blank" rel="noreferrer">Ishan Balakrishnan on LinkedIn</a></div></article><article class="card"><a class="card-main" href="memos/latent.html"><div class="card-top"><span class="decision-pill pass">Pass</span><b>47<small>/100</small></b></div><h2>Latent</h2><div class="card-logo"><img class="company-logo" src="https://bookface-images.s3.amazonaws.com/small_logos/d464e72e759603ce78169d56b1ef679252bf2dae.png" alt="Latent logo"></div><p>Medical language models to automate healthcare operations</p><small class="card-meta">Y Combinator · YC Winter 2023 company listing</small></a><div class="founder-links"><a href="https://linkedin.com/in/rj254" target="_blank" rel="noreferrer">Rishabh Jain on LinkedIn</a><a href="https://www.linkedin.com/in/ssomasundaram/" target="_blank" rel="noreferrer">Sri Somasundaram on LinkedIn</a></div></article></div></main></body></html>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DealScout run</title>
+    <style>
+        :root {
+            --ink: #1b292d;
+            --paper: #f7f2e8;
+            --surface: #fffdf8;
+            --line: #ddd4c2;
+            --muted: #657176;
+            --teal: #176c68;
+            --green: #247054;
+            --green-bg: #e3f0e8;
+            --amber: #9c6100;
+            --amber-bg: #fff1d5;
+            --red: #a63c36;
+            --red-bg: #f9e3e0
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: radial-gradient(circle at 92% 2%, #dbeade 0, transparent 28%), radial-gradient(circle at 8% 25%, #f3e5cc 0, transparent 24%), var(--paper);
+            color: var(--ink);
+            font: 17px/1.52 Baskerville, "Iowan Old Style", Georgia, serif
+        }
+
+        .memo {
+            max-width: 1040px;
+            margin: auto;
+            padding: 52px 28px 88px
+        }
+
+        .memo-header {
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .topline,
+        .hero,
+        .card-top,
+        .section-heading {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px
+        }
+
+        .eyebrow,
+        .section-kicker {
+            margin: 0;
+            font: 700 11px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+            letter-spacing: .13em;
+            color: var(--teal)
+        }
+
+        h1 {
+            max-width: 720px;
+            margin: 15px 0 10px;
+            font-size: clamp(44px, 6vw, 68px);
+            line-height: .98;
+            letter-spacing: -.045em
+        }
+
+        .lede {
+            max-width: 670px;
+            margin: 0;
+            color: #405257;
+            font-size: 22px;
+            line-height: 1.35
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 22px
+        }
+
+        .tags span,
+        .tags a {
+            padding: 5px 9px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: rgba(255, 253, 248, .72);
+            color: var(--muted);
+            font: 600 11px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+            text-decoration: none
+        }
+
+        .tags a {
+            color: var(--teal);
+            border-color: #a9ceca
+        }
+
+        .hero {
+            margin-top: 18px
+        }
+
+        .company-mark,
+        .card-logo {
+            display: grid;
+            width: 68px;
+            height: 68px;
+            place-items: center;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            background: var(--surface);
+            box-shadow: 4px 4px 0 #eadfca
+        }
+
+        .company-logo {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain
+        }
+
+        .company-initials {
+            display: grid;
+            width: 100%;
+            height: 100%;
+            place-items: center;
+            background: #e6efeb;
+            color: var(--teal);
+            font: 800 20px ui-sans-serif, system-ui, sans-serif
+        }
+
+        .score-card {
+            min-width: 144px;
+            padding: 18px 16px 16px;
+            border: 1px solid var(--line);
+            background: var(--surface);
+            box-shadow: 4px 4px 0 #eadfca
+        }
+
+        .score-card small {
+            display: block;
+            color: var(--muted);
+            font: 700 10px ui-monospace, SFMono-Regular, Menlo, monospace;
+            letter-spacing: .08em
+        }
+
+        .score-card strong {
+            font: 700 52px/.92 ui-sans-serif, system-ui, sans-serif;
+            letter-spacing: -.07em
+        }
+
+        .score-card span {
+            color: var(--muted);
+            font: 700 13px ui-sans-serif, system-ui, sans-serif
+        }
+
+        .decision-pill {
+            display: inline-block;
+            width: max-content;
+            padding: 7px 10px;
+            border-radius: 999px;
+            font: 800 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+            letter-spacing: .08em;
+            text-transform: uppercase
+        }
+
+        .decision-pill.pass {
+            background: var(--red-bg);
+            color: var(--red)
+        }
+
+        .decision-pill.watch {
+            background: var(--amber-bg);
+            color: var(--amber)
+        }
+
+        .decision-pill.take-a-meeting {
+            background: var(--green-bg);
+            color: var(--green)
+        }
+
+        section,
+        .callout {
+            margin-top: 28px;
+            padding-top: 25px;
+            border-top: 1px solid var(--line)
+        }
+
+        h2 {
+            margin: 4px 0 10px;
+            font: 800 22px/1.15 ui-sans-serif, system-ui, sans-serif;
+            letter-spacing: -.035em
+        }
+
+        .callout {
+            padding: 23px 25px;
+            border: 1px solid var(--line);
+            background: var(--surface);
+            border-left: 5px solid var(--teal)
+        }
+
+        .callout.pass {
+            border-left-color: var(--red)
+        }
+
+        .callout.watch {
+            border-left-color: var(--amber)
+        }
+
+        .callout.take-a-meeting {
+            border-left-color: var(--green)
+        }
+
+        .callout h2 {
+            margin-top: 5px
+        }
+
+        .callout p:last-child {
+            max-width: 800px;
+            margin: 0;
+            font-size: 19px
+        }
+
+        .section-note {
+            max-width: 300px;
+            margin: 0;
+            color: var(--muted);
+            font: 13px/1.35 ui-sans-serif, system-ui, sans-serif
+        }
+
+        .breakdown {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 12px
+        }
+
+        .meter {
+            padding: 14px 13px;
+            border: 1px solid var(--line);
+            background: var(--surface)
+        }
+
+        .meter>div {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            font: 700 12px/1.25 ui-sans-serif, system-ui, sans-serif
+        }
+
+        .meter b {
+            white-space: nowrap
+        }
+
+        .meter i {
+            display: block;
+            height: 7px;
+            margin-top: 12px;
+            overflow: hidden;
+            border-radius: 9px;
+            background: #edf0ed
+        }
+
+        .meter em {
+            display: block;
+            height: 100%;
+            border-radius: 9px
+        }
+
+        .meter.strong em {
+            background: var(--green)
+        }
+
+        .meter.mixed em {
+            background: var(--amber)
+        }
+
+        .meter.weak em {
+            background: var(--red)
+        }
+
+        .drivers,
+        .grid,
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px
+        }
+
+        .driver {
+            padding: 16px 18px;
+            border: 1px solid var(--line);
+            background: var(--surface)
+        }
+
+        .driver>p {
+            margin: 0 0 10px;
+            font: 800 10px ui-monospace, SFMono-Regular, Menlo, monospace;
+            letter-spacing: .1em
+        }
+
+        .driver.strengths>p {
+            color: var(--green)
+        }
+
+        .driver.concerns>p {
+            color: var(--red)
+        }
+
+        .driver ul {
+            display: grid;
+            gap: 8px;
+            margin: 0;
+            padding: 0;
+            list-style: none
+        }
+
+        .driver li {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            font: 14px ui-sans-serif, system-ui, sans-serif
+        }
+
+        .grid {
+            margin-top: 0
+        }
+
+        .grid section {
+            margin: 0;
+            padding: 20px 0 0
+        }
+
+        .grid p {
+            margin: 0
+        }
+
+        .founder-section {
+            padding: 20px;
+            border: 1px solid var(--line);
+            background: var(--surface)
+        }
+
+        .founder-section h2 {
+            font-size: 18px
+        }
+
+        .founder-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px
+        }
+
+        .founder-links a {
+            padding: 7px 9px;
+            border: 1px solid #a9ceca;
+            border-radius: 4px;
+            color: var(--teal);
+            font: 700 12px ui-sans-serif, system-ui, sans-serif;
+            text-decoration: none
+        }
+
+        .evidence {
+            display: grid;
+            gap: 10px
+        }
+
+        .evidence a,
+        .card {
+            color: inherit;
+            text-decoration: none;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            padding: 16px;
+            display: grid;
+            gap: 6px
+        }
+
+        .evidence a:hover,
+        .card:hover {
+            border-color: #91bdb8
+        }
+
+        .evidence b {
+            font: 800 10px ui-monospace, SFMono-Regular, Menlo, monospace;
+            letter-spacing: .08em;
+            color: var(--teal);
+            text-transform: uppercase
+        }
+
+        .cards {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            margin-top: 34px
+        }
+
+        .card {
+            min-height: 215px
+        }
+
+        .card-main {
+            display: grid;
+            gap: 6px;
+            color: inherit;
+            text-decoration: none
+        }
+
+        .card-top {
+            align-items: center
+        }
+
+        .card-top>b {
+            font: 800 26px/1 ui-sans-serif, system-ui, sans-serif;
+            letter-spacing: -.06em
+        }
+
+        .card-top>b small {
+            color: var(--muted);
+            font: 700 11px ui-sans-serif, system-ui, sans-serif;
+            letter-spacing: 0
+        }
+
+        .card h2 {
+            margin: 18px 0 0;
+            font-size: 24px
+        }
+
+        .card-logo {
+            width: 38px;
+            height: 38px;
+            box-shadow: none
+        }
+
+        .card-logo .company-initials {
+            font-size: 12px
+        }
+
+        .card p {
+            margin: 0;
+            color: #4f5e61
+        }
+
+        .card-meta {
+            margin-top: auto;
+            color: var(--muted);
+            font: 11px/1.35 ui-monospace, SFMono-Regular, Menlo, monospace
+        }
+
+        @media(max-width:760px) {
+            .breakdown {
+                grid-template-columns: repeat(2, minmax(0, 1fr))
+            }
+
+            .cards {
+                grid-template-columns: repeat(2, minmax(0, 1fr))
+            }
+        }
+
+        @media(max-width:560px) {
+            .memo {
+                padding: 32px 18px 60px
+            }
+
+            .topline,
+            .hero,
+            .section-heading {
+                display: grid;
+                grid-template-columns: 1fr
+            }
+
+            .score-card {
+                width: max-content
+            }
+
+            .lede {
+                font-size: 19px
+            }
+
+            .breakdown,
+            .drivers,
+            .grid,
+            .cards {
+                grid-template-columns: 1fr
+            }
+
+            .section-note {
+                max-width: none
+            }
+
+            .card {
+                min-height: auto
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="memo">
+        <header>
+            <p class="eyebrow">DEALSCOUT / PIPELINE RUN</p>
+            <h1>health care operation</h1>
+            <p class="lede">11 researched startup candidates</p>
+        </header>
+        <div class="cards">
+            <article class="card"><a class="card-main" href="memos/care-gp.html">
+                    <div class="card-top"><span class="decision-pill watch">Watch</span><b>58<small>/100</small></b>
+                    </div>
+                    <h2>Care GP</h2>
+                    <div class="card-logo"><img class="company-logo"
+                            src="https://bookface-images.s3.amazonaws.com/small_logos/3f871fa8c32b501e71ef06d881893d564e003fbd.png"
+                            alt="Care GP logo"></div>
+                    <p>AI agents to run primary healthcare operations</p><small class="card-meta">Y Combinator · YC
+                        Summer 2026 company listing</small>
+                </a>
+                <div class="founder-links"><a href="https://www.linkedin.com/in/melvinchen/" target="_blank"
+                        rel="noreferrer">Melvin Chen on LinkedIn</a></div>
+            </article>
+            <article class="card"><a class="card-main" href="memos/ruma-care.html">
+                    <div class="card-top"><span class="decision-pill pass">Pass</span><b>31<small>/100</small></b></div>
+                    <h2>Ruma Care</h2>
+                    <div class="card-logo"><img class="company-logo"
+                            src="https://bookface-images.s3.amazonaws.com/small_logos/34241c57767208be0982fd04163c52d69a91a82c.png"
+                            alt="Ruma Care logo"></div>
+                    <p>The operations stack for biologic infusion clinics</p><small class="card-meta">Y Combinator · YC
+                        Winter 2026 company listing</small>
+                </a>
+                <div class="founder-links"><a href="https://www.linkedin.com/in/mengfei-shen/" target="_blank"
+                        rel="noreferrer">Meng Fei Shen on LinkedIn</a></div>
+            </article>
+            <article class="card"><a class="card-main" href="memos/clicks-health.html">
+                    <div class="card-top"><span class="decision-pill watch">Watch</span><b>56<small>/100</small></b>
+                    </div>
+                    <h2>Clicks Health</h2>
+                    <div class="card-logo"><img class="company-logo"
+                            src="https://bookface-images.s3.amazonaws.com/small_logos/9ba947944afd3b1dfe85a7f3891e69a0b39e5fe9.png"
+                            alt="Clicks Health logo"></div>
+                    <p>AI agents for your healthcare back-office operations.</p><small class="card-meta">Y Combinator ·
+                        YC Fall 2025 company listing</small>
+                </a>
+                <div class="founder-links"><a href="https://www.linkedin.com/in/dominik-helmreich-30574a1b0/"
+                        target="_blank" rel="noreferrer">Dominik Helmreich on LinkedIn</a><a
+                        href="https://www.linkedin.com/in/oliverkn/" target="_blank" rel="noreferrer">Oliver Knapp on
+                        LinkedIn</a></div>
+            </article>
+            <article class="card"><a class="card-main" href="memos/scheduling-wizard.html">
+                    <div class="card-top"><span class="decision-pill watch">Watch</span><b>56<small>/100</small></b>
+                    </div>
+                    <h2>Scheduling Wizard</h2>
+                    <div class="card-logo"><img class="company-logo"
+                            src="https://bookface-images.s3.amazonaws.com/small_logos/a941d8028fafa95dd706134a19099c733b0726ff.png"
+                            alt="Scheduling Wizard logo"></div>
+                    <p>Logistics infrastructure to modernize healthcare operations</p><small class="card-meta">Y
+                        Combinator · YC Winter 2026 company listing</small>
+                </a>
+                <div class="founder-links"><a href="https://www.linkedin.com/in/sam-oberly" target="_blank"
+                        rel="noreferrer">Samuel Oberly on LinkedIn</a><a
+                        href="https://www.linkedin.com/in/zachary-dermody-41238a202" target="_blank"
+                        rel="noreferrer">Zachary Dermody on LinkedIn</a><a
+                        href="https://www.linkedin.com/in/abdelrahman-hamimi-2064ab202/" target="_blank"
+                        rel="noreferrer">Abdelrahman Hamimi on LinkedIn</a></div>
+            </article>
+            <article class="card"><a class="card-main" href="memos/norra.html">
+                    <div class="card-top"><span class="decision-pill pass">Pass</span><b>33<small>/100</small></b></div>
+                    <h2>Norra</h2>
+                    <div class="card-logo"><img class="company-logo"
+                            src="https://bookface-images.s3.amazonaws.com/small_logos/e02b3e396920957fb568e6c31817205cde3dbd2a.png"
+                            alt="Norra logo"></div>
+                    <p>Automating equipment operations for nursing facilities</p><small class="card-meta">Y Combinator ·
+                        YC Fall 2025 company listing</small>
+                </a>
+                <div class="founder-links"><a href="https://www.linkedin.com/in/ben-rubin-b771b8237/" target="_blank"
+                        rel="noreferrer">Ben Rubin on LinkedIn</a><a href="https://www.linkedin.com/in/yining-z/"
+                        target="_blank" rel="noreferrer">Yining Zhang on LinkedIn</a></div>
+            </article>
+            <article class="card"><a class="card-main" href="memos/novoflow.html">
+                    <div class="card-top"><span class="decision-pill pass">Pass</span><b>56<small>/100</small></b></div>
+                    <h2>Novoflow</h2>
+                    <div class="card-logo"><img class="company-logo"
+                            src="https://bookface-images.s3.amazonaws.com/small_logos/5dc1e2e5cc8a224ba29a91be64f14ab1fbc9cde3.png"
+                            alt="Novoflow logo"></div>
+                    <p>Computer-using agents for healthcare operations</p><small class="card-meta">Y Combinator · YC
+                        Spring 2025 company listing</small>
+                </a>
+                <div class="founder-links"><a href="https://www.linkedin.com/in/mathieurihet/" target="_blank"
+                        rel="noreferrer">Mathieu Rihet on LinkedIn</a><a href="https://www.linkedin.com/in/thegeorgesc/"
+                        target="_blank" rel="noreferrer">Georges Casassovici on LinkedIn</a></div>
+            </article>
+            <article class="card"><a class="card-main" href="memos/morphik.html">
+                    <div class="card-top"><span class="decision-pill watch">Watch</span><b>51<small>/100</small></b>
+                    </div>
+                    <h2>Morphik</h2>
+                    <div class="card-logo"><img class="company-logo"
+                            src="https://bookface-images.s3.amazonaws.com/small_logos/1a260c523f9c222814023a16c76c6a2b22616cd5.png"
+                            alt="Morphik logo"></div>
+                    <p>AI workers for Skilled Nursing and Senior Living Operations</p><small class="card-meta">Y
+                        Combinator · YC Spring 2025 company listing</small>
+                </a>
+                <div class="founder-links"><a href="https://www.linkedin.com/in/adityav369/" target="_blank"
+                        rel="noreferrer">Adityavardhan Agrawal on LinkedIn</a><a
+                        href="https://www.linkedin.com/in/arnavagrawal03/" target="_blank" rel="noreferrer">Arnav
+                        Agrawal on LinkedIn</a></div>
+            </article>
+            <article class="card"><a class="card-main" href="memos/saga-ai.html">
+                    <div class="card-top"><span class="decision-pill pass">Pass</span><b>47<small>/100</small></b></div>
+                    <h2>Saga AI</h2>
+                    <div class="card-logo"><img class="company-logo"
+                            src="https://bookface-images.s3.amazonaws.com/small_logos/072186e7f08d3f47c6fb58088ebab611a4e67cd8.png"
+                            alt="Saga AI logo"></div>
+                    <p>Voice Agents for Healthcare Operations</p><small class="card-meta">Y Combinator · YC Winter 2024
+                        company listing</small>
+                </a>
+                <div class="founder-links"><a href="https://linkedin.com/in/jenica-zhong" target="_blank"
+                        rel="noreferrer">Jenica Zhong on LinkedIn</a></div>
+            </article>
+            <article class="card"><a class="card-main" href="memos/prosper.html">
+                    <div class="card-top"><span class="decision-pill watch">Watch</span><b>58<small>/100</small></b>
+                    </div>
+                    <h2>Prosper</h2>
+                    <div class="card-logo"><img class="company-logo"
+                            src="https://bookface-images.s3.amazonaws.com/small_logos/dbf5a3fe66d78955d591f3cbd3eee3f1635749ff.png"
+                            alt="Prosper logo"></div>
+                    <p>AI Phone Agents for Healthcare Operations</p><small class="card-meta">Y Combinator · YC Summer
+                        2023 company listing</small>
+                </a>
+                <div class="founder-links"><a href="https://linkedin.com/in/xavierdegracia" target="_blank"
+                        rel="noreferrer">Xavier de Gracia on LinkedIn</a><a href="https://linkedin.com/in/mingot"
+                        target="_blank" rel="noreferrer">Josep Mingot on LinkedIn</a></div>
+            </article>
+            <article class="card"><a class="card-main" href="memos/cair-health.html">
+                    <div class="card-top"><span class="decision-pill pass">Pass</span><b>39<small>/100</small></b></div>
+                    <h2>Cair Health</h2>
+                    <div class="card-logo"><img class="company-logo"
+                            src="https://bookface-images.s3.amazonaws.com/small_logos/174cf352bddd34701bef4a958ce1e21e7d49de3d.png"
+                            alt="Cair Health logo"></div>
+                    <p>AI Agents for Healthcare RCM</p><small class="card-meta">Y Combinator · YC Summer 2023 company
+                        listing</small>
+                </a>
+                <div class="founder-links"><a href="https://www.linkedin.com/in/shehbazvirk/" target="_blank"
+                        rel="noreferrer">Shehbaz Virk on LinkedIn</a><a href="https://linkedin.com/in/ishanbalakrishnan"
+                        target="_blank" rel="noreferrer">Ishan Balakrishnan on LinkedIn</a></div>
+            </article>
+            <article class="card"><a class="card-main" href="memos/latent.html">
+                    <div class="card-top"><span class="decision-pill pass">Pass</span><b>47<small>/100</small></b></div>
+                    <h2>Latent</h2>
+                    <div class="card-logo"><img class="company-logo"
+                            src="https://bookface-images.s3.amazonaws.com/small_logos/d464e72e759603ce78169d56b1ef679252bf2dae.png"
+                            alt="Latent logo"></div>
+                    <p>Medical language models to automate healthcare operations</p><small class="card-meta">Y
+                        Combinator · YC Winter 2023 company listing</small>
+                </a>
+                <div class="founder-links"><a href="https://linkedin.com/in/rj254" target="_blank"
+                        rel="noreferrer">Rishabh Jain on LinkedIn</a><a
+                        href="https://www.linkedin.com/in/ssomasundaram/" target="_blank" rel="noreferrer">Sri
+                        Somasundaram on LinkedIn</a></div>
+            </article>
+        </div>
+    </main>
+</body>
+
+</html>

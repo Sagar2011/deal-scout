@@ -61,3 +61,7 @@ The thesis, architecture, and AI workflow trail are in `docs/thesis.md`, `docs/a
 ## Source Layout
 
 `src/index.ts` is the entry point. `cli/` parses commands, `core/` owns shared types/config/storage, `sources/` owns public-source clients, `research/` captures evidence and YC profile enrichment, `prompts/` owns independently editable LLM instructions, `analysis/` owns research planning, analysis, and investment decisions, `reports/` renders standalone HTML reports, and `pipeline/` orchestrates the run. Tests are grouped into `tests/unit/` and `tests/integration/`.
+
+
+Demo Vido:
+<div style="position: relative; padding-bottom: 64.86161251504213%; height: 0;"><iframe src="https://www.loom.com/embed/649f85a0270a4d778805ca9c73b475c4" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
