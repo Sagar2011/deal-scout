@@ -11,6 +11,8 @@ const summary = await runPipeline({
   rootDir: config.runsDir,
   llmApiKey: config.llmApiKey,
   llmModel: config.llmModel,
+  concurrency: config.concurrency,
+  limit: config.candidateLimit,
 });
 
 console.log(

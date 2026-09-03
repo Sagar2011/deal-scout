@@ -1,0 +1,25 @@
+{
+  "topic": "health care operation",
+  "thesis": "Seed-stage startups whose software or services improve the operational efficiency, administration, or workflow of health care delivery organizations.",
+  "targetCustomer": "Health care providers, payers, and ancillary operational teams that run day-to-day care delivery or administrative functions.",
+  "inclusionCriteria": [
+    "Software or services targeting back-office, clinical operations, scheduling, billing, or supply-chain workflows within health care",
+    "Solutions addressing scheduling, staffing, revenue cycle, patient flow, or compliance for care delivery organizations",
+    "Tools that automate administrative, clinical workflow, or facility operations tasks for health care providers and payers"
+  ],
+  "exclusions": [
+    "Pure clinical or biomedical research, drug discovery, or therapeutic development companies",
+    "Consumer health, wellness, fitness, or direct patient-facing apps without an operations focus",
+    "Medical devices, diagnostics hardware, or laboratory instrumentation vendors",
+    "Health insurance plan providers and large incumbent enterprise health IT platforms"
+  ],
+  "queries": [
+    "health care operation",
+    "healthcare operations workflow automation",
+    "clinic scheduling and patient flow software",
+    "revenue cycle management for medical practices",
+    "hospital staffing and scheduling platform",
+    "healthcare back office automation startup",
+    "healthcare compliance and credentialing software"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "profileUrl": "https://www.ycombinator.com/companies/morphik",
+  "description": "AI workers for Skilled Nursing and Senior Living Operations. Founded in 2025 by Adityavardhan Agrawal and Arnav Agrawal, Morphik has 2 employees based in San Francisco.",
+  "teamSize": 2,
+  "logoUrl": "https://bookface-images.s3.amazonaws.com/small_logos/1a260c523f9c222814023a16c76c6a2b22616cd5.png",
+  "founders": [
+    {
+      "name": "Adityavardhan Agrawal",
+      "title": "Founder",
+      "bio": "Building Morphik. Prev @MongoDB, worked on scalable database algorithms. Graduated Cornell University in 2022.",
+      "linkedinUrl": "https://www.linkedin.com/in/adityav369/"
+    },
+    {
+      "name": "Arnav Agrawal",
+      "title": "Founder",
+      "bio": "I was one of 3 students in all of India to receive the Tata Scholarship, which allowed me to study Computer Science at Cornell. I dropped out to build Morphik after experiencing terrible RAG and enterprise search first-hand during my co-op at Amazon Robotics. While there, I developed a configuration compiler that sped-up deployment of the Sparrow and Cardinal stations to new locations.   I also developed and taught a course in ML Operations and AI as an undergrad at Cornell.",
+      "linkedinUrl": "https://www.linkedin.com/in/arnavagrawal03/"
+    }
+  ]
+}

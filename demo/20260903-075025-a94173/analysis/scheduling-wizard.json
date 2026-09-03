@@ -1,0 +1,67 @@
+{
+  "analysis": {
+    "team": "Samuel Oberly (Founder/CEO): Johns Hopkins and Cambridge trained Mathematician. Building the algorithms that will drive the future of healthcare administration and resource allocation.   I am an award-winning and published mathematician, including a civilian service medal for my logistics algorithms built while working for the Department of Defense. I received four degrees in my four years at Johns Hopkins and have deep expertise in algorithm development. Zachary Dermody (Founder/COO): Co-Founder and COO of Scheduling Wizard. Johns Hopkins University, 2024. B.A. in Economics with a minor in Computer Science. Former logistics roles at Amazon and McMaster-Carr. Interested in technology, philosophy, and building the future. Abdelrahman Hamimi (Founder/CTO): Co-Founder & CTO of Scheduling Wizard | MS, BS Computer science and BA Economics from Johns Hopkins University (2025) | AWS Cloud Solutions Architect Certified",
+    "product": "Logistics infrastructure to modernize healthcare operations. Founded in 2024 by Zachary Dermody, Abdelrahman Hamimi, and Samuel Oberly, Scheduling Wizard has 3 employees based in Washington, DC, USA.",
+    "market": "The collected source does not establish the initial market.",
+    "traction": "YC Winter 2026 company listing",
+    "risks": ["Company claims have not been independently validated."],
+    "openQuestions": [
+      "Who are the founders and what is their relevant operating experience?",
+      "What evidence supports retention and willingness to pay?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.2,
+      "topicFit": 0.9,
+      "technicalDepth": 0.5,
+      "signalStrength": 0.3,
+      "whyNow": 0.8
+    }
+  },
+  "score": {
+    "total": 56,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "Health Care Operation fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 13,
+        "maximum": 25
+      },
+      {
+        "label": "Health Care Operation fit",
+        "score": 20,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 12,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 11,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 0,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Watch",
+    "rationale": "Scheduling Wizard has a defined workflow (Logistics infrastructure to modernize healthcare operations) and public founder evidence for 3 founders. The current record does not establish customer adoption, retention, or market-timing evidence.",
+    "mindChanges": [
+      "Confirm Scheduling Wizard's paid customer adoption and retention.",
+      "Validate measurable ROI for logistics infrastructure to modernize healthcare operations.",
+      "Validate the founding team's direct experience in this workflow."
+    ]
+  }
+}

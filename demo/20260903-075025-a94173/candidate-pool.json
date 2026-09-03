@@ -1,0 +1,352 @@
+[
+  {
+    "name": "Care GP",
+    "website": "https://caregp.com.au/",
+    "description": "AI agents to run primary healthcare operations",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/care-gp",
+    "signal": "YC Summer 2026 company listing"
+  },
+  {
+    "name": "Ruma Care",
+    "website": "https://rumacare.com",
+    "description": "The operations stack for biologic infusion clinics",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/ruma-care",
+    "signal": "YC Winter 2026 company listing"
+  },
+  {
+    "name": "Clicks Health",
+    "website": "https://www.goclicks.ai/",
+    "description": "AI agents for your healthcare back-office operations.",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/clicks-health",
+    "signal": "YC Fall 2025 company listing"
+  },
+  {
+    "name": "Clara",
+    "website": "http://askclara.com",
+    "description": "AI primary care doctor",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/clara-2",
+    "signal": "YC Spring 2026 company listing"
+  },
+  {
+    "name": "Scheduling Wizard",
+    "website": "https://www.schedulingwiz.com",
+    "description": "Logistics infrastructure to modernize healthcare operations",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/scheduling-wizard",
+    "signal": "YC Winter 2026 company listing"
+  },
+  {
+    "name": "Soren",
+    "website": "https://usesoren.com",
+    "description": "The AI workforce for business operations.",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/soren",
+    "signal": "YC Fall 2025 company listing"
+  },
+  {
+    "name": "Norra",
+    "website": "https://www.norra.io",
+    "description": "Automating equipment operations for nursing facilities",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/norra",
+    "signal": "YC Fall 2025 company listing"
+  },
+  {
+    "name": "Novoflow",
+    "website": "https://www.novoflow.io/",
+    "description": "Computer-using agents for healthcare operations",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/novoflow",
+    "signal": "YC Spring 2025 company listing"
+  },
+  {
+    "name": "Morphik",
+    "website": "https://morphik.ai",
+    "description": "AI workers for Skilled Nursing and Senior Living Operations",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/morphik",
+    "signal": "YC Spring 2025 company listing"
+  },
+  {
+    "name": "Saga AI",
+    "website": "https://usesaga.ai",
+    "description": "Voice Agents for Healthcare Operations",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/saga-ai",
+    "signal": "YC Winter 2024 company listing"
+  },
+  {
+    "name": "Scritch",
+    "website": "https://www.scritchai.com",
+    "description": "AI operating system for veterinary care",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/scritch",
+    "signal": "YC Winter 2024 company listing"
+  },
+  {
+    "name": "Attunement",
+    "website": "http://attunement.ai",
+    "description": "Attunement turns fragmented behavioral health records into structured…",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/attunement",
+    "signal": "YC Winter 2024 company listing"
+  },
+  {
+    "name": "Prosper",
+    "website": "https://www.getprosper.ai?utm_source=yc&utm_medium=directory&utm_campaign=yc_directory",
+    "description": "AI Phone Agents for Healthcare Operations",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/prosper",
+    "signal": "YC Summer 2023 company listing"
+  },
+  {
+    "name": "Cair Health",
+    "website": "https://www.cairhealth.com/",
+    "description": "AI Agents for Healthcare RCM",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/cair-health",
+    "signal": "YC Summer 2023 company listing"
+  },
+  {
+    "name": "Sohar Health",
+    "website": "https://www.soharhealth.com",
+    "description": "AI-powered insurance verification to boost patient conversion.",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/sohar-health",
+    "signal": "YC Summer 2023 company listing"
+  },
+  {
+    "name": "Latent",
+    "website": "https://latenthealth.com",
+    "description": "Medical language models to automate healthcare operations",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/latent",
+    "signal": "YC Winter 2023 company listing"
+  },
+  {
+    "name": "Mantys",
+    "website": "https://www.mantys.io/",
+    "description": "AI agents for healthcare and insurance operations in GCC",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/mantys",
+    "signal": "YC Winter 2023 company listing"
+  },
+  {
+    "name": "Vitalize",
+    "website": "https://vitalize.care",
+    "description": "Transforming how health systems optimize labor",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/vitalize",
+    "signal": "YC Winter 2023 company listing"
+  },
+  {
+    "name": "Avoca Systems",
+    "website": "https://avocasystems.com",
+    "description": "The AI-powered operating system for radiology networks",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/avoca-systems",
+    "signal": "YC Summer 2026 company listing"
+  },
+  {
+    "name": "Radley",
+    "website": "https://radley.health/",
+    "description": "The AI-native radiology practice",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/radley",
+    "signal": "YC Summer 2026 company listing"
+  },
+  {
+    "name": "Omanta",
+    "website": "https://omanta.com/",
+    "description": "A research lab for one",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/omanta",
+    "signal": "YC Summer 2026 company listing"
+  },
+  {
+    "name": "Cova",
+    "website": "https://cova.care/",
+    "description": "Financial infrastructure for family caregiving",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/cova",
+    "signal": "YC Summer 2026 company listing"
+  },
+  {
+    "name": "Floracene",
+    "website": "https://www.floracene.com/",
+    "description": "Vibecode + deploy HIPAA-compliant internal tools, no eng team needed",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/floracene",
+    "signal": "YC Summer 2026 company listing"
+  },
+  {
+    "name": "Filling PDF forms with AI using client-side tool calling",
+    "website": "https://copilot.simplepdf.com/?share=a7d00ad073c75a75d493228e6ff7b11eb3f2d945b6175913e87898ec96ca8076&form=w9&lang=en",
+    "description": "Show HN: Filling PDF forms with AI using client-side tool calling",
+    "source": "Hacker News",
+    "sourceUrl": "https://news.ycombinator.com/item?id=47984675",
+    "signal": "60 HN points",
+    "publishedAt": "2026-05-02T08:54:27.000Z"
+  },
+  {
+    "name": "Filling PDF forms with AI using client-side tool calling",
+    "website": "https://copilot.simplepdf.com/?share=a7d00ad073c75a75d493228e6ff7b11eb3f2d945b6175913e87898ec96ca8076&form=w9&lang=en",
+    "description": "Show HN: Filling PDF forms with AI using client-side tool calling",
+    "source": "Hacker News",
+    "sourceUrl": "https://news.ycombinator.com/item?id=47947347",
+    "signal": "7 HN points",
+    "publishedAt": "2026-04-29T12:22:15.000Z"
+  },
+  {
+    "name": "ChronoGuard–Zero-trust proxy for browser automation with temporal ctrls",
+    "website": "https://github.com/j-raghavan/ChronoGuard",
+    "description": "Show HN: ChronoGuard–Zero-trust proxy for browser automation with temporal ctrls",
+    "source": "Hacker News",
+    "sourceUrl": "https://news.ycombinator.com/item?id=45943156",
+    "signal": "2 HN points",
+    "publishedAt": "2025-11-16T06:11:57.000Z"
+  },
+  {
+    "name": "Oodle – Unified Debugging with OpenSearch and Grafana",
+    "website": "https://blog.oodle.ai/meet-oodle-unified-and-ai-native-observability/",
+    "description": "Show HN: Oodle – Unified Debugging with OpenSearch and Grafana",
+    "source": "Hacker News",
+    "sourceUrl": "https://news.ycombinator.com/item?id=45812312",
+    "signal": "11 HN points",
+    "publishedAt": "2025-11-04T15:49:08.000Z"
+  },
+  {
+    "name": "I built an AI that remembers everything and learns from mistakes",
+    "website": "https://github.com/vac-architector/vac-agi",
+    "description": "Show HN: I built an AI that remembers everything and learns from mistakes",
+    "source": "Hacker News",
+    "sourceUrl": "https://news.ycombinator.com/item?id=44877774",
+    "signal": "2 HN points",
+    "publishedAt": "2025-08-12T15:42:17.000Z"
+  },
+  {
+    "name": "Phases",
+    "website": "https://phases.ai",
+    "description": "Automated clinical trial oversight and execution",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/phases",
+    "signal": "YC Summer 2025 company listing"
+  },
+  {
+    "name": "Clidey",
+    "website": "https://clidey.com",
+    "description": "Turn scattered data into one platform for decision-making",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/clidey",
+    "signal": "YC Spring 2025 company listing"
+  },
+  {
+    "name": "ArchGW – An open-source intelligent proxy server for prompts",
+    "website": "https://github.com/katanemo/archgw",
+    "description": "Show HN: ArchGW – An open-source intelligent proxy server for prompts",
+    "source": "Hacker News",
+    "sourceUrl": "https://news.ycombinator.com/item?id=43259862",
+    "signal": "39 HN points",
+    "publishedAt": "2025-03-04T21:14:56.000Z"
+  },
+  {
+    "name": "Toothy AI",
+    "website": "https://www.toothy.ai/",
+    "description": "AI for insurance verification & billing at dental clinics",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/toothy-ai",
+    "signal": "YC Winter 2025 company listing"
+  },
+  {
+    "name": "YouShift",
+    "website": "https://www.you-shift.com/",
+    "description": "The OS for hospital workforce management",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/youshift",
+    "signal": "YC Winter 2025 company listing"
+  },
+  {
+    "name": "Harbera",
+    "website": "https://harbera.com/",
+    "description": "AI Healthcare Provider Credentialing Software",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/harbera",
+    "signal": "YC Winter 2025 company listing"
+  },
+  {
+    "name": "Ember",
+    "website": "https://www.embercopilot.ai",
+    "description": "AI RCM. Increase net revenue by 16%. ",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/ember",
+    "signal": "YC Fall 2024 company listing"
+  },
+  {
+    "name": "Sample",
+    "website": "https://samplehc.com",
+    "description": "Flexible systems for clinical reasoning.",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/sample",
+    "signal": "YC Winter 2024 company listing"
+  },
+  {
+    "name": "Dime",
+    "website": "https://www.dimehealth.ai/",
+    "description": "Dime automates administrative busywork at healthcare clinics",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/dime-2",
+    "signal": "YC Winter 2024 company listing"
+  },
+  {
+    "name": "Opencall",
+    "website": "https://opencall.ai",
+    "description": "Practice admin run by AI",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/opencall",
+    "signal": "YC Winter 2024 company listing"
+  },
+  {
+    "name": "Simbie AI",
+    "website": "http://www.simbie.ai",
+    "description": "We get patients to their next appointment",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/simbie-ai",
+    "signal": "YC Summer 2023 company listing"
+  },
+  {
+    "name": "Maven Bio",
+    "website": "https://mavenbio.com",
+    "description": "The AI Platform for Life Sciences Intelligence",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/maven-bio",
+    "signal": "YC Summer 2023 company listing"
+  },
+  {
+    "name": "Remy",
+    "website": "https://www.startremy.com/",
+    "description": "Making it simpler for medical clinics to work with insurance",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/remy",
+    "signal": "YC Summer 2023 company listing"
+  },
+  {
+    "name": "Miracle",
+    "website": "http://www.miracleml.com",
+    "description": "Accelerate clinical trials with real-time, actionable insights",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/miracle",
+    "signal": "YC Winter 2023 company listing"
+  },
+  {
+    "name": "Automat",
+    "website": "https://www.runautomat.com/",
+    "description": "Agentic automation that understands context, recovers, and improves.",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/automat",
+    "signal": "YC Winter 2023 company listing"
+  }
+]

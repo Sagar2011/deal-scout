@@ -1,0 +1,14 @@
+{
+  "profileUrl": "https://www.ycombinator.com/companies/corgi-labs",
+  "description": "AI to increase payment acceptance and reduce fraud for businesses. Founded in 2022 by Saif Farooqui, Corgi Labs has 3 employees based in Singapore.",
+  "teamSize": 3,
+  "logoUrl": "https://bookface-images.s3.amazonaws.com/small_logos/48ab8ae360dddc3659ad06077db5d3349b75b91f.png",
+  "founders": [
+    {
+      "name": "Saif Farooqui",
+      "title": "Founder",
+      "bio": "Saif is the founder of Corgi Labs, where he builds modern fraud and payments intelligence for fast-growing businesses. Previously, Saif was a Data Scientist at Stripe, Google and Facebook (now Meta), and a healthcare economist in an earlier life.",
+      "linkedinUrl": "https://www.linkedin.com/in/sfarooqui1/"
+    }
+  ]
+}

@@ -1,12 +1,15 @@
 import type {
   Candidate,
+  CandidateSelection,
   CandidateProfile,
   Evidence,
+  ResearchBrief,
   RunContext,
   StartupAnalysis,
 } from "./models.js";
 import type { MemoInput } from "../reports/memo.js";
 import type { CandidateSource } from "../sources/types.js";
+import type { RunThesis } from "./thesis.js";
 
 export type CandidateEnricher = {
   name: string;
@@ -14,9 +17,32 @@ export type CandidateEnricher = {
   enrich(candidate: Candidate): Promise<CandidateProfile>;
 };
 
+export type EvidenceCollector = {
+  name: string;
+  collect(candidate: Candidate): Promise<Evidence[]>;
+};
+
 export type AnalysisProvider = {
   name: string;
-  analyse(candidate: Candidate, evidence: Evidence[]): Promise<StartupAnalysis>;
+  analyse(
+    candidate: Candidate,
+    evidence: Evidence[],
+    thesis: RunThesis
+  ): Promise<StartupAnalysis>;
+};
+
+export type ResearchPlanner = {
+  name: string;
+  plan(topic: string): Promise<ResearchBrief>;
+};
+
+export type CandidateSelector = {
+  name: string;
+  select(
+    brief: ResearchBrief,
+    candidates: Candidate[],
+    limit: number
+  ): Promise<CandidateSelection>;
 };
 
 export type ReportRenderer = {
@@ -41,6 +67,9 @@ export type RunStore = {
 export type PipelineDependencies = {
   sources: CandidateSource[];
   enrichers: CandidateEnricher[];
+  evidenceCollectors?: EvidenceCollector[];
+  researchPlanner?: ResearchPlanner;
+  candidateSelector?: CandidateSelector;
   analyzer?: AnalysisProvider;
   renderer: ReportRenderer;
   store: RunStore;

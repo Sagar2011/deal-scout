@@ -1,0 +1,376 @@
+[
+  {
+    "name": "Accend",
+    "website": "https://www.withaccend.com/",
+    "description": "AI agents for commercial underwriting at banks and fintechs",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/accend",
+    "signal": "YC Summer 2023 company listing"
+  },
+  {
+    "name": "KelAI",
+    "website": "https://kelaitech.com/",
+    "description": "The AI Quant: Autonomous Alpha Engine for Funds and Traders.",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/kelai",
+    "signal": "YC Spring 2026 company listing"
+  },
+  {
+    "name": "Fenrock AI",
+    "website": "https://fenrock.ai/",
+    "description": "AI agents for banks",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/fenrock-ai",
+    "signal": "YC Winter 2026 company listing"
+  },
+  {
+    "name": "BeeSafe AI",
+    "website": "https://beesafe.ai/",
+    "description": "Frontier AI Defenses for Social Engineering Attacks",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/beesafe-ai",
+    "signal": "YC Winter 2026 company listing"
+  },
+  {
+    "name": "OXH AI – Open-Source AI Crypto Signal Platform with Real-Time Analysis",
+    "website": "https://www.oxher.com",
+    "description": "Show HN: OXH AI – Open-Source AI Crypto Signal Platform with Real-Time Analysis",
+    "source": "Hacker News",
+    "sourceUrl": "https://news.ycombinator.com/item?id=45740985",
+    "signal": "2 HN points",
+    "publishedAt": "2025-10-29T00:05:14.000Z"
+  },
+  {
+    "name": "AI Video Generator",
+    "website": "http://ai-video-gen.org/",
+    "description": "Show HN: AI Video Generator",
+    "source": "Hacker News",
+    "sourceUrl": "https://news.ycombinator.com/item?id=45691699",
+    "signal": "2 HN points",
+    "publishedAt": "2025-10-24T07:01:05.000Z"
+  },
+  {
+    "name": "Selfin",
+    "website": "https://selfin.app",
+    "description": "Building the first AI Bank",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/selfin",
+    "signal": "YC Fall 2025 company listing"
+  },
+  {
+    "name": "Jarmin",
+    "website": "https://jarmin.ai/",
+    "description": "AI Employees for human-level roles",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/jarmin",
+    "signal": "YC Fall 2025 company listing"
+  },
+  {
+    "name": "Splitly – AI Expense Tracker",
+    "website": "https://nexchat.app/",
+    "description": "Show HN: Splitly – AI Expense Tracker",
+    "source": "Hacker News",
+    "sourceUrl": "https://news.ycombinator.com/item?id=45301112",
+    "signal": "1 HN points",
+    "publishedAt": "2025-09-19T12:52:02.000Z"
+  },
+  {
+    "name": "Open-source SDK for AI agent audit trails",
+    "website": "https://www.traceprompt.com/",
+    "description": "Show HN: Open-source SDK for AI agent audit trails",
+    "source": "Hacker News",
+    "sourceUrl": "https://news.ycombinator.com/item?id=45042797",
+    "signal": "1 HN points",
+    "publishedAt": "2025-08-27T17:54:57.000Z"
+  },
+  {
+    "name": "Avallon AI",
+    "website": "https://www.avallon.ai/",
+    "description": "AI agents for insurance claims operations",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/avallon-ai",
+    "signal": "YC Spring 2025 company listing"
+  },
+  {
+    "name": "I built a platform to create private AI agents that only use your data",
+    "website": "https://advantis-ai.pro",
+    "description": "Show HN: I built a platform to create private AI agents that only use your data",
+    "source": "Hacker News",
+    "sourceUrl": "https://news.ycombinator.com/item?id=43269461",
+    "signal": "4 HN points",
+    "publishedAt": "2025-03-05T17:16:53.000Z"
+  },
+  {
+    "name": "AgentScript AI – Build Agents that think in code",
+    "website": "https://github.com/AgentScript-AI/agentscript",
+    "description": "Show HN: AgentScript AI – Build Agents that think in code",
+    "source": "Hacker News",
+    "sourceUrl": "https://news.ycombinator.com/item?id=42646003",
+    "signal": "4 HN points",
+    "publishedAt": "2025-01-09T14:36:16.000Z"
+  },
+  {
+    "name": "Karoo",
+    "website": "https://www.karoo.ca",
+    "description": "AI native consumer lending platform for underserved Americans",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/karoo",
+    "signal": "YC Winter 2025 company listing"
+  },
+  {
+    "name": "Deploy AI code scripts and run them by asking on Slack (YC F24)",
+    "website": "https://recaseai.com/",
+    "description": "Show HN: Deploy AI code scripts and run them by asking on Slack (YC F24)",
+    "source": "Hacker News",
+    "sourceUrl": "https://news.ycombinator.com/item?id=42372102",
+    "signal": "3 HN points",
+    "publishedAt": "2024-12-10T00:09:15.000Z"
+  },
+  {
+    "name": "RiskCube",
+    "website": "https://riskcube.com",
+    "description": "AI insurance company",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/riskcube",
+    "signal": "YC Fall 2024 company listing"
+  },
+  {
+    "name": "Dodo",
+    "website": "https://www.dodo.ai/",
+    "description": "AI agents that handle communications for clinics",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/dodo",
+    "signal": "YC Summer 2024 company listing"
+  },
+  {
+    "name": "Kino AI",
+    "website": "https://kino.ai",
+    "description": "Kino is an AI media manager and video editor for humans and agents.",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/kino-ai",
+    "signal": "YC Summer 2023 company listing"
+  },
+  {
+    "name": "Revamp",
+    "website": "https://www.getrevamp.ai",
+    "description": "AI-Powered Customer Segmentation for eCommerce",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/revamp",
+    "signal": "YC Summer 2023 company listing"
+  },
+  {
+    "name": "SafetyKit",
+    "website": "https://www.safetykit.com/",
+    "description": "AI agents for risk, compliance, and safety",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/safetykit",
+    "signal": "YC Summer 2023 company listing"
+  },
+  {
+    "name": "kapa.ai",
+    "website": "https://www.kapa.ai",
+    "description": "The fastest way to build AI assistants on technical content",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/kapa-ai",
+    "signal": "YC Summer 2023 company listing"
+  },
+  {
+    "name": "Helios",
+    "website": "https://www.usehelios.ai/",
+    "description": "Create your AI workforce",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/helios",
+    "signal": "YC Winter 2023 company listing"
+  },
+  {
+    "name": "Truewind",
+    "website": "https://truewind.ai",
+    "description": "AI-Powered Accounting",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/truewind",
+    "signal": "YC Winter 2023 company listing"
+  },
+  {
+    "name": "Corgi Labs",
+    "website": "https://www.corgilabs.ai",
+    "description": "AI to increase payment acceptance and reduce fraud for businesses",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/corgi-labs",
+    "signal": "YC Winter 2023 company listing"
+  },
+  {
+    "name": "Rally Tax",
+    "website": "https://www.rally.tax/",
+    "description": "AI-native tax platform to save $1T+ for Americans",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/rally-tax",
+    "signal": "YC Winter 2023 company listing"
+  },
+  {
+    "name": "Pacific",
+    "website": "https://gopacific.ai/",
+    "description": "Mass-producing and financing micro data center incredibly quickly.",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/pacific",
+    "signal": "YC Summer 2026 company listing"
+  },
+  {
+    "name": "GeoValida – Spatial Intelligence reality check to find the best land",
+    "website": "https://geovalida.com",
+    "description": "Show HN: GeoValida – Spatial Intelligence reality check to find the best land",
+    "source": "Hacker News",
+    "sourceUrl": "https://news.ycombinator.com/item?id=47883493",
+    "signal": "1 HN points",
+    "publishedAt": "2026-04-23T23:17:44.000Z"
+  },
+  {
+    "name": "Kimpton",
+    "website": "https://kimpton.ai",
+    "description": "Live Evaluation Arenas for Financial Work",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/kimpton",
+    "signal": "YC Spring 2026 company listing"
+  },
+  {
+    "name": "Gatherly – E-signatures and doc collection for professional services",
+    "website": "https://gatherly.shop",
+    "description": "Show HN: Gatherly – E-signatures and doc collection for professional services",
+    "source": "Hacker News",
+    "sourceUrl": "https://news.ycombinator.com/item?id=47085201",
+    "signal": "1 HN points",
+    "publishedAt": "2026-02-20T08:19:30.000Z"
+  },
+  {
+    "name": "GlitchWard – Active defense and CIS hardening for neglected SMB servers",
+    "website": "https://glitchward.com",
+    "description": "Show HN: GlitchWard – Active defense and CIS hardening for neglected SMB servers",
+    "source": "Hacker News",
+    "sourceUrl": "https://news.ycombinator.com/item?id=46793799",
+    "signal": "1 HN points",
+    "publishedAt": "2026-01-28T11:04:15.000Z"
+  },
+  {
+    "name": "I built a firewall for agents because prompt engineering isn't security",
+    "website": "https://github.com/cordum-io/cordum",
+    "description": "Show HN: I built a firewall for agents because prompt engineering isn't security",
+    "source": "Hacker News",
+    "sourceUrl": "https://news.ycombinator.com/item?id=46683661",
+    "signal": "7 HN points",
+    "publishedAt": "2026-01-19T19:54:51.000Z"
+  },
+  {
+    "name": "Kita",
+    "website": "https://www.kita.ai/",
+    "description": "Automate credit assessment for lenders in emerging markets",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/kita",
+    "signal": "YC Winter 2026 company listing"
+  },
+  {
+    "name": "Detail, a Bug Finder",
+    "website": "https://detail.dev/",
+    "description": "Show HN: Detail, a Bug Finder",
+    "source": "Hacker News",
+    "sourceUrl": "https://news.ycombinator.com/item?id=46207852",
+    "signal": "67 HN points",
+    "publishedAt": "2025-12-09T17:35:35.000Z"
+  },
+  {
+    "name": "Narrative",
+    "website": "http://www.narrative-sports.com",
+    "description": "Video Intelligence for Sports",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/usenarrative",
+    "signal": "YC Fall 2025 company listing"
+  },
+  {
+    "name": "Zalos",
+    "website": "https://www.zalos.ai/",
+    "description": "Computer Agents for Finance tasks like reconciliation, in your system!",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/zalos",
+    "signal": "YC Fall 2025 company listing"
+  },
+  {
+    "name": "Traceprompt – open-source SDK for tamper-proof LLM audit trails",
+    "website": "https://github.com/traceprompt/traceprompt-node",
+    "description": "Show HN: Traceprompt – open-source SDK for tamper-proof LLM audit trails",
+    "source": "Hacker News",
+    "sourceUrl": "https://news.ycombinator.com/item?id=44980272",
+    "signal": "2 HN points",
+    "publishedAt": "2025-08-22T01:51:13.000Z"
+  },
+  {
+    "name": "Avelis Health",
+    "website": "https://avelishealth.com",
+    "description": "We audit medical claims for self-insured employers and health plans.",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/avelis-health",
+    "signal": "YC Summer 2025 company listing"
+  },
+  {
+    "name": "I'm 17 and built a voice assistant that networks for you",
+    "website": "https://callwalker.net",
+    "description": "Show HN: I'm 17 and built a voice assistant that networks for you",
+    "source": "Hacker News",
+    "sourceUrl": "https://news.ycombinator.com/item?id=43844977",
+    "signal": "2 HN points",
+    "publishedAt": "2025-04-30T13:31:38.000Z"
+  },
+  {
+    "name": "Blaze",
+    "website": "https://blaze.money",
+    "description": "Agentic Finance for your Life and Business",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/blaze-2",
+    "signal": "YC Summer 2024 company listing"
+  },
+  {
+    "name": "Bayesline",
+    "website": "https://bayesline.com",
+    "description": "Highly customizable and blazingly fast analytics for asset managers.",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/bayesline",
+    "signal": "YC Summer 2024 company listing"
+  },
+  {
+    "name": "Handled",
+    "website": "https://www.itshandled.ai",
+    "description": "Automating post-order operations for e-commerce brands and 3PLs",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/handled",
+    "signal": "YC Summer 2024 company listing"
+  },
+  {
+    "name": "Saturn",
+    "website": "https://www.SaturnOS.com",
+    "description": "Compliance and back office workflows for Wealth Managers.",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/saturn",
+    "signal": "YC Summer 2024 company listing"
+  },
+  {
+    "name": "Greenboard",
+    "website": "https://www.greenboard.com",
+    "description": "Modern OS for the financial back office. ",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/greenboard",
+    "signal": "YC Winter 2024 company listing"
+  },
+  {
+    "name": "Salvy",
+    "website": "https://www.salvy.com.br",
+    "description": "Mobile carrier for businesses in Brazil",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/salvy",
+    "signal": "YC Winter 2024 company listing"
+  },
+  {
+    "name": "Paperplane",
+    "website": "https://www.paperplane.ai/",
+    "description": "Credit risk management platform for builders' merchants",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/paperplane",
+    "signal": "YC Winter 2023 company listing"
+  }
+]

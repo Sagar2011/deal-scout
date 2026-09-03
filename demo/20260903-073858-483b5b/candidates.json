@@ -1,0 +1,90 @@
+[
+  {
+    "name": "Accend",
+    "website": "https://www.withaccend.com/",
+    "description": "AI agents for commercial underwriting at banks and fintechs",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/accend",
+    "signal": "YC Summer 2023 company listing"
+  },
+  {
+    "name": "KelAI",
+    "website": "https://kelaitech.com/",
+    "description": "The AI Quant: Autonomous Alpha Engine for Funds and Traders.",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/kelai",
+    "signal": "YC Spring 2026 company listing"
+  },
+  {
+    "name": "Fenrock AI",
+    "website": "https://fenrock.ai/",
+    "description": "AI agents for banks",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/fenrock-ai",
+    "signal": "YC Winter 2026 company listing"
+  },
+  {
+    "name": "Selfin",
+    "website": "https://selfin.app",
+    "description": "Building the first AI Bank",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/selfin",
+    "signal": "YC Fall 2025 company listing"
+  },
+  {
+    "name": "Avallon AI",
+    "website": "https://www.avallon.ai/",
+    "description": "AI agents for insurance claims operations",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/avallon-ai",
+    "signal": "YC Spring 2025 company listing"
+  },
+  {
+    "name": "Karoo",
+    "website": "https://www.karoo.ca",
+    "description": "AI native consumer lending platform for underserved Americans",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/karoo",
+    "signal": "YC Winter 2025 company listing"
+  },
+  {
+    "name": "RiskCube",
+    "website": "https://riskcube.com",
+    "description": "AI insurance company",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/riskcube",
+    "signal": "YC Fall 2024 company listing"
+  },
+  {
+    "name": "Truewind",
+    "website": "https://truewind.ai",
+    "description": "AI-Powered Accounting",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/truewind",
+    "signal": "YC Winter 2023 company listing"
+  },
+  {
+    "name": "Corgi Labs",
+    "website": "https://www.corgilabs.ai",
+    "description": "AI to increase payment acceptance and reduce fraud for businesses",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/corgi-labs",
+    "signal": "YC Winter 2023 company listing"
+  },
+  {
+    "name": "Rally Tax",
+    "website": "https://www.rally.tax/",
+    "description": "AI-native tax platform to save $1T+ for Americans",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/rally-tax",
+    "signal": "YC Winter 2023 company listing"
+  },
+  {
+    "name": "Kita",
+    "website": "https://www.kita.ai/",
+    "description": "Automate credit assessment for lenders in emerging markets",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/kita",
+    "signal": "YC Winter 2026 company listing"
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "profileUrl": "https://www.ycombinator.com/companies/novoflow",
+  "description": "Computer-using agents for healthcare operations. Founded in 2025 by Georges Casassovici and Mathieu Rihet, Novoflow has 6 employees based in San Francisco. Novoflow is hiring for 4 roles in engineering and sales.",
+  "teamSize": 6,
+  "logoUrl": "https://bookface-images.s3.amazonaws.com/small_logos/5dc1e2e5cc8a224ba29a91be64f14ab1fbc9cde3.png",
+  "founders": [
+    {
+      "name": "Mathieu Rihet",
+      "title": "Founder/CEO",
+      "bio": "Emory University Scholar. Previously a medical interpreter. Building AI employees to automate 99% of manual workflows in medical clinics.",
+      "linkedinUrl": "https://www.linkedin.com/in/mathieurihet/"
+    },
+    {
+      "name": "Georges Casassovici",
+      "title": "Founder/CTO",
+      "bio": "Always take small steps in the right direction. Building Novoflow to solve healthcare interoperability in the next 5 years.",
+      "linkedinUrl": "https://www.linkedin.com/in/thegeorgesc/"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "profileUrl": "https://www.ycombinator.com/companies/riskcube",
+  "description": "AI insurance company. Founded in 2024 by Andrei Craciunescu, RiskCube has 3 employees based in San Francisco.",
+  "teamSize": 3,
+  "logoUrl": "https://bookface-images.s3.amazonaws.com/small_logos/93b1b4fbe4b8807a5770f0fad5c76f3b8685dee9.png",
+  "founders": [
+    {
+      "name": "Andrei Craciunescu",
+      "title": "Founder/CEO",
+      "bio": "Andrei, Founder & CEO. Previously in Risk & Analytics at WTW (Willis Towers Watson), one of the world's largest insurance brokers. He holds an M.Sc. in Mathematics from LMU Munich and conducted PhD-level research in financial mathematics at the Technical University of Munich (TUM). Licensed insurance broker in CA, TX, and DE. Based in San Francisco.",
+      "linkedinUrl": "https://www.linkedin.com/in/andrei-craciunescu/"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "analysis": {
+    "team": "Two co‑founders (Adityavardhan Agrawal, Arnav Agrawal) with backgrounds at MongoDB, Cornell and Amazon Robotics; the company has 2 employees based in San Francisco.",
+    "product": "AI‑driven workers that automate repetitive administrative tasks (accounts payable, billing & collections, nurse admin work) for Skilled Nursing and Senior Living operators, aiming to increase their Net Operating Income (NOI).",
+    "market": "Skilled Nursing and Senior Living delivery organizations (health‑care operation sector).",
+    "traction": "Listed in Y Combinator’s Spring 2025 batch; active website; no disclosed revenue, customer count, or usage metrics.",
+    "risks": [
+      "Very early stage with only 2 staff; narrow target market (senior‑living) limits scale; product automation may face adoption hurdles; likely need for healthcare data‑privacy compliance (e.g., HIPAA) but not yet confirmed; limited visibility into funding and business model."
+    ],
+    "openQuestions": [
+      "Does Morphik have paying customers or pilots? What is the pricing and revenue model? How much funding has been raised? What are the technical details of the AI workers (model architecture, integration approach)? Have any compliance certifications been obtained? What are the concrete NOI improvement metrics?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.5,
+      "topicFit": 0.75,
+      "technicalDepth": 0.5,
+      "signalStrength": 0.75,
+      "whyNow": 0.5
+    }
+  },
+  "score": {
+    "total": 51,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "Health Care Operation fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 19,
+        "maximum": 25
+      },
+      {
+        "label": "Health Care Operation fit",
+        "score": 10,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 12,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 10,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 0,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Watch",
+    "rationale": "Morphik has a defined workflow (AI workers for Skilled Nursing and Senior Living Operations) and public founder evidence for 2 founders. The current record does not establish customer adoption, retention, or market-timing evidence.",
+    "mindChanges": [
+      "Confirm Morphik's paid customer adoption and retention.",
+      "Validate measurable ROI for ai workers for skilled nursing and senior living operations.",
+      "Validate the founding team's direct experience in this workflow."
+    ]
+  }
+}

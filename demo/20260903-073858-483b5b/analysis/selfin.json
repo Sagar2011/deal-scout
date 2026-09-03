@@ -1,0 +1,81 @@
+{
+  "analysis": {
+    "team": "summary: Two-person founding team (Founder/CEO Paula Gutiérrez, Founder/CTO Joel Tomas Pimentel) based in San Francisco; both studied at Imperial, with academic exposure to MIT, UC Berkeley, and Stanford. CEO has prior experience in quant/engineering roles at Bank of America, NASA, Rolls Royce, and software-engineering startups. CTO has a 'Rocket Science' academic background and frames his work as building a fintech revolution.; evidence: Paula Gutierrez, Founder/CEO: -Aerospace @Imperial, MIT, UC Berkeley -Quant @Bank of America, NASA, Rolls Royce, Software engineer startups; Joel Tomas Pimentel, Founder/CTO: Rocket Science @ Imperial & Stanford -> building the next fintech revolution; Founded in 2025 by Paula Gutierrez and Joel Tomas Pimentel, Selfin has 2 employees based in San Francisco.",
+    "product": "summary: Described as 'the first AI Bank' / 'AI-powered bank'. Per the company website, the stated value proposition is managing all financial products from one place while AI optimizes finances automatically. No additional technical details, feature list, or product screenshots were captured in evidence.; evidence: Building the first AI Bank; The first AI-powered bank. Manage all your financial products from one place while AI optimizes your finances automatically.",
+    "market": "summary: Implied to be the consumer/personal banking and AI-fintech space. No market sizing, target segment definition, or competitive landscape data is present in the captured evidence.; evidence: ",
+    "traction": "summary: Public signals are limited to a Y Combinator Fall 2025 listing and a live website (selfin.app). No users, revenue, partnerships, regulatory milestones, or funding round details are documented in the evidence.; evidence: YC Fall 2025 company listing; Company website: https://selfin.app",
+    "risks": [
+      "risk: Highly regulated banking domain with no evidence of banking license, charter, or regulatory strategy disclosed.; supportingEvidence: Description references 'AI Bank' but no compliance, licensing, or partner-bank details are captured.",
+      "risk: Execution risk from a two-person team with no documented fintech-operations or compliance hires.; supportingEvidence: Selfin has 2 employees based in San Francisco.",
+      "risk: Product-market specificity risk: vision is broad ('manage all your financial products') without captured evidence of a wedge use case.; supportingEvidence: Website description only states aggregation + AI optimization; no captured feature detail or ICP.",
+      "risk: Capital intensity and unit-economics risk inherent to consumer banking; no funding or revenue figures captured.; supportingEvidence: No funding, ARR, or user metrics present in evidence.",
+      "risk: Competitive risk from incumbent neobanks, aggregators (e.g., Plaid-powered apps), and large-model-bank entrants.; supportingEvidence: Not addressed in captured evidence; flagged as a known structural risk for the category."
+    ],
+    "openQuestions": [
+      "What is the company's regulatory posture: are they applying for a bank charter, partnering with a BaaS provider, or operating as an aggregator?",
+      "What is the specific AI capability (e.g., autonomous transaction optimization, advisory, fraud) and what proprietary data moat exists?",
+      "What is the target customer (mass market, high-income, underbanked, expats, etc.) and what wedge product addresses them?",
+      "What is the revenue model (interchange, subscription, interchange + interest, SaaS, B2B API)?",
+      "What traction milestones have been achieved post YC Fall 2025 (users, AUM, revenue, waitlist, LOIs, design partners)?",
+      "What is the post-YC funding plan, runway, and capitalization table?",
+      "What banking, compliance, and risk hires are planned and on what milestones?",
+      "Who are the direct competitors and what is the differentiated wedge vs. neobanks (e.g., Mercury, Chime, Revolut) and AI personal-finance apps?",
+      "What are the founder commitments, full-time status, and prior collaboration history?",
+      "What is the timeline to a private beta or general availability?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.25,
+      "topicFit": 0.75,
+      "technicalDepth": 0.25,
+      "signalStrength": 0.5,
+      "whyNow": 0.5
+    }
+  },
+  "score": {
+    "total": 42,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "AI Fintech Space fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 6,
+        "maximum": 25
+      },
+      {
+        "label": "AI Fintech Space fit",
+        "score": 20,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 6,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 10,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 0,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Pass",
+    "rationale": "Selfin has a defined workflow (Building the first AI Bank) and public founder evidence for 2 founders. The current record does not establish customer adoption, retention, or market-timing evidence.",
+    "mindChanges": [
+      "Confirm Selfin's paid customer adoption and retention.",
+      "Validate measurable ROI for building the first ai bank.",
+      "Validate the founding team's direct experience in this workflow."
+    ]
+  }
+}

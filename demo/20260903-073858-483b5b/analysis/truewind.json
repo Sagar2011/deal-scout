@@ -1,0 +1,81 @@
+{
+  "analysis": {
+    "team": "Co-founders Alex Lee (CEO) and Tennison Chan (CTO); company has 30 employees based in San Francisco and is hiring for 6 roles in engineering, operations, and marketing. No further background on founders or broader team is available from the supplied evidence.",
+    "product": "AI-powered accounting platform. Truewind describes AI agents that convert source financial data into GL-ready journal entries, with the stated goal of helping accounting teams close faster with stronger controls.",
+    "market": "Supplied evidence does not include any specific TAM/SAM figures, market sizing, or named customer segments. Inferred positioning from the website description is digital, data-driven tooling for accounting teams within bookkeeping/accounting workflows (a financial services adjacent process).",
+    "traction": "Backed by Y Combinator (Winter 2023 batch). 30 employees and 6 open roles per the YC profile. No revenue, customer count, ARR, or other quantified traction metrics are present in the supplied evidence.",
+    "risks": [
+      "Workflow specificity to accounting close — not a core lending/payments/insurance/wealth-management process, so fit with the 'AI fintech' thesis depends on whether bookkeeping is treated as in-scope.",
+      "Limited evidence depth: only YC directory and the company website were captured; no third-party validation, revenue metrics, or product demos.",
+      "Competitive risk from incumbents and other AI bookkeeping tools (no competitor specifics available in evidence).",
+      "Hiring velocity (6 open roles) signals growth ambition but also execution risk if scaling outpaces product-market fit validation.",
+      "Concentration risk from reliance on AI agents for GL-ready entries — accuracy/auditability is critical and no evidence on error rates, controls, or SOC/compliance posture was supplied."
+    ],
+    "openQuestions": [
+      "Which financial-services vertical does the product primarily serve, and is accounting/bookkeeping within the scope of this thesis?",
+      "Who are the named customers and what is the customer count, retention, and ARR?",
+      "What measurable outcomes have customers achieved (e.g., close-time reduction, accuracy rates)?",
+      "What is the pricing model and typical contract size?",
+      "How does the AI agent architecture work and how is data security / SOC 2 / audit trail handled?",
+      "What is the funding history beyond YC (amount raised, investors, cap table)?",
+      "What prior experience do founders Alex Lee and Tennison Chan bring relevant to AI, accounting, or fintech?",
+      "Who are the direct competitors and what is Truewind's differentiation?",
+      "What is the regulatory exposure when generating GL-ready entries on behalf of clients?",
+      "What does the 6 open hiring roles signal about go-to-market motion and current growth stage?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.5,
+      "topicFit": 0.5,
+      "technicalDepth": 0.5,
+      "signalStrength": 0.5,
+      "whyNow": 0.5
+    }
+  },
+  "score": {
+    "total": 34,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "AI Fintech Space fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 13,
+        "maximum": 25
+      },
+      {
+        "label": "AI Fintech Space fit",
+        "score": 13,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 0,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 8,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 0,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Pass",
+    "rationale": "Truewind has a defined workflow (AI-Powered Accounting) and public founder evidence for 2 founders. The current record does not establish customer adoption, retention, or market-timing evidence.",
+    "mindChanges": [
+      "Confirm Truewind's paid customer adoption and retention.",
+      "Validate measurable ROI for ai-powered accounting.",
+      "Validate the founding team's direct experience in this workflow."
+    ]
+  }
+}

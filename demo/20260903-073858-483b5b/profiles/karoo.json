@@ -1,0 +1,26 @@
+{
+  "profileUrl": "https://www.ycombinator.com/companies/karoo",
+  "description": "AI native consumer lending platform for underserved Americans. Founded in 2024 by Jeanot Dawson, Oliver Lambson, and Hugo Markland, Karoo has 3 employees based in Toronto, ON, Canada.",
+  "teamSize": 3,
+  "logoUrl": "https://bookface-images.s3.amazonaws.com/small_logos/0325dd0445e6e32c47cab4c3ffeb0610307557e0.png",
+  "founders": [
+    {
+      "name": "Jeanot Dawson",
+      "title": "Founder/CEO",
+      "bio": "CEO of Karoo, previously Head of US Loans at Lendable",
+      "linkedinUrl": "https://www.linkedin.com/in/jeanot-dawson-67191b17?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+    },
+    {
+      "name": "Hugo Markland",
+      "title": "Founder",
+      "bio": "Chief Capital Officer of Karoo Early stage employee at Lendable and led UK capital markets - raised bns of funding",
+      "linkedinUrl": "https://www.linkedin.com/in/hugo-markland-cfa-712409125/"
+    },
+    {
+      "name": "Oliver Lambson",
+      "title": "Founder/CTO",
+      "bio": "CTO of Karoo. 0 lines of code to first loan in 45 days.",
+      "linkedinUrl": "https://www.linkedin.com/in/oliverlambson/"
+    }
+  ]
+}

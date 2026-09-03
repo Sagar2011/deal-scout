@@ -1,0 +1,68 @@
+{
+  "analysis": {
+    "team": "Founder Saif Farooqui leads the company, bringing prior experience as a Data Scientist at Stripe, Google, and Meta, as well as a background as a healthcare economist. The company lists 3 total employees, all based in Singapore, suggesting a very early‑stage, lean team.",
+    "product": "Corgi Labs offers an AI‑driven platform that aims to increase payment acceptance and reduce fraud for e‑commerce and SaaS businesses. The product focuses on recovering lost payment revenue, optimizing authorization rates, cutting chargebacks, and preventing fraud.",
+    "market": "The solution targets businesses that process digital payments, a segment within the broader fintech market for payment acceptance and fraud detection. No specific market size or segmentation data is provided in the available evidence.",
+    "traction": "Current evidence shows only a Y Combinator Winter 2023 listing and a company website; no revenue, customer count, usage metrics, or other traction indicators are available.",
+    "risks": [
+      "Key risks include a very small team (3 employees), heavy reliance on a single founder, limited geographic presence (Singapore), intense competition from established players such as Stripe, regulatory requirements in fintech, and unknown product differentiation or technical advantage."
+    ],
+    "openQuestions": [
+      "What is the full composition of the team beyond the founder? Does the company have any paying customers or revenue? What are the unit economics and customer acquisition costs? What is the size and growth trajectory of the target market? What specific AI/ML techniques are used, and what is the proprietary edge? Are the necessary fintech licenses and regulatory approvals in place? How does Corgi Labs plan to scale beyond Singapore?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.75,
+      "topicFit": 0.75,
+      "technicalDepth": 0.5,
+      "signalStrength": 0.5,
+      "whyNow": 0.5
+    }
+  },
+  "score": {
+    "total": 14,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "AI Fintech Space fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 0,
+        "maximum": 25
+      },
+      {
+        "label": "AI Fintech Space fit",
+        "score": 8,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 0,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 6,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 0,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Pass",
+    "rationale": "Corgi Labs has a defined workflow (AI to increase payment acceptance and reduce fraud for businesses) and public founder evidence for 1 founder. The current record does not establish customer adoption, retention, or market-timing evidence.",
+    "mindChanges": [
+      "Confirm Corgi Labs's paid customer adoption and retention.",
+      "Validate measurable ROI for ai to increase payment acceptance and reduce fraud for businesses.",
+      "Validate the founding team's direct experience in this workflow."
+    ]
+  }
+}

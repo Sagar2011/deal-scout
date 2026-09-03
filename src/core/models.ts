@@ -5,6 +5,21 @@ export type Candidate = {
   source: "Y Combinator" | "Hacker News";
   sourceUrl: string;
   signal: string;
+  publishedAt?: string;
+};
+
+export type CandidateSelection = {
+  candidates: Candidate[];
+  reasons: Array<{ sourceUrl: string; reason: string }>;
+};
+
+export type ResearchBrief = {
+  topic: string;
+  thesis: string;
+  targetCustomer: string;
+  inclusionCriteria: string[];
+  exclusions: string[];
+  queries: string[];
 };
 
 export type Evidence = {
@@ -38,7 +53,7 @@ export type StartupAnalysis = {
   openQuestions: string[];
   criteria: {
     workflowClarity: number;
-    smbFit: number;
+    topicFit: number;
     technicalDepth: number;
     signalStrength: number;
     whyNow: number;

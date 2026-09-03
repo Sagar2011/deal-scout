@@ -1,6 +1,8 @@
 import type { Candidate } from "../core/models.js";
 import type { CandidateSource, HttpClient } from "./types.js";
 
+const SOURCE_TIMEOUT_MS = 15_000;
+
 type HnStory = {
   objectID: string;
   title?: string;
@@ -12,24 +14,17 @@ type HnStory = {
 export class HackerNewsSource implements CandidateSource {
   constructor(private readonly http: HttpClient) {}
 
-  async findCandidates(topic: string, limit: number): Promise<Candidate[]> {
+  async findCandidates(query: string, limit: number): Promise<Candidate[]> {
     const params = new URLSearchParams({
-      query: topic,
+      query,
       tags: "story",
       hitsPerPage: String(limit),
     });
     const response = await this.http.get<{ hits: HnStory[] }>(
-      `https://hn.algolia.com/api/v1/search?${params}`
+      `https://hn.algolia.com/api/v1/search?${params}`,
+      { timeout: SOURCE_TIMEOUT_MS }
     );
     const { hits } = response.data;
-    const topicWords = topic
-      .toLowerCase()
-      .split(/[^a-z0-9]+/)
-      .filter(
-        (word) =>
-          word.length > 1 && !["for", "the", "and", "with"].includes(word)
-      )
-      .map((word) => word.replace(/s$/, ""));
     const newestAllowedAge =
       Math.floor(Date.now() / 1000) - 60 * 60 * 24 * 365 * 2;
     return hits
@@ -39,7 +34,7 @@ export class HackerNewsSource implements CandidateSource {
           story.url &&
           story.created_at_i &&
           story.created_at_i >= newestAllowedAge &&
-          topicWords.some((word) => new RegExp(`\\b${word}s?\\b`).test(title))
+          /^show hn:/i.test(title)
         );
       })
       .map((story) => ({
@@ -49,6 +44,7 @@ export class HackerNewsSource implements CandidateSource {
         source: "Hacker News",
         sourceUrl: `https://news.ycombinator.com/item?id=${story.objectID}`,
         signal: `${story.points ?? 0} HN points`,
+        publishedAt: new Date(story.created_at_i! * 1000).toISOString(),
       }));
   }
 }

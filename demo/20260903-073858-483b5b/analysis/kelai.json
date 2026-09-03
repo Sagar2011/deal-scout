@@ -1,0 +1,80 @@
+{
+  "analysis": {
+    "team": "summary: Founder/CEO Jeremie Cohen leads the company. Background includes managing a large global systematic equity book at WorldQuant and leading an ML team at Millennium Management; nuclear engineer by training. Company reports 3 employees based in New York City, with 3 open engineering roles.; evidenceRefs: Jeremie Cohen, Founder/CEO: Founder and CEO of KelAI. Managed a large global systematic equity book at WorldQuant and lead an ML team at Millennium Management. Nuclear engineer by training.; Founded in 2025 by Jeremie Cohen, KelAI has 3 employees based in New York City. KelAI is hiring for 3 roles in engineering.; 3 employees",
+    "product": "summary: Described as 'The AI Quant: Autonomous Alpha Engine for Funds and Traders.' Website frames it as an AI alpha engine for hedge funds and institutional investors, purpose-built to help investment teams discover and validate new sources of alpha.; evidenceRefs: The AI Quant: Autonomous Alpha Engine for Funds and Traders.; Website description: KelAI is the AI alpha engine for hedge funds and institutional investors. Purpose-built AI that helps investment teams discover and validate new sources of alpha.",
+    "market": "summary: Target market appears to be hedge funds and institutional investors seeking AI-driven alpha generation / quant research tooling. No explicit market sizing, segmentation, or geography beyond New York City provided in evidence.; evidenceRefs: Website description: KelAI is the AI alpha engine for hedge funds and institutional investors. Purpose-built AI that helps investment teams discover and validate new sources of alpha.",
+    "traction": "summary: Traction signals in evidence are limited to: YC Spring 2026 listing and a small team (3) that is recruiting engineers. No customers, AUM, AUM on platform, revenue, pilots, or partnerships are mentioned in the supplied evidence.; evidenceRefs: YC Spring 2026 company listing; Founded in 2025 by Jeremie Cohen, KelAI has 3 employees based in New York City. KelAI is hiring for 3 roles in engineering.",
+    "risks": [
+      "risk: Capital-markets product risk: alpha-discovery tools face crowded competition and challenging differentiation; outcomes depend on model performance in live markets.; evidenceRefs: Website description: KelAI is the AI alpha engine for hedge funds and institutional investors. Purpose-built AI that helps investment teams discover and validate new sources of alpha.",
+      "risk: Regulatory/compliance risk: selling into hedge funds and institutional investors typically involves IP, data usage, and potential regulatory considerations; not addressed in supplied evidence.; evidenceRefs: ",
+      "risk: Early-stage execution risk: founded in 2025, 3-person team, still hiring core engineering roles.; evidenceRefs: Founded in 2025 by Jeremie Cohen, KelAI has 3 employees based in New York City. KelAI is hiring for 3 roles in engineering.",
+      "risk: Traction signal risk: no disclosed customers, pilots, revenue, or performance metrics in the evidence provided.; evidenceRefs: YC Spring 2026 company listing"
+    ],
+    "openQuestions": [
+      "What specific AI/ML techniques does the 'Autonomous Alpha Engine' use, and how is it differentiated from existing quant research and AI-for-finance tools?",
+      "Who are the target buyers and what is the sales motion (self-serve, enterprise, API) into hedge funds and institutional investors?",
+      "Are there any design partners, pilot customers, or LOIs from funds or traders?",
+      "What is the pricing/business model (license, performance fee, SaaS)?",
+      "What data sources does the product ingest, and how are licensing and provenance handled?",
+      "What traction metrics exist (users, AUM influenced, backtested vs. live performance, revenue)?",
+      "Who else is on the team beyond the founder, and what is the planned hiring roadmap for the 3 open engineering roles?",
+      "What is the funding history, cap table, and current raise (amount, structure, lead investor)?",
+      "How is the product positioned relative to in-house quant/ML teams at buyside firms?",
+      "What regulatory or compliance considerations apply to the product in target customer jurisdictions?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.5,
+      "topicFit": 0.5,
+      "technicalDepth": 0.25,
+      "signalStrength": 0.25,
+      "whyNow": 0.5
+    }
+  },
+  "score": {
+    "total": 22,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "AI Fintech Space fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 0,
+        "maximum": 25
+      },
+      {
+        "label": "AI Fintech Space fit",
+        "score": 5,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 6,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 11,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 0,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Pass",
+    "rationale": "KelAI has a defined workflow (The AI Quant: Autonomous Alpha Engine for Funds and Traders.) and public founder evidence for 1 founder. The current record does not establish customer adoption, retention, or market-timing evidence.",
+    "mindChanges": [
+      "Confirm KelAI's paid customer adoption and retention.",
+      "Validate measurable ROI for the ai quant: autonomous alpha engine for funds and traders..",
+      "Validate the founding team's direct experience in this workflow."
+    ]
+  }
+}

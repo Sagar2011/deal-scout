@@ -1,0 +1,68 @@
+{
+  "analysis": {
+    "team": "Founder/CEO Melvin Chen with background in private equity and an engineering degree from Oxford; 10 employees based in Sydney, Australia. No further team details provided.",
+    "product": "AI agents that act as an operating system for Australian GP clinics, automating scheduling, patient flow, and back‑office workflows.",
+    "market": "Australian primary‑care (GP) clinic market; specific size and segmentation not disclosed.",
+    "traction": "Listed in the Y Combinator Summer 2026 batch; no public data on customers, revenue, pilots, or funding.",
+    "risks": [
+      "Very early stage with limited product‑market evidence; competition from established health‑IT providers; regulatory requirements in Australian healthcare; narrow geographic focus."
+    ],
+    "openQuestions": [
+      "Does the product deliver the described automation capabilities? What are adoption and retention metrics? What revenue model is used? Has the company raised seed or other funding? What are the technical architecture and data‑privacy safeguards?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.5,
+      "topicFit": 0.75,
+      "technicalDepth": 0.25,
+      "signalStrength": 0.5,
+      "whyNow": 0.25
+    }
+  },
+  "score": {
+    "total": 58,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "Health Care Operation fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 19,
+        "maximum": 25
+      },
+      {
+        "label": "Health Care Operation fit",
+        "score": 20,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 6,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 13,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 0,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Watch",
+    "rationale": "Care GP has a defined workflow (AI agents to run primary healthcare operations) and public founder evidence for 1 founder. The current record does not establish customer adoption, retention, or market-timing evidence.",
+    "mindChanges": [
+      "Confirm Care GP's paid customer adoption and retention.",
+      "Validate measurable ROI for ai agents to run primary healthcare operations.",
+      "Validate the founding team's direct experience in this workflow."
+    ]
+  }
+}

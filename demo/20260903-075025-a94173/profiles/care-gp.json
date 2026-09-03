@@ -1,0 +1,14 @@
+{
+  "profileUrl": "https://www.ycombinator.com/companies/care-gp",
+  "description": "AI agents to run primary healthcare operations. Founded in 2024 by Melvin Chen, Care GP has 10 employees based in Sydney NSW, Australia.",
+  "teamSize": 10,
+  "logoUrl": "https://bookface-images.s3.amazonaws.com/small_logos/3f871fa8c32b501e71ef06d881893d564e003fbd.png",
+  "founders": [
+    {
+      "name": "Melvin Chen",
+      "title": "Founder/CEO",
+      "bio": "Founder & CEO at Care GP (YC S26).   Previously Co-founded Avigo and StarLake Group. Held roles in private equity at Terra Firma, Samena Capital and Goldman Sachs.  Graduated Valedictorian with an Engineering triple major in Materials, Economics and Management from the University of Oxford. Featured in the Forbes ‘30 Under 30’ list for Finance & VC. Born in China and raised in the UK.  Loves sports and fitness - lately the racket sports and golf if anyone wants a hit!",
+      "linkedinUrl": "https://www.linkedin.com/in/melvinchen/"
+    }
+  ]
+}

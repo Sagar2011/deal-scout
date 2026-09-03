@@ -1,0 +1,20 @@
+{
+  "profileUrl": "https://www.ycombinator.com/companies/avallon-ai",
+  "description": "AI agents for insurance claims operations. Founded in 2025 by Bryan Guin and Cornelius Schramm, Avallon AI has 7 employees based in New York City. Avallon AI is hiring for 3 roles in engineering and sales.",
+  "teamSize": 7,
+  "logoUrl": "https://bookface-images.s3.amazonaws.com/small_logos/ac85a0bca77fe890f3dc1aadd1f0f8a554481659.png",
+  "founders": [
+    {
+      "name": "Cornelius Schramm",
+      "title": "Founder/CEO",
+      "bio": "CEO of Avallon. Before Avallon, Cornelius was the founding U.S. engineer at FINN, building the fleet operations platform behind $15M ARR and witnessing firsthand how broken fleet claims processes are.",
+      "linkedinUrl": "https://www.linkedin.com/in/cornelius-schramm-450759150/"
+    },
+    {
+      "name": "Bryan Guin",
+      "title": "Founder/CPO",
+      "bio": "Bryan was previously a machine learning researcher at Cornell and a software engineer at Agentive (YC S23) where he built AI systems for auditors. He also led product consulting teams at EY, advising Fortune 500 clients on new product development and deployment.",
+      "linkedinUrl": "https://www.linkedin.com/in/bryan-guin/"
+    }
+  ]
+}

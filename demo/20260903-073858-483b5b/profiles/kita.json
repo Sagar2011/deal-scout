@@ -1,0 +1,20 @@
+{
+  "profileUrl": "https://www.ycombinator.com/companies/kita",
+  "description": "Automate credit assessment for lenders in emerging markets. Founded in 2025 by Carmel Limcaoco and Rhea Malhotra, Kita has 3 employees based in San Francisco.",
+  "teamSize": 3,
+  "logoUrl": "https://bookface-images.s3.amazonaws.com/small_logos/0e2c404c5bbc49c9c8e25d9c60779b50f507ba65.png",
+  "founders": [
+    {
+      "name": "Carmel Limcaoco",
+      "title": "Founder/CEO",
+      "bio": "Carmel is the co-founder and CEO of Kita.  She is from Manila and studied Symbolic Systems & Music at Stanford. Prior to Kita, she was completing her Master’s in Computer Science. She spent three summers in audio and music product at Apple, where she was one of few interns to ever ship a feature in iOS.  She was awarded by the United Nations at 16, launched the first Product Fellowship in the Philippines, and co-founded DAHA in 2022, where she took Stanford’s first marketplace from 0 to 1.",
+      "linkedinUrl": "https://www.linkedin.com/in/carmellimcaoco/"
+    },
+    {
+      "name": "Rhea Malhotra",
+      "title": "Founder/CTO",
+      "bio": "Rhea is the co-founder and CTO of Kita.  Rhea completed her bachelor’s and master’s degrees in Computer Science at Stanford, and was an incoming PhD in Computer Vision and Robotics at Princeton.   She received the Firestone Medal, the sole highest honor of the Stanford CS Department, for her research in 2025.  Rhea joined her first research lab at age 13, worked on the COVID-19 vaccine at Pfizer at 17, and has since authored 7 papers recognized and awarded internationally.",
+      "linkedinUrl": "https://www.linkedin.com/in/rhea-malhotra-198744142"
+    }
+  ]
+}

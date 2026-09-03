@@ -1,0 +1,20 @@
+{
+  "profileUrl": "https://www.ycombinator.com/companies/truewind",
+  "description": "AI-Powered Accounting. Founded in 2023 by Tennison Chan and Alex Lee, Truewind has 30 employees based in San Francisco. Truewind is hiring for 6 roles in engineering, operations, and marketing.",
+  "teamSize": 30,
+  "logoUrl": "https://bookface-images.s3.amazonaws.com/small_logos/2282cdd4a81eac40181a6efc3ce3c3d32c9eb037.png",
+  "founders": [
+    {
+      "name": "Alex Lee",
+      "title": "Founder",
+      "bio": "co-founder ceo of truewind",
+      "linkedinUrl": "https://www.linkedin.com/in/alexlee611/"
+    },
+    {
+      "name": "Tennison Chan",
+      "title": "Founder/CTO",
+      "bio": "co-founder cto of truewind",
+      "linkedinUrl": "https://www.linkedin.com/in/tennisonchan"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "analysis": {
+    "team": "Founded in 2025 by Dominik Helmreich (CEO) and Oliver Knapp (CTO). Dominik holds an ETH Zurich CS degree, performed AI research at Stanford, and worked as a BCG consultant. Oliver is a repeat AI founder with 10+ enterprise AI applications in the past two years and studied Physics at ETH Zurich. The company has 8 employees and is currently hiring for 2 sales roles.",
+    "product": "AI agents that automate healthcare back‑office tasks, specifically revenue‑cycle workflows such as prior authorizations, claims processing, denials management, and payer follow‑up. The agents integrate with existing systems used by revenue‑cycle teams.",
+    "market": "Targets healthcare back‑office operations, focusing on revenue‑cycle management for providers and payers. The specific market size is not disclosed in the available evidence.",
+    "traction": "Only evidence of traction is the Y Combinator Fall 2025 listing and active hiring for sales positions; no public data on customers, revenue, pilots, or usage metrics.",
+    "risks": [
+      "Very early stage with a small team (8 employees) and limited publicly known customer adoption.",
+      "No disclosed details on regulatory compliance (e.g., HIPAA, FDA) for healthcare AI solutions.",
+      "Uncertain product‑market fit and go‑to‑market strategy.",
+      "Competitive landscape with other revenue‑cycle automation startups.",
+      "Reliance on successful sales hires to drive customer acquisition.",
+      "Limited technical depth disclosed (e.g., model architecture, security, integration specifics)."
+    ],
+    "openQuestions": [
+      "What are the actual customer acquisition metrics (e.g., number of signed pilots, paying clients, ARR)?",
+      "Has the product achieved any regulatory certifications or compliance audits?",
+      "What is the precise technical stack and workflow integration approach?",
+      "What is the go‑to‑market and sales strategy beyond the current hiring?",
+      "What is the current funding status, burn rate, and runway?",
+      "How does the company differentiate from existing revenue‑cycle automation solutions?",
+      "What are the early performance metrics (e.g., automation rates, error reduction)?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.5,
+      "topicFit": 1,
+      "technicalDepth": 0.5,
+      "signalStrength": 0.5,
+      "whyNow": 0
+    }
+  },
+  "score": {
+    "total": 56,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "Health Care Operation fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 19,
+        "maximum": 25
+      },
+      {
+        "label": "Health Care Operation fit",
+        "score": 20,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 6,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 11,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 0,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Watch",
+    "rationale": "Clicks Health has a defined workflow (AI agents for your healthcare back-office operations.) and public founder evidence for 2 founders. The current record does not establish customer adoption, retention, or market-timing evidence.",
+    "mindChanges": [
+      "Confirm Clicks Health's paid customer adoption and retention.",
+      "Validate measurable ROI for ai agents for your healthcare back-office operations..",
+      "Validate the founding team's direct experience in this workflow."
+    ]
+  }
+}

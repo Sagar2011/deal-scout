@@ -1,0 +1,82 @@
+{
+  "analysis": {
+    "team": "Co-founders Carmel Limcaoco (CEO) and Rhea Malhotra (CTO), founded 2025, based in San Francisco with 3 employees. Carmel holds an MS in Computer Science from Stanford, previously interned at Apple in audio/music product, and co-founded DAHA in 2022. Rhea holds BS and MS in Computer Science from Stanford, was an incoming PhD in Computer Vision and Robotics at Princeton, and received the Firestone Medal in 2025. Per YC profile only; no operational finance-industry tenure documented.",
+    "product": "AI-native underwriting stack for lenders, described on the company website as 'bespoke to every lending use case' and able to underwrite borrowers anywhere in the world in minutes. YC listing describes the offering as automating credit assessment for lenders in emerging markets. Specific ML techniques, data sources, integrations, and pricing model are not documented in the supplied evidence.",
+    "market": "Per the supplied evidence only, the addressable market is lenders in emerging markets using automated credit assessment. No market sizing, geography segmentation, regulatory landscape, or competitor set is documented in the evidence.",
+    "traction": "Traction signals are limited to (1) YC Winter 2026 company listing and (2) 3 employees per YC profile. No revenue, customers, pilots, LOIs, ARR, funding raised outside YC, or usage metrics are documented in the supplied evidence.",
+    "risks": [
+      "Very early stage — 3-person team founded in 2025 with no documented customers or revenue in the supplied evidence.",
+      "Emerging-markets lending carries elevated regulatory, data-availability, and credit-data quality risk; none of these are addressed in the supplied evidence.",
+      "Founder background is technical (Stanford CS, CV/robotics, audio product) with no documented prior operating experience in lending, credit, or financial services.",
+      "Single-source evidence base (YC profile + company website); no third-party validation of product capability or claims.",
+      "No documented fundraising beyond YC, limiting runway visibility.",
+      "'Bespoke to every lending use case' positioning implies high customization cost and potentially long sales cycles in an early-stage team."
+    ],
+    "openQuestions": [
+      "Who are the named design partners or paying customers, and what is the sales pipeline?",
+      "What data sources and credit-bureau integrations does the underwriting stack use, especially across emerging markets?",
+      "What is the pricing model (per-application, SaaS, success-based) and what is average contract value?",
+      "What is the regulatory strategy per target country, and is the company licensed or partnered with regulated entities?",
+      "What funding has been raised to date (seed round size, investors, post-money)?",
+      "What are current ARR, pilot conversion rates, and any letters of intent?",
+      "How is 'AI-native' implemented — proprietary models, fine-tuned foundation models, or third-party APIs?",
+      "What is the defensible moat versus incumbents (e.g., credit bureaus, regional scoring providers, other YC AI credit startups)?",
+      "What is the technical responsibility split between CEO and CTO, and who owns the underwriting domain expertise?",
+      "What is the current runway and planned use of proceeds?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.5,
+      "topicFit": 0.75,
+      "technicalDepth": 0.5,
+      "signalStrength": 0.5,
+      "whyNow": 0.5
+    }
+  },
+  "score": {
+    "total": 30,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "AI Fintech Space fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 6,
+        "maximum": 25
+      },
+      {
+        "label": "AI Fintech Space fit",
+        "score": 7,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 6,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 11,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 0,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Pass",
+    "rationale": "Kita has a defined workflow (Automate credit assessment for lenders in emerging markets) and public founder evidence for 2 founders. The current record does not establish customer adoption, retention, or market-timing evidence.",
+    "mindChanges": [
+      "Confirm Kita's paid customer adoption and retention.",
+      "Validate measurable ROI for automate credit assessment for lenders in emerging markets.",
+      "Validate the founding team's direct experience in this workflow."
+    ]
+  }
+}

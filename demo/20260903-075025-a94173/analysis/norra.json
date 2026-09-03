@@ -1,0 +1,80 @@
+{
+  "analysis": {
+    "team": "Founders: Ben Rubin (Founder/CEO) and Yining Zhang (Founder/CTO). Ben has a CS+Math background from Rice and has spent over 1,000 hours observing hospital and nursing facility operations. Yining is listed only as CTO with no additional details provided. The company has 2 employees based in New York City.",
+    "product": "AI-powered platform that provides skilled nursing facilities with a unified view of owned and rented equipment to reduce waste, return unnecessary rentals, and control costs. It automates equipment operations for nursing facilities.",
+    "market": "Target segment is skilled nursing facilities (nursing homes) within health care delivery organizations. No explicit market size or addressable market data is provided; the market is inferred from the focus on equipment operations in this segment.",
+    "traction": "No evidence of customers, revenue, pilots, or usage metrics. All available information is limited to the product description and a YC company listing.",
+    "risks": [
+      "Early-stage risk: only 2 employees and a limited operational history.",
+      "No disclosed customer base or revenue, indicating uncertain product‑market fit.",
+      "Niche focus on equipment operations may limit the breadth of the addressable market.",
+      "Potential regulatory requirements (e.g., HIPAA) for data handling in health care settings.",
+      "Competition from existing facility management solutions and possible new entrants.",
+      "Uncertainty around the scalability of the AI platform and integration with existing facility systems."
+    ],
+    "openQuestions": [
+      "What is the current number of customers or pilot deployments?",
+      "Are there signed contracts or recurring revenue?",
+      "What is the target market size (TAM/SAM/SOM) for equipment operations in skilled nursing facilities?",
+      "What are the regulatory and compliance considerations (HIPAA, data security) for the platform?",
+      "What is the pricing model and go‑to‑market strategy?",
+      "How does Norra differentiate from existing facility management or asset‑tracking solutions?",
+      "What are the plans for team growth and hiring?",
+      "What is the current fundraising status and runway?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.5,
+      "topicFit": 0.75,
+      "technicalDepth": 0.5,
+      "signalStrength": 0.75,
+      "whyNow": 0.25
+    }
+  },
+  "score": {
+    "total": 33,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "Health Care Operation fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 13,
+        "maximum": 25
+      },
+      {
+        "label": "Health Care Operation fit",
+        "score": 10,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 0,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 10,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 0,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Pass",
+    "rationale": "Norra has a defined workflow (Automating equipment operations for nursing facilities) and public founder evidence for 2 founders. The current record does not establish customer adoption, retention, or market-timing evidence.",
+    "mindChanges": [
+      "Confirm Norra's paid customer adoption and retention.",
+      "Validate measurable ROI for automating equipment operations for nursing facilities.",
+      "Validate the founding team's direct experience in this workflow."
+    ]
+  }
+}

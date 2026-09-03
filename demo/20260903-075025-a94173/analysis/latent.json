@@ -1,0 +1,81 @@
+{
+  "analysis": {
+    "team": "name: Rishabh Jain; role: Co-founder; background: Repeat founder (per YC profile); additional prior experience not documented in evidence.; name: Sri Somasundaram; role: Co-founder; background: Stanford research in molecular binding patterns for adaptive immunity; deep RL robotics with publications at ICML, ICLR, and Nature; on the founding team of Hebbia, where he operationalized language models for large financial institutions.",
+    "product": "summary: Medical language models aimed at automating healthcare operations. The company website further describes an 'enterprise pharmacy intelligence' product for health systems, with a 'clinical agentic engine' intended to help pharmacy operations grow, serve more patients, and capture more value.; evidenceNotes: Public description ('healthcare operations') and the website framing ('pharmacy intelligence for leading health systems') point to a pharmacy-operations workflow focus, but specific modules, integrations, and customer-facing capabilities are not documented in the supplied evidence.",
+    "market": "thesis: Seed-stage startups whose software or services improve operational efficiency, administration, or workflow of health care delivery organizations.; relevance: Pharmacy operations within health systems is a subset of healthcare delivery operations, placing Latent inside the stated thesis.; sizeClaims: No market-size or segment-size figures are available in the supplied evidence; market sizing is left to the calibration pipeline.",
+    "traction": "claim: Y Combinator Winter 2023 company (program participation signal).; source: YC company profile; claim: 50 employees based in San Francisco.; source: YC company profile; claim: Currently hiring for 2 roles in engineering and design.; source: YC company profile; claim: Founded in 2022.; source: YC company profile; claim: Website positions the product for 'leading health systems' in pharmacy, suggesting enterprise go-to-market, but no named customers, revenue, pilots, or LOIs are documented in the evidence.; source: Company website",
+    "risks": [
+      "category: Enterprise GTM; description: Health-system pharmacy is a long, regulated sales cycle; evidence shows no named customers or deployments, making pipeline maturity unverified.",
+      "category: Competitive; description: Healthcare LLM/agentic workflow space is crowded (e.g., other YC peers, incumbents); differentiation beyond 'clinical agentic engine' is not substantiated by the evidence.",
+      "category: Regulatory & clinical safety; description: Pharmacy-adjacent clinical decisioning may trigger regulatory and safety review; no compliance posture (HIPAA, HITRUST, FDA SaMD) is documented in the evidence.",
+      "category: Team coverage; description: Technical and research credentials are documented for one co-founder; clinical, pharmacy-operations, and sales leadership depth is not documented in the evidence.",
+      "category: Capital intensity; description: 50 employees as a seed-stage company implies meaningful burn; funding amount and runway are not documented in the evidence."
+    ],
+    "openQuestions": [
+      "Who are the named design partners, pilot health systems, or paying customers, and what workflows are in production use?",
+      "What is the pricing and commercial model (per health system, per pharmacy, per transaction, etc.)?",
+      "How does the 'clinical agentic engine' differ technically from general-purpose medical LLMs, and what proprietary data, evaluations, or guardrails back it?",
+      "What is the regulatory posture (HIPAA, HITRUST, SOC 2, potential FDA SaMD classification for any clinical-decision features)?",
+      "What is the funding history to date (YC standard deal, any priced seed, total raised, runway at 50 employees)?",
+      "What is Rishabh Jain's prior founding track record and domain experience?",
+      "Which specific pharmacy workflows (prior auth, medication reconciliation, ordering, 340B, inventory, clinical documentation) are addressed?",
+      "What measurable outcomes (time saved, revenue captured, error rates) has the product demonstrated in any deployment?",
+      "How are integrations handled with EHRs (Epic, Cerner) and pharmacy information systems?",
+      "What is the current ARR, pilot count, and sales pipeline coverage?"
+    ],
+    "criteria": {
+      "workflowClarity": 0.5,
+      "topicFit": 0.75,
+      "technicalDepth": 0.5,
+      "signalStrength": 0.5,
+      "whyNow": 0.75
+    }
+  },
+  "score": {
+    "total": 47,
+    "method": "Evidence calibration",
+    "reasons": [
+      "Workflow clarity",
+      "Health Care Operation fit",
+      "Technical depth",
+      "Signal strength",
+      "Why now"
+    ],
+    "breakdown": [
+      {
+        "label": "Workflow clarity",
+        "score": 19,
+        "maximum": 25
+      },
+      {
+        "label": "Health Care Operation fit",
+        "score": 20,
+        "maximum": 20
+      },
+      {
+        "label": "Technical depth",
+        "score": 0,
+        "maximum": 20
+      },
+      {
+        "label": "Signal strength",
+        "score": 8,
+        "maximum": 20
+      },
+      {
+        "label": "Why now",
+        "score": 0,
+        "maximum": 15
+      }
+    ]
+  },
+  "recommendation": {
+    "decision": "Pass",
+    "rationale": "Latent has a defined workflow (Medical language models to automate healthcare operations) and public founder evidence for 2 founders. The current record does not establish customer adoption, retention, or market-timing evidence.",
+    "mindChanges": [
+      "Confirm Latent's paid customer adoption and retention.",
+      "Validate measurable ROI for medical language models to automate healthcare operations.",
+      "Validate the founding team's direct experience in this workflow."
+    ]
+  }
+}

@@ -12,9 +12,9 @@ The implementation was validated with source-adapter tests, pipeline artifact te
 
 ## Deliberate Limits
 
-The fallback analysis is deterministic so a reviewer can run the project without an API key. With OpenRouter enabled, the LLM structures the qualitative research at `temperature: 0`; final scores are independently calibrated from captured evidence, candidate metadata, and verified profile facts. This prevents a different free-model response from materially changing a score when the saved evidence is unchanged.
+The fallback analysis is deterministic so a reviewer can run the project without an API key. With OpenRouter enabled, one pre-sourcing call turns the full human topic into a saved `research-brief.json`: a one-sentence thesis, target customer, inclusion criteria, exclusions, and six source-search phrases. The literal human topic is always searched alongside the generated phrases, and the prompt explicitly forbids adding constraints absent from the human request. There is no sector-specific alias table. The same brief drives public-source search and candidate selection, while the selector is constrained to IDs in the retrieved YC/HN pool. Source calls are capped at two concurrent requests. The LLM then structures qualitative research at `temperature: 0`; final scores are independently calibrated from captured evidence, candidate metadata, and verified profile facts. This prevents a different free-model response from materially changing a score when the saved evidence is unchanged.
 
-The LLM analysis prompt lives in `src/prompts/` so it can be reviewed and refined independently. The optional adapter uses OpenRouter and defaults to `openrouter/free`. HTML memos are always rendered deterministically from captured evidence, structured analysis, fixed score, and fixed recommendation.
+The LLM prompts live in `src/prompts/` so topic interpretation, candidate selection, and analysis can be reviewed and refined independently. The optional adapter uses OpenRouter and defaults to `openrouter/free`. HTML memos are always rendered deterministically from captured evidence, structured analysis, fixed score, and fixed recommendation.
 
 ## 2026-09-02: Structure Cleanup
 

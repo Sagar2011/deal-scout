@@ -1,0 +1,90 @@
+[
+  {
+    "name": "Care GP",
+    "website": "https://caregp.com.au/",
+    "description": "AI agents to run primary healthcare operations",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/care-gp",
+    "signal": "YC Summer 2026 company listing"
+  },
+  {
+    "name": "Ruma Care",
+    "website": "https://rumacare.com",
+    "description": "The operations stack for biologic infusion clinics",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/ruma-care",
+    "signal": "YC Winter 2026 company listing"
+  },
+  {
+    "name": "Clicks Health",
+    "website": "https://www.goclicks.ai/",
+    "description": "AI agents for your healthcare back-office operations.",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/clicks-health",
+    "signal": "YC Fall 2025 company listing"
+  },
+  {
+    "name": "Scheduling Wizard",
+    "website": "https://www.schedulingwiz.com",
+    "description": "Logistics infrastructure to modernize healthcare operations",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/scheduling-wizard",
+    "signal": "YC Winter 2026 company listing"
+  },
+  {
+    "name": "Norra",
+    "website": "https://www.norra.io",
+    "description": "Automating equipment operations for nursing facilities",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/norra",
+    "signal": "YC Fall 2025 company listing"
+  },
+  {
+    "name": "Novoflow",
+    "website": "https://www.novoflow.io/",
+    "description": "Computer-using agents for healthcare operations",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/novoflow",
+    "signal": "YC Spring 2025 company listing"
+  },
+  {
+    "name": "Morphik",
+    "website": "https://morphik.ai",
+    "description": "AI workers for Skilled Nursing and Senior Living Operations",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/morphik",
+    "signal": "YC Spring 2025 company listing"
+  },
+  {
+    "name": "Saga AI",
+    "website": "https://usesaga.ai",
+    "description": "Voice Agents for Healthcare Operations",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/saga-ai",
+    "signal": "YC Winter 2024 company listing"
+  },
+  {
+    "name": "Prosper",
+    "website": "https://www.getprosper.ai?utm_source=yc&utm_medium=directory&utm_campaign=yc_directory",
+    "description": "AI Phone Agents for Healthcare Operations",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/prosper",
+    "signal": "YC Summer 2023 company listing"
+  },
+  {
+    "name": "Cair Health",
+    "website": "https://www.cairhealth.com/",
+    "description": "AI Agents for Healthcare RCM",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/cair-health",
+    "signal": "YC Summer 2023 company listing"
+  },
+  {
+    "name": "Latent",
+    "website": "https://latenthealth.com",
+    "description": "Medical language models to automate healthcare operations",
+    "source": "Y Combinator",
+    "sourceUrl": "https://www.ycombinator.com/companies/latent",
+    "signal": "YC Winter 2023 company listing"
+  }
+]
